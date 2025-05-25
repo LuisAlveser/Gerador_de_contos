@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
+import 'package:tcc/Telas/TelaPrincipalApp.dart';
 
 class TelaDeInicio extends StatefulWidget {
   const TelaDeInicio({super.key});
@@ -115,7 +116,14 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                         height: 50.0,
 
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TelaPrincipal(),
+                              ),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             padding: EdgeInsets.zero,
                             shape: RoundedRectangleBorder(

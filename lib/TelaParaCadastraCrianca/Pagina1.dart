@@ -26,265 +26,285 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
         children: [
           Form(
             child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 350,
-                    height: 50,
-                    child: TextFormField(
-                      decoration: getAutenticationInputDecoration("Nome"),
+              child: Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 15),
+                    SizedBox(
+                      width: 350,
+                      height: 50,
+                      child: TextFormField(
+                        decoration: getAutenticationInputDecoration("Nome"),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 350,
-                    height: 50,
-                    child: TextFormField(
-                      decoration: getAutenticationInputDecoration("Apelido"),
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: SizedBox(
+                        width: 350,
+                        height: 50,
+                        child: TextFormField(
+                          decoration: getAutenticationInputDecoration(
+                            "Apelido",
+                          ),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 15),
-                  SizedBox(
-                    width: 350,
-                    height: 50,
-                    child: TextFormField(
-                      decoration: getAutenticationInputDecoration("Idade"),
+                    const SizedBox(height: 15),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SizedBox(
+                        width: 350,
+                        height: 50,
+                        child: TextFormField(
+                          decoration: getAutenticationInputDecoration("Idade"),
+                        ),
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "Alfabetizada",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Alfabetizada",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: ListTile(
-                          title: Text(
-                            "Sim",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: ListTile(
+                            title: Text(
+                              "Sim",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: Alfabetizada[0],
+                              groupValue: selecionadaAlf,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadaAlf = value.toString();
+                                });
+                              },
                             ),
                           ),
-                          leading: Radio(
-                            value: Alfabetizada[0],
-                            groupValue: selecionadaAlf,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaAlf = value.toString();
-                              });
-                            },
-                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 150,
+                        SizedBox(
+                          width: 150,
 
-                        child: ListTile(
-                          title: Text(
-                            "Não",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              "Não",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: Alfabetizada[1],
+                              groupValue: selecionadaAlf,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadaAlf = value.toString();
+                                });
+                              },
                             ),
                           ),
-                          leading: Radio(
-                            value: Alfabetizada[1],
-                            groupValue: selecionadaAlf,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaAlf = value.toString();
-                              });
-                            },
-                          ),
                         ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 10),
-                  Text(
-                    "Possui TEA",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      ],
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: [
-                      SizedBox(
-                        width: 150,
-                        child: ListTile(
-                          title: Text(
-                            "Sim",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiTEA[0],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                              });
-                            },
-                          ),
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Possui TEA",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
-                      SizedBox(
-                        width: 150,
-
-                        child: ListTile(
-                          title: Text(
-                            "Não",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiTEA[1],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(height: 10),
-                  Text(
-                    "Nivel de suporte",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
                     ),
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: [
-                      SizedBox(
-                        width: 159,
-
-                        child: ListTile(
-                          title: Text(
-                            "Nível 1",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                      children: [
+                        SizedBox(
+                          width: 150,
+                          child: ListTile(
+                            title: Text(
+                              "Sim",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: PossuiTEA[0],
+                              groupValue: selecionadaTea,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadaTea = value.toString();
+                                });
+                              },
                             ),
                           ),
-                          leading: Radio(
-                            value: NivelSuporte[0],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                              });
-                            },
-                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 159,
+                        SizedBox(
+                          width: 150,
 
-                        child: ListTile(
-                          title: Text(
-                            "Nível 2",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              "Não",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: PossuiTEA[1],
+                              groupValue: selecionadaTea,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadaTea = value.toString();
+                                });
+                              },
                             ),
                           ),
-                          leading: Radio(
-                            value: NivelSuporte[1],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                              });
-                            },
-                          ),
+                        ),
+                      ],
+                    ),
+
+                    const SizedBox(height: 10),
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "Nivel de suporte",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
                         ),
                       ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
 
-                    children: [
-                      SizedBox(
-                        width: 159,
+                      children: [
+                        SizedBox(
+                          width: 159,
 
-                        child: ListTile(
-                          title: Text(
-                            "Nível 3",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              "Nível 1",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: NivelSuporte[0],
+                              groupValue: selecionadoNivel,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadoNivel = value.toString();
+                                });
+                              },
                             ),
                           ),
-                          leading: Radio(
-                            value: NivelSuporte[2],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                              });
-                            },
-                          ),
                         ),
-                      ),
-                      SizedBox(
-                        width: 170,
+                        SizedBox(
+                          width: 159,
 
-                        child: ListTile(
-                          title: Text(
-                            "Não sei",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                          child: ListTile(
+                            title: Text(
+                              "Nível 2",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: NivelSuporte[1],
+                              groupValue: selecionadoNivel,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadoNivel = value.toString();
+                                });
+                              },
                             ),
                           ),
-                          leading: Radio(
-                            value: NivelSuporte[3],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                              });
-                            },
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+
+                      children: [
+                        SizedBox(
+                          width: 160,
+
+                          child: ListTile(
+                            title: Text(
+                              "Nível 3",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: NivelSuporte[2],
+                              groupValue: selecionadoNivel,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadoNivel = value.toString();
+                                });
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                ],
+                        SizedBox(
+                          width: 170,
+
+                          child: ListTile(
+                            title: Text(
+                              "Não sei",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                            leading: Radio(
+                              value: NivelSuporte[3],
+                              groupValue: selecionadoNivel,
+                              activeColor: Colors.white,
+                              onChanged: (value) {
+                                setState(() {
+                                  selecionadoNivel = value.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

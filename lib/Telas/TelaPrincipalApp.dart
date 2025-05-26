@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
+import 'package:tcc/Telas/TelaDeFormularioHistoria.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
@@ -55,7 +56,17 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: IconButton(onPressed: () {}, icon: Icon(Icons.exit_to_app)),
+            icon: IconButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => TelaDeFormularioHistoria(),
+                  ),
+                );
+              },
+              icon: Icon(Icons.exit_to_app),
+            ),
             label: 'Sair',
           ),
           BottomNavigationBarItem(

@@ -13,6 +13,7 @@ class TelaDeInicio extends StatefulWidget {
 class _TelaDeInicioState extends State<TelaDeInicio> {
   final _formKey = GlobalKey<FormState>();
   bool temConta = true;
+  late final String senha_usuario;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,13 +33,13 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                       Text(
                         (temConta) ? "Cadastrar" : "Entrar",
                         style: TextStyle(
-                          fontSize: 50,
+                          fontSize: 70,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Padding(padding: EdgeInsets.all(5)),
-                      Image.asset("assets/mascote.png", height: 150),
+                      Image.asset("assets/mascote.png", height: 250),
                       Visibility(
                         visible: temConta,
 
@@ -88,6 +89,10 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                         child: TextFormField(
                           decoration: getAutenticationInputDecoration("Senha"),
                           validator: (String? value) {
+                            setState(() {
+                              senha_usuario == value;
+                            });
+
                             if (value == null) {
                               return "A sennha não pode ser vazia";
                             }
@@ -111,6 +116,27 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                         ),
                       ),
                       Padding(padding: EdgeInsets.all(10)),
+                      Visibility(
+                        visible: temConta,
+
+                        child: SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: TextFormField(
+                            decoration: getAutenticationInputDecoration(
+                              "Confirmar Senha",
+                            ),
+                            validator: (String? value) {
+                              if (senha_usuario == (value)) {}
+                              if (value == null) {
+                                return "A sennha não pode ser vazia";
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+
+                      Padding(padding: EdgeInsets.only(top: 50.0)),
                       ClipRRect(
                         borderRadius: BorderRadius.circular(20.0),
                         child: SizedBox(

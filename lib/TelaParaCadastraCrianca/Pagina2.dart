@@ -10,6 +10,6 @@ class Pagina2FormCrianca extends StatefulWidget {
 class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Text("ggg"));
+    return Scaffold(body: Form(child: Column()));
   }
 }

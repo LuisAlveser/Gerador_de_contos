@@ -39,9 +39,17 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
         backgroundColor: Colors.white,
       ),
 
-      body: PageView(
-        controller: controller,
-        children: const <Widget>[Pagina1FormCrianca(), Pagina2FormCrianca()],
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: PageView(
+                controller: controller,
+                children: <Widget>[Pagina1FormCrianca(), Pagina2FormCrianca()],
+              ),
+            ),
+          ],
+        ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(4.0),

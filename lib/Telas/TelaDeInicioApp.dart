@@ -12,8 +12,15 @@ class TelaDeInicio extends StatefulWidget {
 
 class _TelaDeInicioState extends State<TelaDeInicio> {
   final _formKey = GlobalKey<FormState>();
+  final TextEditingController nome_controller = TextEditingController();
+  final TextEditingController email_controller = TextEditingController();
+  final TextEditingController senha_controller = TextEditingController();
+  final TextEditingController senha_confirmada_controller =
+      TextEditingController();
+  final TextEditingController telefone_controller = TextEditingController();
+
   bool temConta = true;
-  late final String senha_usuario;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,16 +37,18 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                     mainAxisAlignment: MainAxisAlignment.center,
 
                     children: [
+                      Padding(padding: EdgeInsets.all(5)),
+                      Image.asset("assets/mascote.png", height: 200),
+                      Padding(padding: EdgeInsets.only(top: 30.0)),
                       Text(
-                        (temConta) ? "Cadastrar" : "Entrar",
+                        (temConta) ? "Iniciar Jornada" : "Bem-vindo de Volta!",
                         style: TextStyle(
-                          fontSize: 70,
+                          fontSize: 40,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Padding(padding: EdgeInsets.all(5)),
-                      Image.asset("assets/mascote.png", height: 250),
+                      Padding(padding: EdgeInsets.only(top: 30.0)),
                       Visibility(
                         visible: temConta,
 
@@ -48,12 +57,37 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                           height: 50,
                           child: TextFormField(
                             decoration: getAutenticationInputDecoration("Nome"),
+                            controller: nome_controller,
+                            key: Key("nome"),
                             validator: (String? value) {
-                              if (value == null) {
+                              if (value == null || value.isEmpty) {
                                 return "O nome não pode ser vazio";
                               }
-                              if (value.length < 5) {
-                                return " O nome é muito curto";
+
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(padding: EdgeInsets.all(10)),
+                      Visibility(
+                        visible: temConta,
+
+                        child: SizedBox(
+                          width: 350,
+                          height: 50,
+                          child: TextFormField(
+                            decoration: getAutenticationInputDecoration(
+                              "Telefone (xx) xxxxx-xxxx",
+                            ),
+                            controller: telefone_controller,
+
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Por favor, insira um número de telefone';
+                              }
+                              if (value.length < 8) {
+                                return 'Número de telefone inválido';
                               }
 
                               return null;
@@ -67,15 +101,17 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                         height: 50,
                         child: TextFormField(
                           decoration: getAutenticationInputDecoration("E-mail"),
+                          controller: email_controller,
+                          key: Key("email"),
                           validator: (String? value) {
-                            if (value == null) {
+                            if (value == null || value.isEmpty) {
                               return "O e-mail não pode ser vazio";
                             }
                             if (value.length < 5) {
-                              return " O e-mail é muito curto";
+                              return "O e-mail é muito curto";
                             }
                             if (!value.contains("@")) {
-                              return " E-mail inválido";
+                              return "E-mail inválido";
                             }
                             return null;
                           },
@@ -88,27 +124,15 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
 
                         child: TextFormField(
                           decoration: getAutenticationInputDecoration("Senha"),
+                          controller: senha_controller,
+                          key: Key("senha"),
+                          obscureText: true,
                           validator: (String? value) {
-                            setState(() {
-                              senha_usuario == value;
-                            });
-
-                            if (value == null) {
+                            if (value == null || value.isEmpty) {
                               return "A sennha não pode ser vazia";
                             }
                             if (value.length < 5) {
-                              return " A  senha é muito curta";
-                            }
-                            bool temMaiuscula = false;
-                            for (int i = 0; i < value.length; i++) {
-                              if (value[i] == value[i].toUpperCase() &&
-                                  value[i] != value[i].toLowerCase()) {
-                                temMaiuscula = true;
-                                break;
-                              }
-                            }
-                            if (!temMaiuscula) {
-                              return "A senha deve conter pelo menos uma letra maiúscula";
+                              return "A  senha é muito curta";
                             }
 
                             return null;
@@ -126,10 +150,15 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                             decoration: getAutenticationInputDecoration(
                               "Confirmar Senha",
                             ),
+                            controller: senha_confirmada_controller,
+                            key: Key("confirma_senha"),
+                            obscureText: true,
                             validator: (String? value) {
-                              if (senha_usuario == (value)) {}
-                              if (value == null) {
-                                return "A sennha não pode ser vazia";
+                              if (senha_controller.text != (value)) {
+                                return "A senha está diferente";
+                              }
+                              if (value == null || value.isEmpty) {
+                                return "A senha não pode ser vazia";
                               }
                             },
                           ),
@@ -144,13 +173,18 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                           height: 50.0,
 
                           child: ElevatedButton(
+                            key: Key("entrar"),
                             onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => TelaPrincipal(),
-                                ),
-                              );
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => TelaPrincipal(),
+                                  ),
+                                );
+                              } else {
+                                print("Formuário invalido ");
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,

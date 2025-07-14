@@ -19,7 +19,6 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
     // 0: pagina1FormKey, // Chave da Pagina1FormCrianca
     //  1: pagina2FormKey, // Chave da Pagina2FormCrianca
   };
-  int _currentPageIndex = 0; //Página atual
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +43,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
           children: [
             Expanded(
               child: PageView(
+                physics: NeverScrollableScrollPhysics(),
                 controller: controller,
                 children: <Widget>[Pagina1FormCrianca(), Pagina2FormCrianca()],
               ),

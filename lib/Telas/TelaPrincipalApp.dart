@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Model/CriancaModelo.dart';
+import 'package:tcc/Model/HistoriaModelo.dart';
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
 import 'package:tcc/Telas/TelaDeFormularioHistoria.dart';
 
@@ -12,7 +14,6 @@ class TelaPrincipal extends StatefulWidget {
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
   @override
-  final bool lista_visivel = false;
   List<CriancaModelo> criancas = [
     CriancaModelo(
       nome: "luis",
@@ -24,9 +25,17 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       nome: "Ana",
       idade: "7",
       sexo: "Feminino",
-      personagem_preferido: "Patrulha Canina",
+      personagem_preferido: "Patrulha",
     ),
   ];
+  List<HistoriaModelo> historias = [
+    HistoriaModelo(
+      titulo: "A árvore de natal",
+      texto: "guyuyuyu",
+      data: DateTime.now(),
+    ),
+  ];
+
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
@@ -135,8 +144,9 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     context,
                                     MaterialPageRoute(
                                       builder:
-                                          (context) =>
-                                              TelaDeFormularioHistoria(),
+                                          (context) => TelaDeFormularioHistoria(
+                                            criancaModelo: criancaModelo,
+                                          ),
                                     ),
                                   );
                                 },
@@ -145,7 +155,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   shadowColor: Colors.transparent,
                                 ),
                                 child: Text(
-                                  "Gerar História",
+                                  "Ir para História",
 
                                   style: TextStyle(
                                     color: Colors.white,
@@ -189,6 +199,119 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 backgroundColor: Colors.transparent,
               ),
               Divider(color: Colors.white, thickness: 2),
+              Padding(padding: EdgeInsets.only(top: 2)),
+              //histórias salvas
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  ...List.generate(historias.length, (index) {
+                    HistoriaModelo historiaModelo = historias[index];
+                    return Card(
+                      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                      elevation: 4,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Icon(Icons.menu_book, color: Colors.blue),
+                                    SizedBox(width: 8),
+                                    Text(
+                                      "Titulo: ${historiaModelo.titulo}",
+                                      style: TextStyle(
+                                        fontSize: 10,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    const SizedBox(width: 12),
+
+                                    IconButton(
+                                      onPressed: () {
+                                        // deleta história
+                                      },
+                                      icon: Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                        size: 25,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+
+                            SizedBox(height: 10),
+
+                            Row(
+                              children: [
+                                Icon(Icons.calendar_month, size: 20),
+                                SizedBox(width: 6),
+                                Text(
+                                  "Data: ${historiaModelo.data.day}/${historiaModelo.data.month}/${historiaModelo.data.year}",
+                                ),
+                              ],
+                            ),
+                            Padding(padding: EdgeInsets.only(top: 10)),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: SizedBox(
+                                    width: 100.0,
+                                    height: 20.0,
+
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        //ir para historia salva
+                                      },
+                                      style: ElevatedButton.styleFrom(
+                                        padding: EdgeInsets.zero,
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.circular(
+                                            30.0,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Image.asset(
+                                            'assets/fundo_botao.jpg',
+                                            fit: BoxFit.cover,
+                                            height: double.infinity,
+                                            width: double.infinity,
+                                          ),
+                                          Text(
+                                            "Ler Novamente",
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 10.0,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  }),
+                ],
+              ),
             ],
           ),
         ),

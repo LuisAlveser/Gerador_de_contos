@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 class CriancaModelo {
   String nome;
   String idade;

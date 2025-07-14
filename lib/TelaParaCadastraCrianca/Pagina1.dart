@@ -66,13 +66,14 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(
-                    "Alfabetizada",
+                    "Ele/ ela utiliza óculos de grau? ",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                 ),
+
                 Padding(
                   padding: const EdgeInsets.all(20.0),
                   child: Row(
@@ -88,12 +89,12 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             ),
                           ),
                           leading: Radio(
-                            value: selecionadaAlf[0],
+                            value: Alfabetizada[0],
                             groupValue: selecionadaAlf,
                             activeColor: Colors.white,
                             onChanged: (value) {
                               setState(() {
-                                selecionadaTea = value.toString();
+                                selecionadaAlf = value.toString();
                               });
                             },
                           ),
@@ -109,12 +110,12 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             ),
                           ),
                           leading: Radio(
-                            value: selecionadaAlf[1],
+                            value: Alfabetizada[1],
                             groupValue: selecionadaAlf,
                             activeColor: Colors.white,
                             onChanged: (value) {
                               setState(() {
-                                selecionadaTea = value.toString();
+                                selecionadaAlf = value.toString();
                               });
                             },
                           ),
@@ -123,10 +124,10 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                     ],
                   ),
                 ),
-
+                Divider(color: Colors.white, thickness: 2.0),
                 const SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Possui TEA",
                     style: TextStyle(
@@ -135,8 +136,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                     ),
                   ),
                 ),
+
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -185,10 +187,10 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                     ],
                   ),
                 ),
-
+                Divider(color: Colors.white, thickness: 2.0),
                 const SizedBox(height: 10),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Nível de suporte",
                     style: TextStyle(
@@ -198,7 +200,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -248,7 +250,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(20.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -297,6 +299,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                     ],
                   ),
                 ),
+                Divider(color: Colors.white, thickness: 2.0),
               ],
             ),
           ),

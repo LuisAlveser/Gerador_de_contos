@@ -29,7 +29,12 @@ List<String> RelacaoComLivros = [
   "Não sei informar",
   "Prefiro não responder",
 ];
-List<String> RelacaoComTecnologia = ["Celular","Televisão","Tablet","Computador"];
+List<String> RelacaoComTecnologia = [
+  "Celular",
+  "Televisão",
+  "Tablet",
+  "Computador",
+];
 
 class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
   String selecionadoAcompanhamento = AcompanhamentoProfissional[0];
@@ -510,7 +515,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
-                    "Com relação as tecnologias, com que freqüência ele/ ela utiliza?",
+                    "Tecnologias, com que freqüência ele/ ela utiliza?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,

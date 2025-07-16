@@ -564,6 +564,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                     ],
                   ),
                 ),
+                Divider(color: Colors.white, thickness: 2.0),
+                
               ],
             ),
           ),

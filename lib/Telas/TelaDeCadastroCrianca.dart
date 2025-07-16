@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina1.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina2.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina3.dart';
+import 'package:tcc/TelaParaCadastraCrianca/Pagina4.dart';
+import 'package:tcc/TelaParaCadastraCrianca/Pagina5.dart';
 
 class TelaDeFormularioCrianca extends StatefulWidget {
   const TelaDeFormularioCrianca({super.key});
@@ -12,7 +14,13 @@ class TelaDeFormularioCrianca extends StatefulWidget {
 }
 
 class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
-  List<Widget> paginas = [Pagina1FormCrianca(), Pagina2FormCrianca()];
+  List<Widget> paginas = [
+    Pagina1FormCrianca(),
+    Pagina2FormCrianca(),
+    Pagina3FormCrianca(),
+    Pagina4FormCrianca(),
+    Pagina5FormCrianca(),
+  ];
   final controller = PageController(initialPage: 0);
 
   // Mapeia o índice da página para sua GlobalKey
@@ -50,6 +58,8 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                   Pagina1FormCrianca(),
                   Pagina2FormCrianca(),
                   Pagina3FormCrianca(),
+                  Pagina4FormCrianca(),
+                  Pagina5FormCrianca(),
                 ],
               ),
             ),
@@ -69,7 +79,10 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
 
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.jumpToPage(0);
+                    controller.previousPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.linear,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,
@@ -110,7 +123,10 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
 
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.jumpToPage(2);
+                    controller.nextPage(
+                      duration: Duration(milliseconds: 300),
+                      curve: Curves.linear,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,

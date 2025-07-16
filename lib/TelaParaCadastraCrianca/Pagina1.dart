@@ -10,7 +10,14 @@ class Pagina1FormCrianca extends StatefulWidget {
 
 List<String> Alfabetizada = ["Sim", "Não"];
 List<String> PossuiTEA = ["Sim", "Não"];
-List<String> NivelSuporte = ["Nivel 1", "Nivel 2", "Nivel 3", "Não informado"];
+List<String> NivelSuporte = [
+  "Nível 1",
+  "Nível 2",
+  "Nível 3",
+  "Não sei",
+  "Ainda não foi diagnosticado(a)",
+  "Prefiro não responder",
+];
 
 class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
   String selecionadaAlf = Alfabetizada[0];
@@ -189,10 +196,11 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                 ),
                 Divider(color: Colors.white, thickness: 2.0),
                 const SizedBox(height: 10),
+
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
-                    "Nível de suporte",
+                    "Em qual nível de suporte ele/ela foi diagnosticado(a)?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -207,7 +215,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                       Expanded(
                         child: ListTile(
                           title: Text(
-                            "Nível 1",
+                            "Nível 1:  Pouco apoio",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -228,7 +236,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                       Expanded(
                         child: ListTile(
                           title: Text(
-                            "Nível 2",
+                            "Nível 2: Apoio moderado",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -257,7 +265,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                       Expanded(
                         child: ListTile(
                           title: Text(
-                            "Nível 3",
+                            "Nível 3: Apoio substancial",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -278,7 +286,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                       Expanded(
                         child: ListTile(
                           title: Text(
-                            "Não sei",
+                            "Não sei informar",
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
@@ -286,6 +294,56 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                           ),
                           leading: Radio(
                             value: NivelSuporte[3],
+                            groupValue: selecionadoNivel,
+                            activeColor: Colors.white,
+                            onChanged: (value) {
+                              setState(() {
+                                selecionadoNivel = value.toString();
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Ainda não foi diagnosticado(a)",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          leading: Radio(
+                            value: NivelSuporte[4],
+                            groupValue: selecionadoNivel,
+                            activeColor: Colors.white,
+                            onChanged: (value) {
+                              setState(() {
+                                selecionadoNivel = value.toString();
+                              });
+                            },
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            "Prefiro não responder",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                          leading: Radio(
+                            value: NivelSuporte[5],
                             groupValue: selecionadoNivel,
                             activeColor: Colors.white,
                             onChanged: (value) {

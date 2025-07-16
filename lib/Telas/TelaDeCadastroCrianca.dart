@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina1.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina2.dart';
+import 'package:tcc/TelaParaCadastraCrianca/Pagina3.dart';
 
 class TelaDeFormularioCrianca extends StatefulWidget {
   const TelaDeFormularioCrianca({super.key});
@@ -45,7 +46,11 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
               child: PageView(
                 physics: NeverScrollableScrollPhysics(),
                 controller: controller,
-                children: <Widget>[Pagina1FormCrianca(), Pagina2FormCrianca()],
+                children: <Widget>[
+                  Pagina1FormCrianca(),
+                  Pagina2FormCrianca(),
+                  Pagina3FormCrianca(),
+                ],
               ),
             ),
           ],
@@ -105,7 +110,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
 
                 child: ElevatedButton(
                   onPressed: () {
-                    controller.jumpToPage(1);
+                    controller.jumpToPage(2);
                   },
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.zero,

@@ -1,7 +1,28 @@
 import 'package:flutter/material.dart';
+class Pagina5Data {
+  String? selecionadaComidaFavorita ;
+  String? selecionadaAtividadeFavorita;
+  String?  selecionadoMovimentoFavoritos;
 
+  Pagina5Data({
+    this.selecionadaComidaFavorita,
+    this.selecionadaAtividadeFavorita,
+    this.selecionadoMovimentoFavoritos,
+  });
+  Map<String, dynamic> toJson() {
+    return {
+      'ComidaFavorita': selecionadaComidaFavorita,
+      'AtividadeFavorita': selecionadaAtividadeFavorita,
+      'MovimentoFavorito': selecionadoMovimentoFavoritos,
+    };
+  }
+}
 class Pagina5FormCrianca extends StatefulWidget {
-  const Pagina5FormCrianca({super.key});
+   final GlobalKey<FormState> formKey;
+
+  final ValueChanged<Pagina5Data> onDataChanged;
+  const Pagina5FormCrianca({super.key,required this.formKey,
+    required this.onDataChanged,});
 
   @override
   State<Pagina5FormCrianca> createState() => _Pagina5FormCriancaState();
@@ -35,10 +56,40 @@ List<String> AtividadesFavoritas = [
   "Que alguém cante",
   "Que alguém conte história",
 ];
+List<String> MovimentosFavoritos = [
+  "Balançar o corpo (para frente ou para trás)",
+  "Balançar as mãos",
+  "Andar nas pontas dos pés",
+  "Bater os pés no chão ou em algum objeto próximo",
+  "Cruzar e descruzar as pernas muitas vezes",
+  "Pular com frequência",
+  "Correr com frequência",
+  "Movimentar os dedos na frente dos olhos",
+  "Fazer sons repetitivos",
+  "Girar objetos ou girar em volta do próprio corpo",
+  "Prefiro não responder",
+];
 
 class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
   String selecionadaComidaFavorita = ComidasPreferidas[0];
   String selecionadaAtividadeFavorita = AtividadesFavoritas[0];
+  String selecionadoMovimentoFavoritos = MovimentosFavoritos[0];
+   late Pagina5Data _pagina5Data;
+  void _sendDataToParent() {
+    widget.onDataChanged(_pagina5Data);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pagina5Data = Pagina5Data(
+      selecionadaComidaFavorita: selecionadaComidaFavorita,
+      selecionadaAtividadeFavorita: selecionadaAtividadeFavorita,
+      selecionadoMovimentoFavoritos: selecionadoMovimentoFavoritos,
+    );
+    _sendDataToParent();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,6 +97,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Form(
+           key: widget.formKey,
           child: Column(
             children: [
               Padding(
@@ -80,6 +132,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -102,6 +157,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -132,6 +190,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -154,6 +215,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -184,6 +248,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -206,6 +273,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -236,6 +306,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -258,6 +331,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -288,6 +364,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -310,6 +389,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -340,6 +422,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -362,6 +447,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -392,6 +480,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -414,6 +505,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -444,6 +538,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
+                               _pagina5Data.selecionadaComidaFavorita =
+                                  selecionadaComidaFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -486,6 +583,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -508,6 +608,10 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
+
                             });
                           },
                         ),
@@ -538,6 +642,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -560,6 +667,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -590,6 +700,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -612,6 +725,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -642,6 +758,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -664,6 +783,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -694,6 +816,343 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
+                               _pagina5Data.selecionadaAtividadeFavorita=
+                                  selecionadaAtividadeFavorita;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(color: Colors.white, thickness: 2.0),
+              Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Text(
+                  "Quais  movimentos repetitivos ele/ela realiza com frequência?",
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Balançar o corpo (para frente ou para trás)",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[0],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Balançar as mãos",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[1],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Andar nas pontas dos pés",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[2],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Bater os pés no chão ou em algum objeto próximo",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[3],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Cruzar e descruzar as pernas muitas vezes",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[4],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Pular com frequência",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[5],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Correr com frequência",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[6],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Movimentar os dedos na frente dos olhos",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[7],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Fazer sons repetitivos",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[8],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Girar objetos ou girar em volta do próprio corpo",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[9],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: ListTile(
+                        title: Text(
+                          "Prefiro não responder",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: MovimentosFavoritos[10],
+                          groupValue: selecionadoMovimentoFavoritos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoMovimentoFavoritos = value.toString();
+                               _pagina5Data.selecionadoMovimentoFavoritos=
+                                  selecionadoMovimentoFavoritos;
+                              _sendDataToParent();
                             });
                           },
                         ),

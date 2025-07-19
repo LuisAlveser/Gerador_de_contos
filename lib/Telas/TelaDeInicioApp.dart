@@ -15,8 +15,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
   final TextEditingController nome_controller = TextEditingController();
   final TextEditingController email_controller = TextEditingController();
   final TextEditingController senha_controller = TextEditingController();
-  final TextEditingController senha_confirmada_controller =
-      TextEditingController();
+  final TextEditingController senha_confirmada_controller = TextEditingController();
   final TextEditingController telefone_controller = TextEditingController();
 
   bool temConta = true;
@@ -111,6 +110,9 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                               return "O e-mail é muito curto";
                             }
                             if (!value.contains("@")) {
+                              return "E-mail inválido";
+                            }
+                            if (!value.contains(".com")) {
                               return "E-mail inválido";
                             }
                             return null;

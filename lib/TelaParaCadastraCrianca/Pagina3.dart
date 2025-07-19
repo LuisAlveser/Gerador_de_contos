@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
 
+class Pagina3Data {
+  String? selecionadoAcompanhamento;
+  String? selecionadoRelacaoLivros;
+  String? selecionadoRelacaoComTecnologia;
+
+  Pagina3Data({
+    this.selecionadoAcompanhamento,
+    this.selecionadoRelacaoLivros,
+    this.selecionadoRelacaoComTecnologia,
+  });
+  Map<String, dynamic> toJson() {
+    return {
+      'Acompanhamento': selecionadoAcompanhamento,
+      'RelacaoLivros': selecionadoRelacaoLivros,
+      'RelacaoTecnologia': selecionadoRelacaoComTecnologia,
+    };
+  }
+}
+
 class Pagina3FormCrianca extends StatefulWidget {
-  const Pagina3FormCrianca({super.key});
+  final GlobalKey<FormState> formKey;
+
+  final ValueChanged<Pagina3Data> onDataChanged;
+  const Pagina3FormCrianca({
+    super.key,
+    required this.formKey,
+    required this.onDataChanged,
+  });
 
   @override
   State<Pagina3FormCrianca> createState() => _Pagina3FormCriancaState();
@@ -40,11 +66,29 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
   String selecionadoAcompanhamento = AcompanhamentoProfissional[0];
   String selecionadoRelacaoLivros = RelacaoComLivros[0];
   String selecionadoRelacaoComTecnologia = RelacaoComTecnologia[0];
+  late Pagina3Data _pagina3Data;
+  void _sendDataToParent() {
+    widget.onDataChanged(_pagina3Data);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pagina3Data = Pagina3Data(
+      selecionadoAcompanhamento: selecionadoAcompanhamento,
+      selecionadoRelacaoLivros: selecionadoRelacaoLivros,
+      selecionadoRelacaoComTecnologia: selecionadoRelacaoComTecnologia,
+    );
+    _sendDataToParent();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: const Color.fromARGB(167, 10, 134, 235),
       child: Form(
+        key: widget.formKey,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
           child: Center(
@@ -83,6 +127,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -105,6 +152,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -136,6 +186,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -158,6 +211,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -188,6 +244,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -210,6 +269,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -240,6 +302,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -262,6 +327,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -292,6 +360,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoAcompanhamento = value.toString();
+                                _pagina3Data.selecionadoAcompanhamento =
+                                    selecionadoAcompanhamento;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -323,6 +394,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -332,6 +404,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -344,6 +419,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -353,6 +429,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -373,6 +452,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -382,6 +462,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -394,6 +477,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -403,6 +487,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -423,6 +510,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -432,6 +520,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -444,6 +535,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -453,6 +545,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -473,6 +568,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -482,6 +578,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -494,6 +593,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -503,6 +603,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoRelacaoLivros = value.toString();
+                                _pagina3Data.selecionadoRelacaoLivros =
+                                    selecionadoRelacaoLivros;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -534,6 +637,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -544,6 +648,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                               setState(() {
                                 selecionadoRelacaoComTecnologia =
                                     value.toString();
+                                _pagina3Data.selecionadoRelacaoComTecnologia =
+                                    selecionadoRelacaoComTecnologia;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -556,6 +663,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -566,6 +674,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                               setState(() {
                                 selecionadoRelacaoComTecnologia =
                                     value.toString();
+                                _pagina3Data.selecionadoRelacaoComTecnologia =
+                                    selecionadoRelacaoComTecnologia;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -586,6 +697,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -596,6 +708,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                               setState(() {
                                 selecionadoRelacaoComTecnologia =
                                     value.toString();
+                                _pagina3Data.selecionadoRelacaoComTecnologia =
+                                    selecionadoRelacaoComTecnologia;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -608,6 +723,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -618,6 +734,9 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                               setState(() {
                                 selecionadoRelacaoComTecnologia =
                                     value.toString();
+                                _pagina3Data.selecionadoRelacaoComTecnologia =
+                                    selecionadoRelacaoComTecnologia;
+                                _sendDataToParent();
                               });
                             },
                           ),

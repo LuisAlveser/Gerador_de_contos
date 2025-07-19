@@ -1,7 +1,37 @@
 import 'package:flutter/material.dart';
 
+class Pagina2Data {
+  String? selecionadoGenero;
+
+  String? selecionadoVerbo;
+  String? selecionadoEletronico;
+  String? selecionadoEtapaEducacaoBasica;
+
+  Pagina2Data({
+    this.selecionadoGenero,
+    this.selecionadoVerbo,
+    this.selecionadoEletronico,
+    this.selecionadoEtapaEducacaoBasica,
+  });
+  Map<String, dynamic> toJson() {
+    return {
+      'Genero': selecionadoGenero,
+      'Verbal': selecionadoVerbo,
+      'Eletronico': selecionadoEletronico,
+      'Educação_Etapa': selecionadoEtapaEducacaoBasica,
+    };
+  }
+}
+
 class Pagina2FormCrianca extends StatefulWidget {
-  const Pagina2FormCrianca({super.key});
+  final GlobalKey<FormState> formKey;
+
+  final ValueChanged<Pagina2Data> onDataChanged;
+  const Pagina2FormCrianca({
+    super.key,
+    required this.formKey,
+    required this.onDataChanged,
+  });
 
   @override
   State<Pagina2FormCrianca> createState() => _Pagina2FormCriancaState();
@@ -35,12 +65,31 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
   String selecionadoVerbo = Verbal[0];
   String selecionadoEletronico = Verbal[0];
   String selecionadoEtapaEducacaoBasica = EtapaEducacaoBasica[0];
+  late Pagina2Data _pagina2Data;
+  void _sendDataToParent() {
+    widget.onDataChanged(_pagina2Data);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pagina2Data = Pagina2Data(
+      selecionadoGenero: selecionadoGenero,
+      selecionadoVerbo: selecionadoVerbo,
+      selecionadoEletronico: selecionadoEletronico,
+      selecionadoEtapaEducacaoBasica: selecionadoEtapaEducacaoBasica,
+    );
+    _sendDataToParent();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: const Color.fromARGB(167, 10, 134, 235),
 
       child: Form(
+        key: widget.formKey,
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(20.0),
           child: Center(
@@ -69,6 +118,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -78,6 +128,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoGenero = value.toString();
+                                 _pagina2Data.selecionadoGenero =
+                                    selecionadoGenero;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -90,6 +143,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -99,6 +153,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoGenero = value.toString();
+                                _pagina2Data.selecionadoGenero =
+                                    selecionadoGenero;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -119,6 +176,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -128,6 +186,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoGenero = value.toString();
+                                  _pagina2Data.selecionadoGenero =
+                                    selecionadoGenero;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -159,6 +220,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -168,6 +230,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
+                                  _pagina2Data.selecionadoVerbo =
+                                    selecionadoVerbo;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -180,6 +245,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -189,6 +255,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
+                                 _pagina2Data.selecionadoVerbo =
+                                    selecionadoVerbo;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -209,6 +278,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -218,6 +288,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
+                                 _pagina2Data.selecionadoVerbo =
+                                    selecionadoVerbo;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -230,6 +303,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -239,6 +313,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
+                                 _pagina2Data.selecionadoVerbo =
+                                    selecionadoVerbo;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -270,6 +347,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -279,6 +357,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoEletronico = value.toString();
+                                 _pagina2Data.selecionadoEletronico =
+                                    selecionadoEletronico;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -291,6 +372,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -300,6 +382,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoEletronico = value.toString();
+                                _pagina2Data.selecionadoEletronico =
+                                    selecionadoEletronico;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -320,6 +405,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
                               color: Colors.white,
+                              fontSize: 13,
                             ),
                           ),
                           leading: Radio(
@@ -329,6 +415,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoEletronico = value.toString();
+                                _pagina2Data.selecionadoEletronico =
+                                    selecionadoEletronico;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -371,6 +460,9 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -394,6 +486,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -425,6 +519,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -448,6 +544,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -479,6 +577,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -502,6 +602,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -533,6 +635,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -556,6 +660,8 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
+                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                    selecionadoEtapaEducacaoBasica;
                               });
                             },
                           ),
@@ -565,7 +671,6 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                   ),
                 ),
                 Divider(color: Colors.white, thickness: 2.0),
-                
               ],
             ),
           ),

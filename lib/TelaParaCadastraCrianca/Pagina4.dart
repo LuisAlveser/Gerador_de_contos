@@ -1,7 +1,33 @@
 import 'package:flutter/material.dart';
 
+class Pagina4Data {
+  String? selecionadoBrinquedo;
+  String? selecionadoCor;
+  String? selecionadoVeiculoFavorito;
+
+  Pagina4Data({
+    this.selecionadoBrinquedo,
+    this.selecionadoCor,
+    this.selecionadoVeiculoFavorito,
+  });
+  Map<String, dynamic> toJson() {
+    return {
+      'Brinquedo': selecionadoBrinquedo,
+      'Cor': selecionadoCor,
+      'VeiculoFavorito': selecionadoVeiculoFavorito,
+    };
+  }
+}
+
 class Pagina4FormCrianca extends StatefulWidget {
-  const Pagina4FormCrianca({super.key});
+  final GlobalKey<FormState> formKey;
+
+  final ValueChanged<Pagina4Data> onDataChanged;
+  const Pagina4FormCrianca({
+    super.key,
+    required this.formKey,
+    required this.onDataChanged,
+  });
 
   @override
   State<Pagina4FormCrianca> createState() => _Pagina4FormCriancaState();
@@ -55,6 +81,22 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
   String selecionadoBriquendo = BrinquedosPreferidos[0];
   String selecionadoCor = CorFavorita[0];
   String selecionadoVeiculoFavorito = VeiculoFavorito[0];
+  late Pagina4Data _pagina4Data;
+  void _sendDataToParent() {
+    widget.onDataChanged(_pagina4Data);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _pagina4Data = Pagina4Data(
+      selecionadoBrinquedo: selecionadoBriquendo,
+      selecionadoCor: selecionadoCor,
+      selecionadoVeiculoFavorito: selecionadoVeiculoFavorito,
+    );
+    _sendDataToParent();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +105,7 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Form(
+           key: widget.formKey,
           child: Column(
             children: [
               Padding(
@@ -97,6 +140,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -119,6 +165,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -149,6 +198,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -171,6 +223,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -201,6 +256,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -223,6 +281,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -253,6 +314,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -275,6 +339,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -305,6 +372,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -327,6 +397,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -357,6 +430,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -379,6 +455,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -409,6 +488,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -431,6 +513,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -461,6 +546,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -483,6 +571,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -513,6 +604,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -535,6 +629,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -565,6 +662,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -587,6 +687,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoBrinquedo =
+                                  selecionadoBriquendo;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -628,6 +731,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -650,6 +755,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -680,6 +787,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -702,6 +811,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -732,6 +843,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -754,6 +867,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -784,6 +899,8 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoCor = value.toString();
+                              _pagina4Data.selecionadoCor = selecionadoCor;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -825,6 +942,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -847,6 +967,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -877,6 +1000,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -899,6 +1025,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -929,6 +1058,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -951,6 +1083,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -981,6 +1116,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -1003,6 +1141,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -1033,6 +1174,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoBriquendo = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),
@@ -1055,6 +1199,9 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoVeiculoFavorito = value.toString();
+                              _pagina4Data.selecionadoVeiculoFavorito =
+                                  selecionadoVeiculoFavorito;
+                              _sendDataToParent();
                             });
                           },
                         ),

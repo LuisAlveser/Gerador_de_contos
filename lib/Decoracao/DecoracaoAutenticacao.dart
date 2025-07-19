@@ -5,7 +5,8 @@ InputDecoration getAutenticationInputDecoration(String label) {
     label: Text(label),
     fillColor: Colors.white,
     filled: true,
-    labelStyle: TextStyle(color: Colors.blueAccent),
+    labelStyle: TextStyle(color: const Color.fromARGB(255, 17, 44, 194)),
+    
 
     border: OutlineInputBorder(borderRadius: BorderRadius.circular(20.0)),
     enabledBorder: OutlineInputBorder(
@@ -14,7 +15,10 @@ InputDecoration getAutenticationInputDecoration(String label) {
     ),
     focusedBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),
-      borderSide: BorderSide(color: Colors.blueAccent, width: 3),
+      borderSide: BorderSide(
+        color: const Color.fromARGB(255, 17, 44, 194),
+        width: 3,
+      ),
     ),
     errorBorder: OutlineInputBorder(
       borderRadius: BorderRadius.circular(20.0),

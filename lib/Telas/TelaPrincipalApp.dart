@@ -316,36 +316,42 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           ),
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: IconButton(onPressed: () {}, icon: Icon(Icons.exit_to_app)),
-            label: 'Sair',
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                _scaffoldKey.currentState?.openDrawer();
-              },
-              icon: Icon(Icons.bookmark_outline),
+      bottomNavigationBar: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(15.0),
+          topRight: Radius.circular(15.0),
+        ),
+        child: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: IconButton(onPressed: () {}, icon: Icon(Icons.exit_to_app)),
+              label: 'Sair',
             ),
-            label: 'Histórias Salvas',
-          ),
-          BottomNavigationBarItem(
-            icon: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => TelaDeFormularioCrianca(),
-                  ),
-                );
-              },
-              icon: Icon(Icons.person_add_alt_outlined),
+            BottomNavigationBarItem(
+              icon: IconButton(
+                onPressed: () {
+                  _scaffoldKey.currentState?.openDrawer();
+                },
+                icon: Icon(Icons.bookmark_outline),
+              ),
+              label: 'Histórias Salvas',
             ),
-            label: 'Adicionar Criança',
-          ),
-        ],
+            BottomNavigationBarItem(
+              icon: IconButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => TelaDeFormularioCrianca(),
+                    ),
+                  );
+                },
+                icon: Icon(Icons.person_add_alt_outlined),
+              ),
+              label: 'Adicionar Criança',
+            ),
+          ],
+        ),
       ),
     );
   }

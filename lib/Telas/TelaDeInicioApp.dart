@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
+import 'package:tcc/Model/ResponsavelModelo.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
+import 'package:tcc/servicos/AutenticacaoResponsavel.dart';
 
 class TelaDeInicio extends StatefulWidget {
   const TelaDeInicio({super.key});
@@ -15,8 +18,11 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
   final TextEditingController nome_controller = TextEditingController();
   final TextEditingController email_controller = TextEditingController();
   final TextEditingController senha_controller = TextEditingController();
-  final TextEditingController senha_confirmada_controller = TextEditingController();
+  final TextEditingController senha_confirmada_controller =
+      TextEditingController();
   final TextEditingController telefone_controller = TextEditingController();
+  AutenticacaoResponsavel _autenticacaoresponsavel =
+      new AutenticacaoResponsavel();
 
   bool temConta = true;
 
@@ -176,8 +182,17 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
 
                           child: ElevatedButton(
                             key: Key("entrar"),
-                            onPressed: () {
+                            onPressed: () async {
                               if (_formKey.currentState!.validate()) {
+                                if (temConta) {
+                                  User? user = await _autenticacaoresponsavel.cadastrarResponsavel(
+                                    nome: nome_controller.text,
+                                    senha: senha_controller.text,
+                                    telefone: telefone_controller.text,
+                                    email: email_controller.text,
+                                    context: context, 
+                                  );
+                                }
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -185,6 +200,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                                   ),
                                 );
                               } else {
+                                
                                 print("Formuário invalido ");
                               }
                             },

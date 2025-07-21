@@ -120,126 +120,140 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(4.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: 100.0,
-                height: 40.0,
+      bottomNavigationBar: ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(15.0),
+          topRight: Radius.circular(15.0),
+        ),
+        child: Container(
+          color: Colors.white,
+          padding: const EdgeInsets.only(
+            left: 10.0,
+            right: 10.0,
+            bottom: 0.0,
+            top: 5.0,
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 100.0,
+                  height: 40.0,
 
-                child: ElevatedButton(
-                  onPressed: () {
-                    _pageController.previousPage(
-                      duration: Duration(milliseconds: 300),
-                      curve: Curves.linear,
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          'assets/fundo_botao.jpg',
-                          fit: BoxFit.cover,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
-                      ),
-                      Text(
-                        "Voltar",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: SizedBox(
-                width: 100.0,
-                height: 40.0,
-
-                child: ElevatedButton(
-                  onPressed: () {
-                    final currentFormKey = formKeys[_currentPageIndex];
-
-                    if (currentFormKey != null &&
-                        currentFormKey.currentState != null) {
-                      final isValid = currentFormKey.currentState!.validate();
-
-                      if (isValid) {
-                        _pageController.nextPage(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        _pageController.previousPage(
                           duration: Duration(milliseconds: 300),
                           curve: Curves.linear,
                         );
-
-                        if (_currentPageIndex == 6) {
-                          final pagina1 = _formData[0] as Pagina1Data;
-                          final pagina2 = _formData[1] as Pagina2Data;
-                          final pagina3 = _formData[2] as Pagina3Data;
-                          final pagina4 = _formData[3] as Pagina4Data;
-                          final pagina5 = _formData[4] as Pagina5Data;
-                          final pagina6 = _formData[5] as Pagina6Data;
-                          final pagina7 = _formData[6] as Pagina7Data;
-                        }
-                      }
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text("Preencha todos os campos"),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      ClipRRect(
+                      });
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(20.0),
-                        child: Image.asset(
-                          'assets/fundo_botao.jpg',
-                          fit: BoxFit.cover,
-                          height: double.infinity,
-                          width: double.infinity,
-                        ),
                       ),
-                      Text(
-                        _currentPageIndex == 6 ? "Cadastrar" : "Proximo",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 20.0,
-                          fontWeight: FontWeight.bold,
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/fundo_botao.jpg',
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                            width: double.infinity,
+                          ),
                         ),
-                      ),
-                    ],
+                        Text(
+                          "Voltar",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  width: 100.0,
+                  height: 40.0,
+
+                  child: ElevatedButton(
+                    onPressed: () {
+                      final currentFormKey = formKeys[_currentPageIndex];
+
+                      if (currentFormKey != null &&
+                          currentFormKey.currentState != null) {
+                        final isValid = currentFormKey.currentState!.validate();
+
+                        if (isValid) {
+                          _pageController.nextPage(
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.linear,
+                          );
+
+                          if (_currentPageIndex == 6) {
+                            final pagina1 = _formData[0] as Pagina1Data;
+                            final pagina2 = _formData[1] as Pagina2Data;
+                            final pagina3 = _formData[2] as Pagina3Data;
+                            final pagina4 = _formData[3] as Pagina4Data;
+                            final pagina5 = _formData[4] as Pagina5Data;
+                            final pagina6 = _formData[5] as Pagina6Data;
+                            final pagina7 = _formData[6] as Pagina7Data;
+                          }
+                        }
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("Preencha todos os campos"),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: EdgeInsets.zero,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(20.0),
+                          child: Image.asset(
+                            'assets/fundo_botao.jpg',
+                            fit: BoxFit.cover,
+                            height: double.infinity,
+                            width: double.infinity,
+                          ),
+                        ),
+                        Text(
+                          _currentPageIndex == 6 ? "Cadastrar" : "Proximo",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
 class Pagina2Data {
-  String? selecionadoGenero;
+  String selecionadoGenero;
 
-  String? selecionadoVerbo;
-  String? selecionadoEletronico;
-  String? selecionadoEtapaEducacaoBasica;
+  String selecionadoVerbo;
+  String selecionadoEletronico;
+  String  selecionadoEtapaEducacaoBasica;
 
   Pagina2Data({
-    this.selecionadoGenero,
-    this.selecionadoVerbo,
-    this.selecionadoEletronico,
-    this.selecionadoEtapaEducacaoBasica,
+    required this.selecionadoGenero,
+   required  this.selecionadoVerbo,
+   required  this.selecionadoEletronico,
+   required  this.selecionadoEtapaEducacaoBasica,
   });
   Map<String, dynamic> toJson() {
     return {

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Pagina4Data {
-  String? selecionadoBrinquedo;
-  String? selecionadoCor;
-  String? selecionadoVeiculoFavorito;
+  String selecionadoBrinquedo;
+  String selecionadoCor;
+  String selecionadoVeiculoFavorito;
 
   Pagina4Data({
-    this.selecionadoBrinquedo,
-    this.selecionadoCor,
-    this.selecionadoVeiculoFavorito,
+   required  this.selecionadoBrinquedo,
+     required this.selecionadoCor,
+    required this.selecionadoVeiculoFavorito,
   });
   Map<String, dynamic> toJson() {
     return {

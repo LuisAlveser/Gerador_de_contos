@@ -1,8 +1,9 @@
 class QuestionarioModel {
-  String idCrianca;
+  String idquestionario;
+  String idresponsavel;
   String nome;
   String apelido;
-  int idade;
+  String  idade;
   String usaOculos;
   String diagnosticoTEA;
   String nivelTEA;
@@ -34,9 +35,10 @@ class QuestionarioModel {
   String animalEstimacaoNome;
   String hiperfoco;
 
-  // Constructor
+  
   QuestionarioModel({
-    required this.idCrianca,
+    required this.idquestionario,
+    required this.idresponsavel,
     required this.nome,
     required this.apelido,
     required this.idade,
@@ -72,49 +74,52 @@ class QuestionarioModel {
     required this.hiperfoco,
   });
 
-  factory QuestionarioModel.fromJson(Map<String, dynamic> json) {
+  factory QuestionarioModel.fromMap(Map<String, dynamic> map) {
     return QuestionarioModel(
-      idCrianca: json['id_crianca'] as String,
-      nome: json['nome'] as String,
-      apelido: json['apelido'] as String,
-      idade: json['idade'] as int,
-      usaOculos: json['usa_oculos'] as String,
-      diagnosticoTEA: json['diagnostico_TEA'] as String,
-      nivelTEA: json['nivel_TEA'] as String,
-      genero: json['genero'] as String,
-      comunicacao: json['comunicacao'] as String,
-      tecnologiaQueGosta: json['tecnologia_que_gosta'] as String,
-      anoEscolar: json['ano_escolar'] as String,
-      acompanhamentoProfissinal: json['acompanhamento_profissinal'] as String,
-      relacaocomLivros: json['relacao_com_livros'] as String,
-      tecnologiasUsadasComFrequencia: json['tecnologias_usados_com_frequencia'] as String,
-      caracteristicaBrinquedo: json['caracteristica_brinquedo'] as String,
-      corFavorita: json['cor_favorita'] as String,
-      veiculosPreferidos: json['veiculos_preferidos'] as String,
-      alimentosNome: json['alimentos_nome'] as String,
-      atividadePreferida: json['atividade_preferida'] as String,
-      movimentoRealizadoComFrequencia: json['movimento_realizado_com_frequencia'] as String,
-      brinquedoNome: json['brinquedo_nome'] as String,
-      coisasPreferidas: json['coisas_preferidas'] as String,
-      acessoriosPreferidos: json['acessorios_preferidos'] as String,
-      animaisPreferidos: json['animais_preferidos'] as String,
-      deveTerNaHistoria: json['deve_ter_na_historia'] as String,
-      naoDeveTernaHistoria: json['nao_deve_ter_na_historia'] as String,
-      parentesco: json['parentesco'] as String,
-      processoDeAlfabetizacao: json['processo_de_alfabetizacao'] as String,
-      conjugeNomes: json['conjuge_nomes'] as String,
-      amigosNomes: json['amigos_nomes'] as String,
-      atividadeFavorita: json['atividade_favorita'] as String,
-      atividadeNaoGosta: json['atividade_nao_gosta'] as String,
-      animalEstimacaoNome: json['animal_estimacao_nome'] as String,
-      hiperfoco: json['hiperfoco'] as String,
+      idquestionario:map ['idquestionario'] ,
+       idresponsavel: map['idresponsavel'],
+      nome:  map ['nome'] ,
+      apelido: map['apelido'] ,
+      idade: map['idade']  ,
+      usaOculos: map['usa_oculos'] ,
+      diagnosticoTEA:map ['diagnostico_TEA'] ,
+      nivelTEA: map['nivel_TEA'] ,
+      genero: map['genero'] ,
+      comunicacao:map ['comunicacao'] ,
+      tecnologiaQueGosta:map ['tecnologia_que_gosta'],
+      anoEscolar: map['ano_escolar'] ,
+      acompanhamentoProfissinal:map ['acompanhamento_profissinal'],
+      relacaocomLivros:map ['relacao_com_livros'] ,
+      tecnologiasUsadasComFrequencia:
+         map ['tecnologias_usados_com_frequencia'] ,
+      caracteristicaBrinquedo:map ['caracteristica_brinquedo'],
+      corFavorita:map ['cor_favorita'] ,
+      veiculosPreferidos:map['veiculos_preferidos'] ,
+      alimentosNome:map ['alimentos_nome'] ,
+      atividadePreferida:map ['atividade_preferida'] ,
+      movimentoRealizadoComFrequencia:
+         map ['movimento_realizado_com_frequencia'] ,
+      brinquedoNome:map ['brinquedo_nome'] ,
+      coisasPreferidas:map ['coisas_preferidas'] ,
+      acessoriosPreferidos: map['acessorios_preferidos'],
+      animaisPreferidos:map ['animais_preferidos'],
+      deveTerNaHistoria: map['deve_ter_na_historia'] ,
+      naoDeveTernaHistoria: map['nao_deve_ter_na_historia'] ,
+      parentesco:map ['parentesco'] ,
+      processoDeAlfabetizacao:map ['processo_de_alfabetizacao'] ,
+      conjugeNomes:map ['conjuge_nomes'] ,
+      amigosNomes:map ['amigos_nomes'] ,
+      atividadeFavorita:map ['atividade_favorita'] ,
+      atividadeNaoGosta:map ['atividade_nao_gosta'] ,
+      animalEstimacaoNome:map ['animal_estimacao_nome'],
+      hiperfoco: map['hiperfoco'] 
     );
   }
 
-  
-  Map<String, dynamic> toJson() {
+   Map<String, dynamic> toMap(){
     return {
-      'id_crianca': idCrianca,
+      'id_crianca': idquestionario,
+      'idresponsavel':idresponsavel,
       'nome': nome,
       'apelido': apelido,
       'idade': idade,

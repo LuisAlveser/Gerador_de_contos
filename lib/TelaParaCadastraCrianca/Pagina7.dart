@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 
 class Pagina7Data {
-  String? moracomcrianca;
-  String? amigos;
-  String? atividadequegosta;
-  String? atividadequeNaogosta;
-  String? animalestimacao;
-  String? hiperfoco;
+  String moracomcrianca;
+  String amigos;
+  String atividadequegosta;
+  String atividadequeNaogosta;
+  String animalestimacao;
+  String hiperfoco;
 
   Pagina7Data({
-    this.moracomcrianca,
-    this.amigos,
-    this.atividadequegosta,
-    this.atividadequeNaogosta,
-    this.animalestimacao,
-    this.hiperfoco,
+   required  this.moracomcrianca,
+      required this.amigos,
+    required this.atividadequegosta,
+    required this.atividadequeNaogosta,
+    required this.animalestimacao,
+    required this.hiperfoco,
   });
 
   Map<String, dynamic> toJson() => {

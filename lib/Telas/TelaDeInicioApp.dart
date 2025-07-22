@@ -5,6 +5,7 @@ import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 import 'package:tcc/Model/ResponsavelModelo.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
 import 'package:tcc/servicos/AutenticacaoResponsavel.dart';
+import 'package:tcc/servicos/LoginResponsavel.dart';
 
 class TelaDeInicio extends StatefulWidget {
   const TelaDeInicio({super.key});
@@ -23,9 +24,11 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
   final TextEditingController telefone_controller = TextEditingController();
   AutenticacaoResponsavel _autenticacaoresponsavel =
       new AutenticacaoResponsavel();
+  Loginresponsavel _loginresponsavel = new Loginresponsavel();
 
   bool temConta = true;
 
+  bool _carregando = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -184,25 +187,77 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                             key: Key("entrar"),
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
-                                if (temConta) {
-                                  User? user = await _autenticacaoresponsavel.cadastrarResponsavel(
-                                    nome: nome_controller.text,
-                                    senha: senha_controller.text,
-                                    telefone: telefone_controller.text,
-                                    email: email_controller.text,
-                                    context: context, 
+                                setState(() {
+                                  _carregando = true;
+                                });
+
+                                try {
+                                  if (temConta) {
+                                    User? newUser =
+                                        await _autenticacaoresponsavel
+                                            .cadastrarResponsavel(
+                                              nome: nome_controller.text,
+                                              senha: senha_controller.text,
+                                              telefone:
+                                                  telefone_controller.text,
+                                              email: email_controller.text,
+                                              context: context,
+                                            );
+                                    if (newUser != null) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) =>
+                                                  const TelaPrincipal(),
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    var login = await _loginresponsavel
+                                        .loginResponsavel(
+                                          email: email_controller.text,
+                                          senha: senha_controller.text,
+                                          context: context,
+                                        );
+
+                                    if (login == null) {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) =>
+                                                  const TelaPrincipal(),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                } catch (e) {
+                                  print("Erro inesperado na TelaDeInicio: $e");
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Ocorreu um erro: ${e.toString()}",
+                                      ),
+                                      backgroundColor: Colors.red,
+                                    ),
                                   );
+                                } finally {
+                                  setState(() {
+                                    _carregando = false;
+                                  });
                                 }
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPrincipal(),
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text("Formulário invalido"),
+                                    backgroundColor: Colors.red,
                                   ),
                                 );
-                              } else {
-                                
-                                print("Formuário invalido ");
                               }
+                              setState(() {
+                                _carregando = false;
+                              });
                             },
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
@@ -219,14 +274,18 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                                   height: double.infinity,
                                   width: double.infinity,
                                 ),
-                                Text(
-                                  (temConta) ? "Cadastrar" : "Entrar",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
+                                _carregando
+                                    ? const CircularProgressIndicator(
+                                      color: Colors.white,
+                                    )
+                                    : Text(
+                                      (temConta) ? "Cadastrar" : "Entrar",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                               ],
                             ),
                           ),

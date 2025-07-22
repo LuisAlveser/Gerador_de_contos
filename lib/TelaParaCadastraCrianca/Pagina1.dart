@@ -2,20 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 
 class Pagina1Data {
-  String? nomecrianca;
-  String? idade;
-  String? apelido;
-  String? selecionadoOculos;
-  String? selecionadaTea;
-  String? selecionadoNivel;
+  String nomecrianca;
+  String idade;
+  String apelido;
+  String selecionadoOculos;
+  String selecionadaTea;
+  String selecionadoNivel;
 
   Pagina1Data({
-    this.nomecrianca,
-    this.idade,
-    this.apelido,
-    this.selecionadoOculos,
-    this.selecionadaTea,
-    this.selecionadoNivel,
+    required this.nomecrianca,
+    required  this.idade,
+    required  this.apelido,
+   required  this.selecionadoOculos,
+   required  this.selecionadaTea,
+   required  this.selecionadoNivel,
   });
   Map<String, dynamic> toJson() {
     return {

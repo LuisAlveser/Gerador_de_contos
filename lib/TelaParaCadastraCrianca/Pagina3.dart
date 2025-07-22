@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Pagina3Data {
-  String? selecionadoAcompanhamento;
-  String? selecionadoRelacaoLivros;
-  String? selecionadoRelacaoComTecnologia;
+  String selecionadoAcompanhamento;
+  String selecionadoRelacaoLivros;
+  String selecionadoRelacaoComTecnologia;
 
   Pagina3Data({
-    this.selecionadoAcompanhamento,
-    this.selecionadoRelacaoLivros,
-    this.selecionadoRelacaoComTecnologia,
+   required  this.selecionadoAcompanhamento,
+    required this.selecionadoRelacaoLivros,
+    required this.selecionadoRelacaoComTecnologia,
   });
   Map<String, dynamic> toJson() {
     return {

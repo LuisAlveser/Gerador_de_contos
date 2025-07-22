@@ -1,4 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina1.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina2.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina3.dart';
@@ -6,6 +8,8 @@ import 'package:tcc/TelaParaCadastraCrianca/Pagina4.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina5.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina6.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina7.dart';
+import 'package:tcc/Telas/TelaPrincipalApp.dart';
+import 'package:tcc/servicos/AdicionarQuestionario.dart';
 
 class TelaDeFormularioCrianca extends StatefulWidget {
   const TelaDeFormularioCrianca({super.key});
@@ -29,13 +33,53 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
   };
 
   final Map<int, dynamic> _formData = {
-    0: Pagina1Data(),
-    1: Pagina2Data(),
-    2: Pagina3Data(),
-    3: Pagina4Data(),
-    4: Pagina5Data(),
-    5: Pagina6Data(),
-    6: Pagina7Data(),
+    0: Pagina1Data(
+      nomecrianca: '',
+      idade: '',
+      apelido: '',
+      selecionadoOculos: '',
+      selecionadaTea: '',
+      selecionadoNivel: '',
+    ),
+    1: Pagina2Data(
+      selecionadoGenero: '',
+      selecionadoVerbo: '',
+      selecionadoEletronico: '',
+      selecionadoEtapaEducacaoBasica: '',
+    ),
+    2: Pagina3Data(
+      selecionadoAcompanhamento: '',
+      selecionadoRelacaoLivros: '',
+      selecionadoRelacaoComTecnologia: '',
+    ),
+    3: Pagina4Data(
+      selecionadoBrinquedo: '',
+      selecionadoCor: '',
+      selecionadoVeiculoFavorito: '',
+    ),
+    4: Pagina5Data(
+      selecionadaComidaFavorita: '',
+      selecionadaAtividadeFavorita: '',
+      selecionadoMovimentoFavoritos: '',
+    ),
+    5: Pagina6Data(
+      brinquedos: '',
+      coisasfavoritas: '',
+      acessoriofavoritos: '',
+      animaisfavoritos: '',
+      historiacoisasfavoritas: '',
+      historiacoisasNaofavoritas: '',
+      selecionadoParentesco: '',
+      selecionadoProcessoAlf: '',
+    ),
+    6: Pagina7Data(
+      moracomcrianca: '',
+      amigos: '',
+      atividadequegosta: '',
+      atividadequeNaogosta: '',
+      animalestimacao: '',
+      hiperfoco: '',
+    ),
   };
 
   late final List<Widget> paginas;
@@ -189,7 +233,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                   height: 40.0,
 
                   child: ElevatedButton(
-                    onPressed: () {
+                    onPressed: () async {
                       final currentFormKey = formKeys[_currentPageIndex];
 
                       if (currentFormKey != null &&
@@ -197,12 +241,15 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                         final isValid = currentFormKey.currentState!.validate();
 
                         if (isValid) {
+                          currentFormKey.currentState!.save();
                           _pageController.nextPage(
                             duration: Duration(milliseconds: 300),
                             curve: Curves.linear,
                           );
 
                           if (_currentPageIndex == 6) {
+                            User? currentUser =
+                                FirebaseAuth.instance.currentUser;
                             final pagina1 = _formData[0] as Pagina1Data;
                             final pagina2 = _formData[1] as Pagina2Data;
                             final pagina3 = _formData[2] as Pagina3Data;
@@ -210,6 +257,85 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                             final pagina5 = _formData[4] as Pagina5Data;
                             final pagina6 = _formData[5] as Pagina6Data;
                             final pagina7 = _formData[6] as Pagina7Data;
+
+                            QuestionarioModel
+                            questionarioModel = await QuestionarioModel(
+                              idquestionario: "",
+                              idresponsavel: currentUser!.uid,
+                              nome: pagina1.apelido,
+                              apelido: pagina1.apelido,
+                              idade: pagina1.idade,
+                              usaOculos: pagina1.selecionadoOculos,
+                              diagnosticoTEA: pagina1.selecionadaTea,
+                              nivelTEA: pagina1.selecionadoNivel,
+                              genero: pagina2.selecionadoGenero,
+                              comunicacao: pagina2.selecionadoVerbo,
+                              tecnologiaQueGosta: pagina2.selecionadoEletronico,
+                              anoEscolar:
+                                  pagina2.selecionadoEtapaEducacaoBasica,
+                              acompanhamentoProfissinal:
+                                  pagina3.selecionadoAcompanhamento,
+                              relacaocomLivros:
+                                  pagina3.selecionadoRelacaoLivros,
+                              tecnologiasUsadasComFrequencia:
+                                  pagina3.selecionadoRelacaoComTecnologia,
+                              caracteristicaBrinquedo:
+                                  pagina4.selecionadoBrinquedo,
+                              corFavorita: pagina4.selecionadoCor,
+                              veiculosPreferidos:
+                                  pagina4.selecionadoVeiculoFavorito,
+                              alimentosNome: pagina5.selecionadaComidaFavorita,
+                              atividadePreferida:
+                                  pagina5.selecionadaAtividadeFavorita,
+                              movimentoRealizadoComFrequencia:
+                                  pagina5.selecionadoMovimentoFavoritos,
+                              brinquedoNome: pagina6.brinquedos,
+                              coisasPreferidas: pagina6.coisasfavoritas,
+                              acessoriosPreferidos: pagina6.acessoriofavoritos,
+                              animaisPreferidos: pagina6.animaisfavoritos,
+                              deveTerNaHistoria:
+                                  pagina6.historiacoisasNaofavoritas,
+                              naoDeveTernaHistoria:
+                                  pagina6.historiacoisasNaofavoritas,
+                              parentesco: pagina6.selecionadoParentesco,
+                              processoDeAlfabetizacao:
+                                  pagina6.selecionadoProcessoAlf,
+                              conjugeNomes: pagina7.moracomcrianca,
+                              amigosNomes: pagina7.amigos,
+                              atividadeFavorita: pagina7.atividadequegosta,
+
+                              atividadeNaoGosta: pagina7.atividadequeNaogosta,
+                              animalEstimacaoNome: pagina7.animalestimacao,
+                              hiperfoco: pagina7.hiperfoco,
+                            );
+                           
+                            QuestionarioService questionarioService =
+                                QuestionarioService();
+                            bool sucesso = await questionarioService
+                                .salvarQuestionario(
+                                  questionario: questionarioModel,
+                                  context: context,
+                                );
+
+                            if (sucesso) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                    "Criança Cadastrada com sucesso ",
+                                  ),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const TelaPrincipal(),
+                                ),
+                                (Route<dynamic> route) => false,
+                              );
+                            } else {
+                              print("Falha ao salvar questionário.");
+                            }
                           }
                         }
                       } else {

@@ -140,15 +140,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                               height: 50,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder:
-                                          (context) => TelaDeFormularioHistoria(
-                                            criancaModelo: criancaModelo,
-                                          ),
-                                    ),
-                                  );
+                                 
                                 },
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Colors.transparent,

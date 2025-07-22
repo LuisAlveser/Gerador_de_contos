@@ -1,10 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Model/ResponsavelModelo.dart';
 
 class AutenticacaoResponsavel {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   Future<User?> cadastrarResponsavel({
     required String nome,
     required String senha,
@@ -16,16 +17,22 @@ class AutenticacaoResponsavel {
       UserCredential responsavelCredential = await _auth
           .createUserWithEmailAndPassword(email: email, password: senha);
       User? user = responsavelCredential.user;
+
       if (user != null) {
         ResponsavelModel responsavel = ResponsavelModel(
           id: user.uid,
           nome: nome,
           telefone: telefone,
           email: email,
-          senha: senha,
-          questionariosIds: [],
+          senha: "",
         );
+        await _firestore
+            .collection("responsaveis")
+            .doc(user.uid)
+            .set(responsavel.toMap());
+        return user;
       }
+      print(user);
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -35,6 +42,8 @@ class AutenticacaoResponsavel {
           ),
         );
       }
+
+      return null;
     }
   }
 }

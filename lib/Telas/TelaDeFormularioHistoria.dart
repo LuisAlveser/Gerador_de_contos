@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 import 'package:tcc/Model/CriancaModelo.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class TelaDeFormularioHistoria extends StatefulWidget {
-  final CriancaModelo criancaModelo;
-  const TelaDeFormularioHistoria({super.key, required this.criancaModelo});
+  final QuestionarioModel questionarioModel;
+  const TelaDeFormularioHistoria({super.key, required this.questionarioModel});
 
   @override
   State<TelaDeFormularioHistoria> createState() =>
@@ -50,7 +51,7 @@ class _TelaDeFormularioHistoriaState extends State<TelaDeFormularioHistoria> {
                         children: [
                           SizedBox(height: 10),
                           Text(
-                            "Personagens que ${widget.criancaModelo.nome} mais gosta são: ${widget.criancaModelo.personagem_preferido} ",
+                            "Personagens que ${widget.questionarioModel.nome} mais gosta são: ${widget.questionarioModel.coisasPreferidas} ",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.white,

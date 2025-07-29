@@ -1,7 +1,5 @@
-import 'package:tcc/Model/QuestinarioModel.dart';
-
 class ResponsavelModel {
-  String id;
+  String? id;
   String nome;
 
   String telefone;
@@ -9,7 +7,7 @@ class ResponsavelModel {
   String senha;
 
   ResponsavelModel({
-    required this.id,
+    this.id,
 
     required this.nome,
     required this.telefone,

@@ -32,7 +32,7 @@ class AutenticacaoResponsavel {
             .set(responsavel.toMap());
         return user;
       }
-      print(user);
+      return user;
     } on FirebaseAuthException catch (e) {
       if (e.code == "email-already-in-use") {
         ScaffoldMessenger.of(context).showSnackBar(

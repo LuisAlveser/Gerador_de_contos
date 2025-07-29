@@ -1,9 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 import 'package:tcc/Model/CriancaModelo.dart';
 import 'package:tcc/Model/HistoriaModelo.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
-import 'package:tcc/Telas/TelaDeFormularioHistoria.dart';
+import 'package:tcc/Telas/TelaDaHistoria.dart';
+import 'package:tcc/servicos/AdicionarQuestionario.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
@@ -13,21 +16,8 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  @override
-  List<CriancaModelo> criancas = [
-    CriancaModelo(
-      nome: "luis",
-      idade: "13",
-      sexo: "Masculino",
-      personagem_preferido: "Naruto",
-    ),
-    CriancaModelo(
-      nome: "Ana",
-      idade: "7",
-      sexo: "Feminino",
-      personagem_preferido: "Patrulha",
-    ),
-  ];
+  final QuestionarioService _questionarioService = QuestionarioService();
+
   List<HistoriaModelo> historias = [
     HistoriaModelo(
       titulo: "A árvore de natal",
@@ -52,122 +42,381 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
         ),
       ),
-      body: Visibility(
-        visible: criancas.isNotEmpty,
+      body: StreamBuilder<QuerySnapshot>(
+        stream: _questionarioService.getQuestionariosPorResponsavel(),
+        builder: (_, snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+              return Center(
+                child: CircularProgressIndicator(color: Colors.white),
+              );
+            case ConnectionState.done:
+            case ConnectionState.active:
+              return ListView.builder(
+                itemCount: snapshot.data!.docs.length,
+                itemBuilder: (context, index) {
+                  final DocumentSnapshot doc = snapshot.data!.docs[index];
 
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ...List.generate(criancas.length, (index) {
-              CriancaModelo criancaModelo = criancas[index];
-              return Card(
-                margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                elevation: 4,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  return Card(
+                    margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Icon(Icons.person, color: Colors.blue),
-                              SizedBox(width: 8),
-                              Text(
-                                criancaModelo.nome,
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Row(
+                                children: [
+                                  Icon(Icons.person, color: Colors.blue),
+                                  SizedBox(width: 8),
+                                  Text(
+                                    doc["nome"],
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              const SizedBox(width: 200.0),
-                              IconButton(
-                                onPressed: () {
-                                  // atualiza dados
-                                },
-                                icon: Icon(Icons.edit),
-                              ),
-                              IconButton(
-                                onPressed: () {
-                                  // deleta criança
-                                },
-                                icon: Icon(Icons.delete, color: Colors.red),
+                              Row(
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) =>
+                                                  TelaDeFormularioCrianca(
+                                                    doc: doc,
+                                                  ),
+                                        ),
+                                      );
+                                    },
+                                    icon: Icon(Icons.edit),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      SnackBar snackBar = SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                          "Deseja remover ${doc['nome']} ?",
+                                          selectionColor: Colors.white,
+                                        ),
+
+                                        action: SnackBarAction(
+                                          label: "Remover",
+                                          textColor: Colors.white,
+                                          onPressed: () {
+                                            _questionarioService
+                                                .removerquestionario(
+                                                  idquestionario:
+                                                      doc["idquestionario"],
+                                                );
+                                          },
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(
+                                        context,
+                                      ).showSnackBar(snackBar);
+                                    },
+                                    icon: Icon(Icons.delete, color: Colors.red),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-
-                      SizedBox(height: 10),
-                      Row(
-                        children: [
-                          Icon(Icons.cake, size: 20),
-                          SizedBox(width: 6),
-                          Text("Idade: ${criancaModelo.idade}"),
-                        ],
-                      ),
-                      SizedBox(height: 6),
-                      Row(
-                        children: [
-                          Icon(Icons.people_alt, size: 20),
-                          SizedBox(width: 6),
-                          Text("Gênero: ${criancaModelo.sexo}"),
-                        ],
-                      ),
-                      SizedBox(height: 12),
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(20.0),
-                              child: Image.asset(
-                                'assets/fundo_botao.jpg',
-                                width: 150,
-                                height: 40,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-
-                            SizedBox(
-                              width: 200,
-                              height: 50,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                 
-                                },
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.transparent,
-                                  shadowColor: Colors.transparent,
-                                ),
-                                child: Text(
-                                  "Ir para História",
-
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
+                          SizedBox(height: 10),
+                          Row(
+                            children: [
+                              Icon(Icons.cake, size: 20),
+                              SizedBox(width: 6),
+                              Text("Idade: ${doc["idade"]}"),
+                            ],
+                          ),
+                          SizedBox(height: 6),
+                          Row(
+                            children: [
+                              Icon(Icons.people_alt, size: 20),
+                              SizedBox(width: 6),
+                              Text("Gênero: ${doc["genero"]}"),
+                            ],
+                          ),
+                          SizedBox(height: 12),
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image.asset(
+                                    'assets/fundo_botao.jpg',
+                                    width: 150,
+                                    height: 40,
+                                    fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
+                                SizedBox(
+                                  width: 200,
+                                  height: 50,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (BuildContext context) {
+                                          final TextEditingController
+                                          preferencias_controller =
+                                              TextEditingController();
+                                          bool historia_padrao = false;
+
+                                          return StatefulBuilder(
+                                            builder: (
+                                              BuildContext context,
+                                              StateSetter setState,
+                                            ) {
+                                              return AlertDialog(
+                                                backgroundColor: Color.fromARGB(
+                                                  167,
+                                                  10,
+                                                  134,
+                                                  235,
+                                                ),
+                                                title: Text(
+                                                  "Selecione o Modo da História",
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(
+                                                    fontSize: 20,
+                                                    fontWeight: FontWeight.bold,
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+
+                                                content: SingleChildScrollView(
+                                                  child: Column(
+                                                    children: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            historia_padrao =
+                                                                false;
+                                                          });
+                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      Teladahistoria(),
+                                                            ),
+                                                          );
+                                                        },
+
+                                                        child: Text(
+                                                          "Modo História Rápida : Nesse modo são escolhidas cinco preferências da criança de modo aleatório",
+                                                          style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Divider(
+                                                        color: Colors.white,
+                                                        thickness: 2.0,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                              top: 15,
+                                                            ),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            historia_padrao =
+                                                                true;
+                                                          });
+                                                          print(
+                                                            historia_padrao,
+                                                          );
+                                                        },
+                                                        child: Text(
+                                                          "Modo História Padrão : Nesse modo as preferências da criança são escolhidas pelo responsável",
+                                                          style: TextStyle(
+                                                            fontSize: 15,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                            color: Colors.white,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                      Divider(
+                                                        color: Colors.white,
+                                                        thickness: 2.0,
+                                                      ),
+                                                      Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                              top: 15,
+                                                            ),
+                                                      ),
+
+                                                      Visibility(
+                                                        visible:
+                                                            historia_padrao,
+                                                        child: Form(
+                                                          child: Column(
+                                                            children: [
+                                                              Text(
+                                                                "As preferências de ${doc["nome"]} são : ${doc["coisas_preferidas"]}",
+                                                                style: TextStyle(
+                                                                  fontSize: 15,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold,
+                                                                  color:
+                                                                      Colors
+                                                                          .white,
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsets.only(
+                                                                      top: 10,
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 350,
+                                                                height: 50,
+                                                                child: TextFormField(
+                                                                  decoration:
+                                                                      getAutenticationInputDecoration(
+                                                                        "Digite as preferências da criança",
+                                                                      ),
+                                                                  controller:
+                                                                      preferencias_controller,
+                                                                  validator: (
+                                                                    String?
+                                                                    value,
+                                                                  ) {
+                                                                    if (value ==
+                                                                            null ||
+                                                                        value
+                                                                            .isEmpty) {
+                                                                      return "Esse campo não pode ser vazio";
+                                                                    }
+                                                                    return null;
+                                                                  },
+                                                                ),
+                                                              ),
+                                                              Padding(
+                                                                padding:
+                                                                    EdgeInsets.only(
+                                                                      top: 20,
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                width: 150.0,
+                                                                height: 30.0,
+
+                                                                child: ElevatedButton(
+                                                                  onPressed:
+                                                                      () {},
+                                                                  style: ElevatedButton.styleFrom(
+                                                                    padding:
+                                                                        EdgeInsets
+                                                                            .zero,
+                                                                    shape: RoundedRectangleBorder(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                            30.0,
+                                                                          ),
+                                                                    ),
+                                                                  ),
+                                                                  child: Stack(
+                                                                    alignment:
+                                                                        Alignment
+                                                                            .center,
+
+                                                                    children: [
+                                                                      ClipRRect(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(
+                                                                              20.0,
+                                                                            ),
+                                                                        child: Image.asset(
+                                                                          'assets/fundo_botao.jpg',
+                                                                          height:
+                                                                              double.infinity,
+                                                                          width:
+                                                                              double.infinity,
+                                                                          fit:
+                                                                              BoxFit.cover,
+                                                                        ),
+                                                                      ),
+                                                                      Text(
+                                                                        "Gerar História",
+                                                                        style: TextStyle(
+                                                                          color:
+                                                                              Colors.white,
+                                                                          fontSize:
+                                                                              15.0,
+                                                                          fontWeight:
+                                                                              FontWeight.bold,
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          );
+                                        },
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: Colors.transparent,
+                                      shadowColor: Colors.transparent,
+                                    ),
+                                    child: Text(
+                                      "Ir para História",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
+                  );
+                },
               );
-            }),
-          ],
-        ),
-      ), //crianças cadastradas
+          }
+        },
+      ),
+      //crianças cadastradas
       drawer: Drawer(
         backgroundColor: Color.fromARGB(255, 25, 72, 137),
         child: DrawerHeader(

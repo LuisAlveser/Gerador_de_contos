@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class Pagina3Data {
   String selecionadoAcompanhamento;
@@ -21,12 +23,14 @@ class Pagina3Data {
 
 class Pagina3FormCrianca extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-
+ final DocumentSnapshot? doc;
   final ValueChanged<Pagina3Data> onDataChanged;
   const Pagina3FormCrianca({
     super.key,
     required this.formKey,
-    required this.onDataChanged,
+    required this.onDataChanged, 
+    Pagina3Data? initialData,
+   this.doc,
   });
 
   @override
@@ -66,6 +70,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
   String selecionadoAcompanhamento = AcompanhamentoProfissional[0];
   String selecionadoRelacaoLivros = RelacaoComLivros[0];
   String selecionadoRelacaoComTecnologia = RelacaoComTecnologia[0];
+  late QuestionarioModel? _currentQuestionario;
   late Pagina3Data _pagina3Data;
   void _sendDataToParent() {
     widget.onDataChanged(_pagina3Data);
@@ -74,7 +79,16 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
   @override
   void initState() {
     super.initState();
-
+if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      selecionadoAcompanhamento = _currentQuestionario!.acompanhamentoProfissinal;
+      selecionadoRelacaoComTecnologia = _currentQuestionario!.tecnologiasUsadasComFrequencia;
+     selecionadoRelacaoLivros = _currentQuestionario!.relacaocomLivros;
+    
+    }
     _pagina3Data = Pagina3Data(
       selecionadoAcompanhamento: selecionadoAcompanhamento,
       selecionadoRelacaoLivros: selecionadoRelacaoLivros,

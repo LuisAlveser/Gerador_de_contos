@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class Pagina4Data {
   String selecionadoBrinquedo;
@@ -6,8 +8,8 @@ class Pagina4Data {
   String selecionadoVeiculoFavorito;
 
   Pagina4Data({
-   required  this.selecionadoBrinquedo,
-     required this.selecionadoCor,
+    required this.selecionadoBrinquedo,
+    required this.selecionadoCor,
     required this.selecionadoVeiculoFavorito,
   });
   Map<String, dynamic> toJson() {
@@ -21,12 +23,14 @@ class Pagina4Data {
 
 class Pagina4FormCrianca extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-
+  final DocumentSnapshot? doc;
   final ValueChanged<Pagina4Data> onDataChanged;
   const Pagina4FormCrianca({
     super.key,
     required this.formKey,
     required this.onDataChanged,
+    Pagina4Data? initialData,
+    this.doc,
   });
 
   @override
@@ -82,6 +86,7 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
   String selecionadoCor = CorFavorita[0];
   String selecionadoVeiculoFavorito = VeiculoFavorito[0];
   late Pagina4Data _pagina4Data;
+  late QuestionarioModel? _currentQuestionario;
   void _sendDataToParent() {
     widget.onDataChanged(_pagina4Data);
   }
@@ -89,7 +94,15 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
   @override
   void initState() {
     super.initState();
-
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      selecionadoBriquendo = _currentQuestionario!.caracteristicaBrinquedo;
+      selecionadoCor = _currentQuestionario!.corFavorita;
+      selecionadoVeiculoFavorito = _currentQuestionario!.veiculosPreferidos;
+    }
     _pagina4Data = Pagina4Data(
       selecionadoBrinquedo: selecionadoBriquendo,
       selecionadoCor: selecionadoCor,
@@ -105,7 +118,7 @@ class _Pagina4FormCriancaState extends State<Pagina4FormCrianca> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-           key: widget.formKey,
+          key: widget.formKey,
           child: Column(
             children: [
               Padding(

@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class Pagina7Data {
   String moracomcrianca;
@@ -10,8 +12,8 @@ class Pagina7Data {
   String hiperfoco;
 
   Pagina7Data({
-   required  this.moracomcrianca,
-      required this.amigos,
+    required this.moracomcrianca,
+    required this.amigos,
     required this.atividadequegosta,
     required this.atividadequeNaogosta,
     required this.animalestimacao,
@@ -30,12 +32,14 @@ class Pagina7Data {
 
 class Pagina7FormCrianca extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-
+  final DocumentSnapshot? doc;
   final ValueChanged<Pagina7Data> onDataChanged;
   const Pagina7FormCrianca({
     super.key,
     required this.formKey,
     required this.onDataChanged,
+    Pagina7Data? initialData,
+    this.doc,
   });
 
   @override
@@ -49,6 +53,7 @@ final TextEditingController atividadequeNaogosta = TextEditingController();
 final TextEditingController animalestimacao = TextEditingController();
 final TextEditingController hiperfoco = TextEditingController();
 final _formKey = GlobalKey<FormState>();
+late QuestionarioModel? _currentQuestionario;
 
 class _Pagina7FormCriancaState extends State<Pagina7FormCrianca> {
   late Pagina7Data _pagina7Data;
@@ -59,7 +64,18 @@ class _Pagina7FormCriancaState extends State<Pagina7FormCrianca> {
   @override
   void initState() {
     super.initState();
-
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      moracomcrianca.text = _currentQuestionario!.conjugeNomes;
+      amigos.text = _currentQuestionario!.amigosNomes;
+      atividadequegosta.text = _currentQuestionario!.atividadeFavorita;
+      atividadequeNaogosta.text = _currentQuestionario!.atividadeNaoGosta;
+      animalestimacao.text = _currentQuestionario!.animalEstimacaoNome;
+      hiperfoco.text = _currentQuestionario!.hiperfoco;
+    }
     _pagina7Data = Pagina7Data(
       moracomcrianca: moracomcrianca.text,
       amigos: amigos.text,

@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class Pagina1Data {
   String nomecrianca;
@@ -11,11 +13,11 @@ class Pagina1Data {
 
   Pagina1Data({
     required this.nomecrianca,
-    required  this.idade,
-    required  this.apelido,
-   required  this.selecionadoOculos,
-   required  this.selecionadaTea,
-   required  this.selecionadoNivel,
+    required this.idade,
+    required this.apelido,
+    required this.selecionadoOculos,
+    required this.selecionadaTea,
+    required this.selecionadoNivel,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -31,12 +33,14 @@ class Pagina1Data {
 
 class Pagina1FormCrianca extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-
+  final DocumentSnapshot? doc;
   final ValueChanged<Pagina1Data> onDataChanged;
   const Pagina1FormCrianca({
     super.key,
     required this.formKey,
     required this.onDataChanged,
+    required Pagina1Data initialData,
+    this.doc,
   });
 
   @override
@@ -68,15 +72,28 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
   final TextEditingController apelido = TextEditingController();
   final TextEditingController idade = TextEditingController();
   late Pagina1Data _pagina1Data;
+  late QuestionarioModel? _currentQuestionario;
   void _sendDataToParent() {
     widget.onDataChanged(_pagina1Data);
   }
 
   void initState() {
     super.initState();
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      nomecrianca.text = _currentQuestionario!.nome;
+      apelido.text = _currentQuestionario!.apelido;
+      idade.text = _currentQuestionario!.idade;
+      selecionadaTea = _currentQuestionario!.diagnosticoTEA;
+      selecionadoNivel = _currentQuestionario!.nivelTEA;
+      selecionadoOculos = _currentQuestionario!.usaOculos;
+    }
     _pagina1Data = Pagina1Data(
       nomecrianca: nomecrianca.text,
-      idade:idade.text,
+      idade: idade.text,
       apelido: apelido.text,
       selecionadoOculos: selecionadoOculos,
       selecionadaTea: selecionadaTea,
@@ -136,12 +153,12 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                         }
                         return null;
                       },
-                       onChanged: (value) {
-                      setState(() {
-                        _pagina1Data.apelido = value;
-                        _sendDataToParent();
-                      });
-                    },
+                      onChanged: (value) {
+                        setState(() {
+                          _pagina1Data.apelido = value;
+                          _sendDataToParent();
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -161,12 +178,12 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                         }
                         return null;
                       },
-                       onChanged: (value) {
-                      setState(() {
-                        _pagina1Data.idade = value;
-                        _sendDataToParent();
-                      });
-                    },
+                      onChanged: (value) {
+                        setState(() {
+                          _pagina1Data.idade = value;
+                          _sendDataToParent();
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -205,8 +222,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoOculos = value.toString();
-                                 _pagina1Data.selecionadoOculos = selecionadoOculos;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoOculos =
+                                    selecionadoOculos;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -229,8 +247,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoOculos = value.toString();
-                                 _pagina1Data.selecionadoOculos = selecionadoOculos;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoOculos =
+                                    selecionadoOculos;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -274,8 +293,8 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadaTea = value.toString();
-                                 _pagina1Data.selecionadaTea = selecionadaTea;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadaTea = selecionadaTea;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -298,8 +317,8 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadaTea = value.toString();
-                                 _pagina1Data.selecionadaTea = selecionadaTea;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadaTea = selecionadaTea;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -330,8 +349,8 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadaTea = value.toString();
-                                 _pagina1Data.selecionadaTea = selecionadaTea;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadaTea = selecionadaTea;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -355,7 +374,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                               setState(() {
                                 selecionadaTea = value.toString();
                                 _pagina1Data.selecionadaTea = selecionadaTea;
-                        _sendDataToParent();
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -387,7 +406,7 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                               setState(() {
                                 selecionadaTea = value.toString();
                                 _pagina1Data.selecionadaTea = selecionadaTea;
-                        _sendDataToParent();
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -431,8 +450,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoNivel = value.toString();
-                                 _pagina1Data.selecionadoNivel = selecionadoNivel;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoNivel =
+                                    selecionadoNivel;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -455,8 +475,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoNivel = value.toString();
-                               _pagina1Data.selecionadoNivel = selecionadoNivel;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoNivel =
+                                    selecionadoNivel;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -487,8 +508,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel = selecionadoNivel;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoNivel =
+                                    selecionadoNivel;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -511,8 +533,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel = selecionadoNivel;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoNivel =
+                                    selecionadoNivel;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -543,8 +566,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel = selecionadoNivel;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoNivel =
+                                    selecionadoNivel;
+                                _sendDataToParent();
                               });
                             },
                           ),
@@ -567,8 +591,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel = selecionadoNivel;
-                        _sendDataToParent();
+                                _pagina1Data.selecionadoNivel =
+                                    selecionadoNivel;
+                                _sendDataToParent();
                               });
                             },
                           ),

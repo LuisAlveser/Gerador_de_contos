@@ -214,14 +214,14 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                                       );
                                     }
                                   } else {
-                                    var login = await _loginresponsavel
+                                    User? user = await _loginresponsavel
                                         .loginResponsavel(
                                           email: email_controller.text,
                                           senha: senha_controller.text,
                                           context: context,
                                         );
-
-                                    if (login == null) {
+                                    print(user);
+                                    if (user != null) {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(

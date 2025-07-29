@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Model/QuestinarioModel.dart';
@@ -12,7 +13,8 @@ import 'package:tcc/Telas/TelaPrincipalApp.dart';
 import 'package:tcc/servicos/AdicionarQuestionario.dart';
 
 class TelaDeFormularioCrianca extends StatefulWidget {
-  const TelaDeFormularioCrianca({super.key});
+  final DocumentSnapshot? doc;
+  const TelaDeFormularioCrianca({super.key, this.doc});
 
   @override
   State<TelaDeFormularioCrianca> createState() =>
@@ -81,8 +83,9 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
       hiperfoco: '',
     ),
   };
-
+  late QuestionarioModel? _currentQuestionario;
   late final List<Widget> paginas;
+
   int _currentPageIndex = 0;
   void _updatePageData(int pageIndex, dynamic data) {
     _formData[pageIndex] = data;
@@ -91,6 +94,113 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
   @override
   void initState() {
     super.initState();
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+
+      _formData[0] = Pagina1Data(
+        nomecrianca: _currentQuestionario!.nome,
+        idade: _currentQuestionario!.idade,
+        apelido: _currentQuestionario!.apelido,
+        selecionadoOculos: _currentQuestionario!.usaOculos,
+        selecionadaTea: _currentQuestionario!.diagnosticoTEA,
+        selecionadoNivel: _currentQuestionario!.nivelTEA,
+      );
+
+      _formData[1] = Pagina2Data(
+        selecionadoGenero: _currentQuestionario!.genero,
+        selecionadoVerbo: _currentQuestionario!.comunicacao,
+        selecionadoEletronico: _currentQuestionario!.tecnologiaQueGosta,
+        selecionadoEtapaEducacaoBasica: _currentQuestionario!.anoEscolar,
+      );
+      _formData[2] = Pagina3Data(
+        selecionadoAcompanhamento:
+            _currentQuestionario!.acompanhamentoProfissinal,
+        selecionadoRelacaoLivros: _currentQuestionario!.relacaocomLivros,
+        selecionadoRelacaoComTecnologia:
+            _currentQuestionario!.tecnologiasUsadasComFrequencia,
+      );
+      _formData[3] = Pagina4Data(
+        selecionadoBrinquedo: _currentQuestionario!.caracteristicaBrinquedo,
+        selecionadoCor: _currentQuestionario!.corFavorita,
+        selecionadoVeiculoFavorito: _currentQuestionario!.veiculosPreferidos,
+      );
+
+      _formData[4] = Pagina5Data(
+        selecionadaComidaFavorita: _currentQuestionario!.alimentosNome,
+        selecionadaAtividadeFavorita: _currentQuestionario!.atividadeFavorita,
+        selecionadoMovimentoFavoritos:
+            _currentQuestionario!.movimentoRealizadoComFrequencia,
+      );
+      _formData[5] = Pagina6Data(
+        brinquedos: _currentQuestionario!.brinquedoNome,
+        coisasfavoritas: _currentQuestionario!.coisasPreferidas,
+        acessoriofavoritos: _currentQuestionario!.acessoriosPreferidos,
+        animaisfavoritos: _currentQuestionario!.animaisPreferidos,
+        historiacoisasfavoritas: _currentQuestionario!.deveTerNaHistoria,
+        historiacoisasNaofavoritas: _currentQuestionario!.naoDeveTernaHistoria,
+        selecionadoParentesco: _currentQuestionario!.parentesco,
+        selecionadoProcessoAlf: _currentQuestionario!.processoDeAlfabetizacao,
+      );
+      _formData[6] = Pagina7Data(
+        moracomcrianca: _currentQuestionario!.conjugeNomes,
+        amigos: _currentQuestionario!.amigosNomes,
+        atividadequegosta: _currentQuestionario!.atividadePreferida,
+        atividadequeNaogosta: _currentQuestionario!.atividadeNaoGosta,
+        animalestimacao: _currentQuestionario!.animalEstimacaoNome,
+        hiperfoco: _currentQuestionario!.hiperfoco,
+      );
+    } else {
+      _currentQuestionario = null;
+    }
+    paginas = [
+      Pagina1FormCrianca(
+        formKey: formKeys[0]!,
+        onDataChanged: (data) => _updatePageData(0, data),
+        initialData: _formData[0] as Pagina1Data,
+        doc: widget.doc,
+      ),
+
+      Pagina2FormCrianca(
+        formKey: formKeys[1]!,
+        onDataChanged: (data) => _updatePageData(1, data),
+        initialData: _formData[1] as Pagina2Data,
+        doc: widget.doc,
+      ),
+      Pagina3FormCrianca(
+        formKey: formKeys[2]!,
+        onDataChanged: (data) => _updatePageData(2, data),
+        initialData: _formData[2] as Pagina3Data,
+        doc: widget.doc,
+      ),
+      Pagina4FormCrianca(
+        formKey: formKeys[3]!,
+        onDataChanged: (data) => _updatePageData(3, data),
+        initialData: _formData[3] as Pagina4Data,
+        doc: widget.doc,
+      ),
+      Pagina5FormCrianca(
+        formKey: formKeys[4]!,
+        onDataChanged: (data) => _updatePageData(4, data),
+        initialData: _formData[4] as Pagina5Data,
+        doc: widget.doc,
+      ),
+      Pagina6FormCrianca(
+        formKey: formKeys[5]!,
+        onDataChanged: (data) => _updatePageData(5, data),
+        initialData: _formData[5] as Pagina6Data,
+        doc: widget.doc,
+      ),
+      Pagina7FormCrianca(
+        formKey: formKeys[6]!,
+        onDataChanged: (data) => _updatePageData(6, data),
+        initialData: _formData[6] as Pagina7Data,
+        doc: widget.doc,
+      ),
+    ];
+
     _pageController.addListener(() {
       final page = _pageController.page?.round();
       if (page != null && page != _currentPageIndex) {
@@ -99,38 +209,6 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
         });
       }
     });
-
-    paginas = [
-      Pagina1FormCrianca(
-        formKey: formKeys[0]!,
-        onDataChanged: (data) => _updatePageData(0, data),
-      ),
-
-      Pagina2FormCrianca(
-        formKey: formKeys[1]!,
-        onDataChanged: (data) => _updatePageData(1, data),
-      ),
-      Pagina3FormCrianca(
-        formKey: formKeys[2]!,
-        onDataChanged: (data) => _updatePageData(2, data),
-      ),
-      Pagina4FormCrianca(
-        formKey: formKeys[3]!,
-        onDataChanged: (data) => _updatePageData(3, data),
-      ),
-      Pagina5FormCrianca(
-        formKey: formKeys[4]!,
-        onDataChanged: (data) => _updatePageData(4, data),
-      ),
-      Pagina6FormCrianca(
-        formKey: formKeys[5]!,
-        onDataChanged: (data) => _updatePageData(5, data),
-      ),
-      Pagina7FormCrianca(
-        formKey: formKeys[6]!,
-        onDataChanged: (data) => _updatePageData(6, data),
-      ),
-    ];
   }
 
   @override
@@ -143,8 +221,8 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
         ),
 
-        title: const Text(
-          'Cadastro da Criança',
+        title: Text(
+          (widget.doc != null) ? "Atualizar Criança" : 'Cadastro da Criança',
 
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
@@ -260,9 +338,10 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
 
                             QuestionarioModel
                             questionarioModel = await QuestionarioModel(
-                              idquestionario: "",
+
+                               idquestionario: widget.doc==null?"":widget.doc!["idquestionario"],
                               idresponsavel: currentUser!.uid,
-                              nome: pagina1.apelido,
+                              nome: pagina1.nomecrianca,
                               apelido: pagina1.apelido,
                               idade: pagina1.idade,
                               usaOculos: pagina1.selecionadoOculos,
@@ -308,20 +387,31 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                               animalEstimacaoNome: pagina7.animalestimacao,
                               hiperfoco: pagina7.hiperfoco,
                             );
-                           
+
                             QuestionarioService questionarioService =
                                 QuestionarioService();
-                            bool sucesso = await questionarioService
-                                .salvarQuestionario(
-                                  questionario: questionarioModel,
-                                  context: context,
-                                );
 
+                            bool sucesso;
+                            if (widget.doc == null) {
+                              sucesso = await questionarioService
+                                  .salvarQuestionario(
+                                    questionario: questionarioModel,
+                                    context: context,
+                                  );
+                            } else {
+                              sucesso = await questionarioService
+                                  .atualizarQuestionario(
+                                    questionario: questionarioModel,
+                                    context: context,
+                                  );
+                            }
                             if (sucesso) {
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    "Criança Cadastrada com sucesso ",
+                                    widget.doc == null
+                                        ? "Criança Cadastrada com sucesso "
+                                        : "Criança Atualizada com sucesso ",
                                   ),
                                   backgroundColor: Colors.green,
                                 ),
@@ -366,7 +456,12 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                           ),
                         ),
                         Text(
-                          _currentPageIndex == 6 ? "Cadastrar" : "Proximo",
+                          widget.doc != null && _currentPageIndex == 6
+                              ? "Atualizar"
+                              : _currentPageIndex == 6
+                              ? "Cadastrar"
+                              : "Proximo",
+
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,

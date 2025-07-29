@@ -1,5 +1,7 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class Pagina6Data {
   String brinquedos;
@@ -9,11 +11,11 @@ class Pagina6Data {
   String historiacoisasfavoritas;
   String historiacoisasNaofavoritas;
   String selecionadoParentesco;
-  String  selecionadoProcessoAlf;
+  String selecionadoProcessoAlf;
 
   Pagina6Data({
-   required  this.brinquedos,
-   required  this.coisasfavoritas,
+    required this.brinquedos,
+    required this.coisasfavoritas,
     required this.acessoriofavoritos,
     required this.animaisfavoritos,
     required this.historiacoisasfavoritas,
@@ -36,12 +38,14 @@ class Pagina6Data {
 
 class Pagina6FormCrianca extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-
+  final DocumentSnapshot? doc;
   final ValueChanged<Pagina6Data> onDataChanged;
   const Pagina6FormCrianca({
     super.key,
     required this.formKey,
     required this.onDataChanged,
+    Pagina6Data? initialData,
+    this.doc,
   });
 
   @override
@@ -75,7 +79,9 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
       TextEditingController();
   String selecionadoParentesco = Parentesco[0];
   String selecionadoProcessoAlf = ProcessoDeALFAlfdetizacao[0];
+  late QuestionarioModel? _currentQuestionario;
   late Pagina6Data _pagina6Data;
+
   void _sendDataToParent() {
     widget.onDataChanged(_pagina6Data);
   }
@@ -83,7 +89,21 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
   @override
   void initState() {
     super.initState();
-
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      selecionadoParentesco = _currentQuestionario!.parentesco;
+      selecionadoProcessoAlf = _currentQuestionario!.processoDeAlfabetizacao;
+      brinquedos.text = _currentQuestionario!.brinquedoNome;
+      coisasfavoritas.text = _currentQuestionario!.coisasPreferidas;
+      acessoriofavoritos.text = _currentQuestionario!.acessoriosPreferidos;
+      animaisfavoritos.text = _currentQuestionario!.animaisPreferidos;
+      historiacoisasfavoritas.text = _currentQuestionario!.deveTerNaHistoria;
+      historiacoisasNaofavoritas.text =
+          _currentQuestionario!.naoDeveTernaHistoria;
+    }
     _pagina6Data = Pagina6Data(
       brinquedos: brinquedos.text,
       coisasfavoritas: coisasfavoritas.text,
@@ -103,7 +123,7 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
       color: const Color.fromARGB(167, 10, 134, 235),
       child: SingleChildScrollView(
         child: Form(
-           key: widget.formKey,
+          key: widget.formKey,
           child: Column(
             children: [
               const Padding(padding: EdgeInsets.only(top: 30)),

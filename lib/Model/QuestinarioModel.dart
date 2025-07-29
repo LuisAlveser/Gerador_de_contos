@@ -74,7 +74,7 @@ class QuestionarioModel {
     required this.hiperfoco,
   });
 
-  factory QuestionarioModel.fromMap(Map<String, dynamic> map) {
+  factory QuestionarioModel.fromMap(Map<String, dynamic> map, String id) {
     return QuestionarioModel(
       idquestionario:map ['idquestionario'] ,
        idresponsavel: map['idresponsavel'],
@@ -118,7 +118,7 @@ class QuestionarioModel {
 
    Map<String, dynamic> toMap(){
     return {
-      'id_crianca': idquestionario,
+      'idquestionario': idquestionario,
       'idresponsavel':idresponsavel,
       'nome': nome,
       'apelido': apelido,

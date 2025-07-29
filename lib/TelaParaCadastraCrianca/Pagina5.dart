@@ -1,13 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
+
 class Pagina5Data {
-  String selecionadaComidaFavorita ;
+  String selecionadaComidaFavorita;
   String selecionadaAtividadeFavorita;
-  String  selecionadoMovimentoFavoritos;
+  String selecionadoMovimentoFavoritos;
 
   Pagina5Data({
-   required  this.selecionadaComidaFavorita,
-   required  this.selecionadaAtividadeFavorita,
-      required this.selecionadoMovimentoFavoritos,
+    required this.selecionadaComidaFavorita,
+    required this.selecionadaAtividadeFavorita,
+    required this.selecionadoMovimentoFavoritos,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -17,12 +20,18 @@ class Pagina5Data {
     };
   }
 }
-class Pagina5FormCrianca extends StatefulWidget {
-   final GlobalKey<FormState> formKey;
 
+class Pagina5FormCrianca extends StatefulWidget {
+  final GlobalKey<FormState> formKey;
+  final DocumentSnapshot? doc;
   final ValueChanged<Pagina5Data> onDataChanged;
-  const Pagina5FormCrianca({super.key,required this.formKey,
-    required this.onDataChanged,});
+  const Pagina5FormCrianca({
+    super.key,
+    required this.formKey,
+    required this.onDataChanged,
+    Pagina5Data? initialData,
+    this.doc,
+  });
 
   @override
   State<Pagina5FormCrianca> createState() => _Pagina5FormCriancaState();
@@ -74,7 +83,8 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
   String selecionadaComidaFavorita = ComidasPreferidas[0];
   String selecionadaAtividadeFavorita = AtividadesFavoritas[0];
   String selecionadoMovimentoFavoritos = MovimentosFavoritos[0];
-   late Pagina5Data _pagina5Data;
+  late Pagina5Data _pagina5Data;
+  late QuestionarioModel? _currentQuestionario;
   void _sendDataToParent() {
     widget.onDataChanged(_pagina5Data);
   }
@@ -82,7 +92,16 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
   @override
   void initState() {
     super.initState();
-
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      selecionadoMovimentoFavoritos =
+          _currentQuestionario!.movimentoRealizadoComFrequencia;
+      selecionadaAtividadeFavorita = _currentQuestionario!.atividadePreferida;
+      selecionadaComidaFavorita = _currentQuestionario!.alimentosNome;
+    }
     _pagina5Data = Pagina5Data(
       selecionadaComidaFavorita: selecionadaComidaFavorita,
       selecionadaAtividadeFavorita: selecionadaAtividadeFavorita,
@@ -90,6 +109,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
     );
     _sendDataToParent();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -97,7 +117,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-           key: widget.formKey,
+          key: widget.formKey,
           child: Column(
             children: [
               Padding(
@@ -132,7 +152,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -157,7 +177,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -190,7 +210,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -215,7 +235,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -248,7 +268,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -273,7 +293,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -306,7 +326,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -331,7 +351,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -364,7 +384,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -389,7 +409,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -422,7 +442,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -447,7 +467,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -480,7 +500,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -505,7 +525,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -538,7 +558,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaComidaFavorita = value.toString();
-                               _pagina5Data.selecionadaComidaFavorita =
+                              _pagina5Data.selecionadaComidaFavorita =
                                   selecionadaComidaFavorita;
                               _sendDataToParent();
                             });
@@ -583,7 +603,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -608,10 +628,9 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
-
                             });
                           },
                         ),
@@ -642,7 +661,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -667,7 +686,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -700,7 +719,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -725,7 +744,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -758,7 +777,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -783,7 +802,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -816,7 +835,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadaAtividadeFavorita = value.toString();
-                               _pagina5Data.selecionadaAtividadeFavorita=
+                              _pagina5Data.selecionadaAtividadeFavorita =
                                   selecionadaAtividadeFavorita;
                               _sendDataToParent();
                             });
@@ -860,7 +879,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -885,7 +904,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -918,7 +937,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -943,7 +962,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -976,7 +995,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -1001,7 +1020,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -1034,7 +1053,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -1059,7 +1078,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -1092,7 +1111,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -1117,7 +1136,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });
@@ -1150,7 +1169,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                           onChanged: (value) {
                             setState(() {
                               selecionadoMovimentoFavoritos = value.toString();
-                               _pagina5Data.selecionadoMovimentoFavoritos=
+                              _pagina5Data.selecionadoMovimentoFavoritos =
                                   selecionadoMovimentoFavoritos;
                               _sendDataToParent();
                             });

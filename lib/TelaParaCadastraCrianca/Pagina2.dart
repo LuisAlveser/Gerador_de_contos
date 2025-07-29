@@ -1,17 +1,19 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:tcc/Model/QuestinarioModel.dart';
 
 class Pagina2Data {
   String selecionadoGenero;
 
   String selecionadoVerbo;
   String selecionadoEletronico;
-  String  selecionadoEtapaEducacaoBasica;
+  String selecionadoEtapaEducacaoBasica;
 
   Pagina2Data({
     required this.selecionadoGenero,
-   required  this.selecionadoVerbo,
-   required  this.selecionadoEletronico,
-   required  this.selecionadoEtapaEducacaoBasica,
+    required this.selecionadoVerbo,
+    required this.selecionadoEletronico,
+    required this.selecionadoEtapaEducacaoBasica,
   });
   Map<String, dynamic> toJson() {
     return {
@@ -25,12 +27,14 @@ class Pagina2Data {
 
 class Pagina2FormCrianca extends StatefulWidget {
   final GlobalKey<FormState> formKey;
-
+  final DocumentSnapshot? doc;
   final ValueChanged<Pagina2Data> onDataChanged;
   const Pagina2FormCrianca({
     super.key,
     required this.formKey,
     required this.onDataChanged,
+    Pagina2Data? initialData,
+    this.doc,
   });
 
   @override
@@ -63,8 +67,9 @@ List<String> EtapaEducacaoBasica = [
 class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
   String selecionadoGenero = Genero[0];
   String selecionadoVerbo = Verbal[0];
-  String selecionadoEletronico = Verbal[0];
+  String selecionadoEletronico = EletronicosAtividade[0];
   String selecionadoEtapaEducacaoBasica = EtapaEducacaoBasica[0];
+  late QuestionarioModel? _currentQuestionario;
   late Pagina2Data _pagina2Data;
   void _sendDataToParent() {
     widget.onDataChanged(_pagina2Data);
@@ -73,7 +78,16 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
   @override
   void initState() {
     super.initState();
-
+    if (widget.doc != null) {
+      _currentQuestionario = QuestionarioModel.fromMap(
+        widget.doc!.data() as Map<String, dynamic>,
+        widget.doc!.id,
+      );
+      selecionadoGenero = _currentQuestionario!.genero;
+      selecionadoVerbo = _currentQuestionario!.comunicacao;
+      selecionadoEletronico = _currentQuestionario!.tecnologiaQueGosta;
+      selecionadoEtapaEducacaoBasica = _currentQuestionario!.anoEscolar;
+    }
     _pagina2Data = Pagina2Data(
       selecionadoGenero: selecionadoGenero,
       selecionadoVerbo: selecionadoVerbo,
@@ -128,7 +142,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoGenero = value.toString();
-                                 _pagina2Data.selecionadoGenero =
+                                _pagina2Data.selecionadoGenero =
                                     selecionadoGenero;
                                 _sendDataToParent();
                               });
@@ -186,7 +200,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoGenero = value.toString();
-                                  _pagina2Data.selecionadoGenero =
+                                _pagina2Data.selecionadoGenero =
                                     selecionadoGenero;
                                 _sendDataToParent();
                               });
@@ -230,7 +244,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
-                                  _pagina2Data.selecionadoVerbo =
+                                _pagina2Data.selecionadoVerbo =
                                     selecionadoVerbo;
                                 _sendDataToParent();
                               });
@@ -255,7 +269,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
-                                 _pagina2Data.selecionadoVerbo =
+                                _pagina2Data.selecionadoVerbo =
                                     selecionadoVerbo;
                                 _sendDataToParent();
                               });
@@ -288,7 +302,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
-                                 _pagina2Data.selecionadoVerbo =
+                                _pagina2Data.selecionadoVerbo =
                                     selecionadoVerbo;
                                 _sendDataToParent();
                               });
@@ -313,7 +327,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoVerbo = value.toString();
-                                 _pagina2Data.selecionadoVerbo =
+                                _pagina2Data.selecionadoVerbo =
                                     selecionadoVerbo;
                                 _sendDataToParent();
                               });
@@ -357,7 +371,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                             onChanged: (value) {
                               setState(() {
                                 selecionadoEletronico = value.toString();
-                                 _pagina2Data.selecionadoEletronico =
+                                _pagina2Data.selecionadoEletronico =
                                     selecionadoEletronico;
                                 _sendDataToParent();
                               });
@@ -460,7 +474,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                                 _sendDataToParent();
                               });
@@ -486,7 +500,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },
@@ -519,7 +533,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },
@@ -544,7 +558,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },
@@ -577,7 +591,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },
@@ -602,7 +616,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },
@@ -635,7 +649,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },
@@ -660,7 +674,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                               setState(() {
                                 selecionadoEtapaEducacaoBasica =
                                     value.toString();
-                                    _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                _pagina2Data.selecionadoEtapaEducacaoBasica =
                                     selecionadoEtapaEducacaoBasica;
                               });
                             },

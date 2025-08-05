@@ -176,6 +176,9 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                         if (value == null || value.isEmpty) {
                           return "Este campo não pode ser vazio";
                         }
+                        if (value.length > 2) {
+                          return "Idade inválida";
+                        }
                         return null;
                       },
                       onChanged: (value) {

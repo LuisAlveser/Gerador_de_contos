@@ -213,13 +213,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             MaterialPageRoute(
                                                               builder:
                                                                   (context) =>
-                                                                      Teladahistoria(),
+                                                                      Teladahistoria(doc: doc,),
                                                             ),
                                                           );
                                                         },
 
                                                         child: Text(
-                                                          "Modo História Rápida : Nesse modo são escolhidas cinco preferências da criança de modo aleatório",
+                                                          "Modo História Rápida : Nesse modo são escolhidas cinco preferências da criança de modo aleatório. (Imagens não estão inclusas com a história)",
                                                           style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
@@ -244,12 +244,10 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             historia_padrao =
                                                                 true;
                                                           });
-                                                          print(
-                                                            historia_padrao,
-                                                          );
+                                                       
                                                         },
                                                         child: Text(
-                                                          "Modo História Padrão : Nesse modo as preferências da criança são escolhidas pelo responsável",
+                                                          "Modo História Padrão : Nesse modo as preferências da criança são escolhidas pelo responsável. (Imagens inclusas com a história)",
                                                           style: TextStyle(
                                                             fontSize: 15,
                                                             fontWeight:
@@ -299,7 +297,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                                 child: TextFormField(
                                                                   decoration:
                                                                       getAutenticationInputDecoration(
-                                                                        "Digite as preferências da criança",
+                                                                        "Digite cinco  preferências da criança",
                                                                       ),
                                                                   controller:
                                                                       preferencias_controller,
@@ -329,7 +327,16 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
                                                                 child: ElevatedButton(
                                                                   onPressed:
-                                                                      () {},
+                                                                      () {
+                                                                          Navigator.push(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder:
+                                                                  (context) =>
+                                                                      Teladahistoria(doc: doc, historiapadraoTexto:  preferencias_controller.text),
+                                                            ),
+                                                          );
+                                                                      },
                                                                   style: ElevatedButton.styleFrom(
                                                                     padding:
                                                                         EdgeInsets

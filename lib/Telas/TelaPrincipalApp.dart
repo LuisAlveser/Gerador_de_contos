@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
-import 'package:tcc/Model/CriancaModelo.dart';
+
 import 'package:tcc/Model/HistoriaModelo.dart';
-import 'package:tcc/Model/QuestinarioModel.dart';
+
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
 import 'package:tcc/Telas/TelaDaHistoria.dart';
 import 'package:tcc/servicos/AdicionarQuestionario.dart';
+import 'package:tcc/servicos/Historia_Servico.dart';
 
 class TelaPrincipal extends StatefulWidget {
   const TelaPrincipal({super.key});
@@ -16,8 +17,9 @@ class TelaPrincipal extends StatefulWidget {
 }
 
 class _TelaPrincipalState extends State<TelaPrincipal> {
-  final QuestionarioService _questionarioService = QuestionarioService();
-
+  late final QuestionarioService _questionarioService = QuestionarioService();
+  final HistoriaService _historiaService = HistoriaService();
+  late DocumentSnapshot docRef;
   List<HistoriaModelo> historias = [
     HistoriaModelo(
       titulo: "A árvore de natal",
@@ -56,7 +58,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
-                  final DocumentSnapshot doc = snapshot.data!.docs[index];
+                  DocumentSnapshot doc = snapshot.data!.docs[index];
 
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -213,7 +215,10 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             MaterialPageRoute(
                                                               builder:
                                                                   (context) =>
-                                                                      Teladahistoria(doc: doc,),
+                                                                      Teladahistoria(
+                                                                        doc:
+                                                                            doc,
+                                                                      ),
                                                             ),
                                                           );
                                                         },
@@ -244,7 +249,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             historia_padrao =
                                                                 true;
                                                           });
-                                                       
                                                         },
                                                         child: Text(
                                                           "Modo História Padrão : Nesse modo as preferências da criança são escolhidas pelo responsável. (Imagens inclusas com a história)",
@@ -326,17 +330,22 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                                 height: 30.0,
 
                                                                 child: ElevatedButton(
-                                                                  onPressed:
-                                                                      () {
-                                                                          Navigator.push(
-                                                            context,
-                                                            MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      Teladahistoria(doc: doc, historiapadraoTexto:  preferencias_controller.text),
-                                                            ),
-                                                          );
-                                                                      },
+                                                                  onPressed: () {
+                                                                    Navigator.push(
+                                                                      context,
+                                                                      MaterialPageRoute(
+                                                                        builder:
+                                                                            (
+                                                                              context,
+                                                                            ) => Teladahistoria(
+                                                                              doc:
+                                                                                  doc,
+                                                                              historiapadraoTexto:
+                                                                                  preferencias_controller.text,
+                                                                            ),
+                                                                      ),
+                                                                    );
+                                                                  },
                                                                   style: ElevatedButton.styleFrom(
                                                                     padding:
                                                                         EdgeInsets
@@ -426,34 +435,54 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       //crianças cadastradas
       drawer: Drawer(
         backgroundColor: Color.fromARGB(255, 25, 72, 137),
-        child: DrawerHeader(
-          child: Column(
-            children: [
-              AppBar(
-                iconTheme: IconThemeData(color: Colors.white),
-                leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(Icons.arrow_back),
-                ),
-                title: Text(
-                  "Histórias Salvas",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                backgroundColor: Colors.transparent,
-              ),
-              Divider(color: Colors.white, thickness: 2),
-              Padding(padding: EdgeInsets.only(top: 2)),
-              //histórias salvas
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            Container(
+              padding: EdgeInsets.only(top: 50),
+              color: Color.fromARGB(255, 25, 72, 137),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  ...List.generate(historias.length, (index) {
-                    HistoriaModelo historiaModelo = historias[index];
+                  Text(
+                    "Histórias Salvas",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Divider(color: Colors.white, thickness: 2),
+
+            FutureBuilder<List<QueryDocumentSnapshot>>(
+              future:
+                  _historiaService
+                      .getHistoriasPorQuestionarios(), //passar os questionarios ids
+              builder: (context, snapshot) {
+                if (!snapshot.hasData) {
+                  return Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: CircularProgressIndicator(color: Colors.white),
+                    ),
+                  );
+                }
+
+                final docs = snapshot.data!;
+
+                return ListView.builder(
+                  itemCount: docs.length,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemBuilder: (context, index) {
+                    final dochistoria = docs[index];
+                    final timestamp = dochistoria["data"];
+                    final DateTime data = timestamp.toDate();
+
                     return Card(
                       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       elevation: 4,
@@ -463,7 +492,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       child: Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -473,41 +502,57 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     Icon(Icons.menu_book, color: Colors.blue),
                                     SizedBox(width: 8),
                                     Text(
-                                      "Titulo: ${historiaModelo.titulo}",
+                                      "Título: ${dochistoria["texto"].toString().substring(2, 25)}..",
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
                                       ),
                                     ),
-                                    const SizedBox(width: 12),
-
-                                    IconButton(
-                                      onPressed: () {
-                                        // deleta história
-                                      },
-                                      icon: Icon(
-                                        Icons.delete,
-                                        color: Colors.red,
-                                        size: 25,
-                                      ),
-                                    ),
                                   ],
+                                ),
+                                IconButton(
+                                  onPressed: () {
+                                    print(dochistoria["id_historia"]);
+                                    Navigator.of(context).pop();
+
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        backgroundColor: Colors.red,
+                                        content: Text(
+                                          "Deseja remover essa história ?",
+                                          selectionColor: Colors.white,
+                                        ),
+
+                                        action: SnackBarAction(
+                                          label: "Remover",
+                                          textColor: Colors.white,
+                                          onPressed: () {
+                                            _historiaService.excluirHistoriaPorId(
+                                              idHistoria:
+                                                  dochistoria["id_historia"],
+                                              idquestionario:
+                                                  dochistoria["id_questionario"],
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(Icons.delete, color: Colors.red),
                                 ),
                               ],
                             ),
-
                             SizedBox(height: 10),
-
                             Row(
                               children: [
                                 Icon(Icons.calendar_month, size: 20),
                                 SizedBox(width: 6),
                                 Text(
-                                  "Data: ${historiaModelo.data.day}/${historiaModelo.data.month}/${historiaModelo.data.year}",
+                                  "Data: ${data.day} / ${data.month} / ${data.year}",
                                 ),
                               ],
                             ),
-                            Padding(padding: EdgeInsets.only(top: 10)),
+                            SizedBox(height: 10),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -516,10 +561,17 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   child: SizedBox(
                                     width: 100.0,
                                     height: 20.0,
-
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        //ir para historia salva
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder:
+                                                (context) => Teladahistoria(
+                                                  historiadoc: dochistoria,
+                                                ),
+                                          ),
+                                        );
                                       },
                                       style: ElevatedButton.styleFrom(
                                         padding: EdgeInsets.zero,
@@ -557,13 +609,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                         ),
                       ),
                     );
-                  }),
-                ],
-              ),
-            ],
-          ),
+                  },
+                );
+              },
+            ),
+          ],
         ),
       ),
+
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15.0),

@@ -338,8 +338,10 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
 
                             QuestionarioModel
                             questionarioModel = await QuestionarioModel(
-
-                               idquestionario: widget.doc==null?"":widget.doc!["idquestionario"],
+                              idquestionario:
+                                  widget.doc == null
+                                      ? ""
+                                      : widget.doc!["idquestionario"],
                               idresponsavel: currentUser!.uid,
                               nome: pagina1.nomecrianca,
                               apelido: pagina1.apelido,

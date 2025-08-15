@@ -192,42 +192,43 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                                 });
 
                                 try {
+                                  User? novoUser;
+                                  User? userLogado;
                                   if (temConta) {
-                                    User? newUser =
-                                        await _autenticacaoresponsavel
-                                            .cadastrarResponsavel(
-                                              nome: nome_controller.text,
-                                              senha: senha_controller.text,
-                                              telefone:
-                                                  telefone_controller.text,
-                                              email: email_controller.text,
-                                              context: context,
-                                            );
-                                    if (newUser != null) {
+                                    novoUser = await _autenticacaoresponsavel
+                                        .cadastrarResponsavel(
+                                          nome: nome_controller.text,
+                                          senha: senha_controller.text,
+                                          telefone: telefone_controller.text,
+                                          email: email_controller.text,
+                                          context: context,
+                                        );
+                                    if (novoUser != null) {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                           builder:
                                               (context) =>
-                                                  const TelaPrincipal(),
+                                                  TelaPrincipal(user: novoUser),
                                         ),
                                       );
                                     }
                                   } else {
-                                    User? user = await _loginresponsavel
+                                  userLogado = await _loginresponsavel
                                         .loginResponsavel(
                                           email: email_controller.text,
                                           senha: senha_controller.text,
                                           context: context,
                                         );
-                                    print(user);
-                                    if (user != null) {
+                                    print(userLogado);
+                                    if (userLogado!= null) {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
                                           builder:
-                                              (context) =>
-                                                  const TelaPrincipal(),
+                                              (context) => TelaPrincipal(
+                                                user: userLogado,
+                                              ),
                                         ),
                                       );
                                     }

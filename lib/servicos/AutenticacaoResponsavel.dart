@@ -46,4 +46,83 @@ class AutenticacaoResponsavel {
       return null;
     }
   }
+
+  Future<DocumentSnapshot?> mostrarResponsavel() async {
+    User? currentUser = _auth.currentUser;
+
+    if (currentUser != null) {
+      try {
+        DocumentSnapshot snapshot =
+            await _firestore
+                .collection("responsaveis")
+                .doc(currentUser.uid)
+                .get();
+
+        if (snapshot.exists) {
+          return snapshot;
+        } else {
+          print("Documento do responsável não encontrado no Firestore.");
+          return null;
+        }
+      } catch (e) {
+        print("Erro ao buscar responsável: $e");
+        return null;
+      }
+    }
+
+    return null;
+  }
+
+  Future<bool> atualizarresponsavel({
+    required String novo_nome,
+    required String telefene,
+    required BuildContext context,
+  }) async {
+    try {
+      User? currentUser = _auth.currentUser;
+      if (currentUser == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Erro: Nenhuma sessão de usuário ativa. Faça login novamente.",
+            ),
+            backgroundColor: Colors.red,
+          ),
+        );
+        return false;
+      }
+
+      _firestore.collection('responsaveis').doc(currentUser.uid).update({
+        "nome": novo_nome,
+        "telefone": telefene,
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Responsável atualizado com sucesso!"),
+          backgroundColor: Colors.green,
+        ),
+      );
+      mostrarResponsavel();
+
+      return true;
+      
+    } on FirebaseException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro ao atualizar responsável: ${e.message}"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return false;
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro inesperado: $e"),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return false;
+    }
+  }
 }

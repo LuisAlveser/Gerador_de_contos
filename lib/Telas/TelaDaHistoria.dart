@@ -125,7 +125,9 @@ A duração da história deve ser de:
           imagemUrl = responseData["data"][0]["url"];
         });
       } else {
-        print("Erro em gerar a imagem");
+        print(
+          "Erro ao gerar imagem: ${response.statusCode} - ${response.body}",
+        );
       }
     } catch (e) {
       print("Erro: $e");
@@ -152,10 +154,9 @@ A duração da história deve ser de:
     }
 
     // gerarhistoria();
-    //  if (widget.historiapadraoTexto != null) {
-    //gerar imagens
-    //  }
-    //  gerarImagens();
+    if (widget.historiapadraoTexto != null) {
+      gerarImagens();
+    }
   }
 
   @override
@@ -235,71 +236,79 @@ A duração da história deve ser de:
                 child: SizedBox(
                   width: 100.0,
                   height: 40.0,
-                  child: ElevatedButton(
-                    onPressed:
-                        salvandohistoria
-                            ? null
-                            : () async {
-                              setState(() {
-                                salvandohistoria = true;
-                              });
-                              HistoriaModeloReal historiamodel =
-                                  HistoriaModeloReal(
-                                    idhistoria: "", //atribuir o uid do firebase
-                                    idquestionario: widget.doc!.id,
-                                    texto: textoDaHistoria,
-                                    data: DateTime.now(),
-                                  );
-                              HistoriaService historiaService =
-                                  HistoriaService();
-                              bool sucesso;
-                              sucesso = await historiaService.cadastrarHistoria(
-                                historiamodel: historiamodel,
-                                context: context,
-                              );
-                              if (sucesso) {
-                                setState(() {
-                                  salvandohistoria = false;
-                                });
-                                Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const TelaPrincipal(),
+                  child:
+                      widget.historiadoc != null
+                          ? null
+                          : ElevatedButton(
+                            onPressed:
+                                salvandohistoria
+                                    ? null
+                                    : () async {
+                                      setState(() {
+                                        salvandohistoria = true;
+                                      });
+                                      HistoriaModeloReal historiamodel =
+                                          HistoriaModeloReal(
+                                            idhistoria: "",
+                                            idquestionario: widget.doc!.id,
+                                            texto: textoDaHistoria,
+                                            data: DateTime.now(),
+                                          );
+                                      HistoriaService historiaService =
+                                          HistoriaService();
+                                      bool sucesso;
+                                      sucesso = await historiaService
+                                          .cadastrarHistoria(
+                                            historiamodel: historiamodel,
+                                            context: context,
+                                          );
+                                      if (sucesso) {
+                                        setState(() {
+                                          salvandohistoria = false;
+                                        });
+                                        if (widget.historiadoc != null) {
+                                          Navigator.pushAndRemoveUntil(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) =>
+                                                      const TelaPrincipal(),
+                                            ),
+                                            (Route<dynamic> route) => false,
+                                          );
+                                        }
+                                      }
+                                    },
+                            style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  child: Image.asset(
+                                    'assets/fundo_botao.jpg',
+                                    fit: BoxFit.cover,
+                                    height: double.infinity,
+                                    width: double.infinity,
                                   ),
-                                  (Route<dynamic> route) => false,
-                                );
-                              }
-                            },
-                    style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.zero,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20.0),
-                      ),
-                    ),
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(20.0),
-                          child: Image.asset(
-                            'assets/fundo_botao.jpg',
-                            fit: BoxFit.cover,
-                            height: double.infinity,
-                            width: double.infinity,
+                                ),
+                                Text(
+                                  "Salvar História",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        Text(
-                          "Salvar História",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
                 ),
               ),
               Padding(

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 
@@ -7,10 +8,12 @@ import 'package:tcc/Model/HistoriaModelo.dart';
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
 import 'package:tcc/Telas/TelaDaHistoria.dart';
 import 'package:tcc/servicos/AdicionarQuestionario.dart';
+import 'package:tcc/servicos/AutenticacaoResponsavel.dart';
 import 'package:tcc/servicos/Historia_Servico.dart';
 
 class TelaPrincipal extends StatefulWidget {
-  const TelaPrincipal({super.key});
+  final User? user;
+  const TelaPrincipal({super.key, this.user});
 
   @override
   State<TelaPrincipal> createState() => _TelaPrincipalState();
@@ -20,15 +23,12 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   late final QuestionarioService _questionarioService = QuestionarioService();
   final HistoriaService _historiaService = HistoriaService();
   late DocumentSnapshot docRef;
-  List<HistoriaModelo> historias = [
-    HistoriaModelo(
-      titulo: "A árvore de natal",
-      texto: "guyuyuyu",
-      data: DateTime.now(),
-    ),
-  ];
 
+  final AutenticacaoResponsavel _autenticacaoResponsavel =
+      AutenticacaoResponsavel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final _formKeyAtualizacaoResponsavel = GlobalKey<FormState>();
+  final _formKeyHistoriaPadrao = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +40,29 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
+        automaticallyImplyLeading: false,
+        leading: Builder(
+          builder: (context) {
+            return IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            );
+          },
+        ),
+        actions: [
+          Builder(
+            builder: (context) {
+              return IconButton(
+                icon: const Icon(Icons.person),
+                onPressed: () {
+                  Scaffold.of(context).openEndDrawer();
+                },
+              );
+            },
+          ),
+        ],
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
         ),
@@ -616,7 +639,286 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           ],
         ),
       ),
+      endDrawer: Drawer(
+        backgroundColor: Color.fromARGB(255, 25, 72, 137),
+        child: ListView(
+          children: [
+            FutureBuilder(
+              future: _autenticacaoResponsavel.mostrarResponsavel(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator(color: Colors.white);
+                }
 
+                if (snapshot.hasError) {
+                  return Text('Erro: ${snapshot.error}');
+                }
+
+                if (snapshot.hasData && snapshot.data != null) {
+                  final data = snapshot.data!.data() as Map<String, dynamic>;
+
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(width: 10),
+                          Icon(
+                            Icons.supervised_user_circle,
+                            color: Colors.white,
+                          ),
+                          SizedBox(width: 10),
+                          Text(
+                            '${data["nome"]}',
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Divider(thickness: 2, color: Colors.white),
+                      SizedBox(height: 20),
+                      Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Icon(Icons.email, color: Colors.white),
+                          SizedBox(width: 10),
+                          Text(
+                            '${data["email"]}',
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 16),
+                      Row(
+                        children: [
+                          SizedBox(width: 10),
+                          Icon(Icons.phone, color: Colors.white),
+                          SizedBox(width: 10),
+                          Text(
+                            '${data["telefone"]}',
+                            style: TextStyle(fontSize: 15, color: Colors.white),
+                          ),
+                        ],
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 20)),
+                      SizedBox(
+                        width: 100.0,
+                        height: 30.0,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (BuildContext context) {
+                                final TextEditingController
+                                nome_controller_novo = TextEditingController(
+                                  text: data["nome"],
+                                );
+                                final TextEditingController
+                                telefone_controller_novo =
+                                    TextEditingController(
+                                      text: data["telefone"],
+                                    );
+                                return AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  backgroundColor: Color.fromARGB(
+                                    167,
+                                    10,
+                                    134,
+                                    235,
+                                  ),
+                                  title: Text(
+                                    "Informações do Responsável",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 20,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                  content: Form(
+                                    key: _formKeyAtualizacaoResponsavel,
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        SizedBox(
+                                          width: 300,
+                                          height: 50,
+                                          child: TextFormField(
+                                            decoration:
+                                                getAutenticationInputDecoration(
+                                                  "Nome",
+                                                ),
+
+                                            controller: nome_controller_novo,
+                                            validator: (String? value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return "Esse campo não pode ser vazio";
+                                              }
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: EdgeInsets.only(top: 20),
+                                        ),
+                                        SizedBox(
+                                          width: 350,
+                                          height: 50,
+                                          child: TextFormField(
+                                            decoration:
+                                                getAutenticationInputDecoration(
+                                                  "Telefone (xx) xxxxx-xxxx",
+                                                ),
+                                            controller:
+                                                telefone_controller_novo,
+
+                                            validator: (String? value) {
+                                              if (value == null ||
+                                                  value.isEmpty) {
+                                                return 'Por favor, insira um número de telefone';
+                                              }
+                                              if (value.length < 8) {
+                                                return 'Número de telefone inválido';
+                                              }
+
+                                              return null;
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  actions: [
+                                    SizedBox(
+                                      width: 120,
+                                      height: 40,
+                                      child: ElevatedButton(
+                                        onPressed: () async {
+                                          if (_formKeyAtualizacaoResponsavel
+                                              .currentState!
+                                              .validate()) {
+                                            _autenticacaoResponsavel
+                                                .atualizarresponsavel(
+                                                  novo_nome:
+                                                      nome_controller_novo.text,
+                                                  telefene:
+                                                      telefone_controller_novo
+                                                          .text,
+                                                  context: context,
+                                                );
+                                            Navigator.of(context).pop();
+                                            setState(() {});
+                                          }
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          padding: EdgeInsets.zero,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                        ),
+                                        child: Ink(
+                                          decoration: BoxDecoration(
+                                            image: DecorationImage(
+                                              image: AssetImage(
+                                                "assets/fundo_botao.jpg",
+                                              ),
+                                              fit: BoxFit.cover,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                              12,
+                                            ),
+                                          ),
+                                          child: Container(
+                                            alignment: Alignment.center,
+                                            child: const Text(
+                                              "Atualizar",
+                                              style: TextStyle(
+                                                color: Colors.white,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50.0),
+                            ),
+                          ),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/fundo_botao.jpg',
+                                fit: BoxFit.cover,
+                                height: double.infinity,
+                                width: double.infinity,
+                              ),
+                              Text(
+                                "Atualizar dados",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  );
+                }
+
+                return Text('Nenhum dado de responsável encontrado.');
+              },
+            ),
+            Padding(padding: EdgeInsets.only(top: 20)),
+            ListTile(
+              leading: Icon(Icons.delete, color: Colors.red),
+              title: Text("Excluir conta", style: TextStyle(color: Colors.red)),
+              onTap: () {
+                Navigator.pop(context);
+                SnackBar snackBar = SnackBar(
+                  backgroundColor: Colors.red,
+                  content: Text(
+                    "Deseja remover sua conta",
+                    selectionColor: Colors.white,
+                  ),
+
+                  action: SnackBarAction(
+                    label: "Sim",
+                    textColor: Colors.white,
+                    onPressed: () {
+                      //excluir reponsável
+                    },
+                  ),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+            ),
+          ],
+        ),
+      ),
+
+      //usuario informações
       bottomNavigationBar: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(15.0),

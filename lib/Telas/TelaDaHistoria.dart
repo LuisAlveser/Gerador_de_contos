@@ -10,6 +10,7 @@ import 'package:tcc/Model/HistoriaModeloreal.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
 import 'package:tcc/servicos/Historia_Servico.dart';
 import 'package:http/http.dart' as http;
+import 'package:tcc/servicos/Pdf_Servico.dart';
 
 class Teladahistoria extends StatefulWidget {
   final DocumentSnapshot? doc;
@@ -152,10 +153,13 @@ A duração da história deve ser de:
     if (widget.historiadoc != null) {
       textoDaHistoria = widget.historiadoc?["texto"];
     }
+    if (widget.doc != null) {
+      gerarhistoria();
+    }
 
-    // gerarhistoria();
     if (widget.historiapadraoTexto != null) {
-      gerarImagens();
+      gerarhistoria();
+      //  gerarImagens();
     }
   }
 
@@ -266,7 +270,7 @@ A duração da história deve ser de:
                                         setState(() {
                                           salvandohistoria = false;
                                         });
-                                        if (widget.historiadoc != null) {
+                                        if (widget.doc != null) {
                                           Navigator.pushAndRemoveUntil(
                                             context,
                                             MaterialPageRoute(
@@ -276,6 +280,7 @@ A duração da história deve ser de:
                                             ),
                                             (Route<dynamic> route) => false,
                                           );
+                                          setState(() {});
                                         }
                                       }
                                     },
@@ -323,7 +328,14 @@ A duração da história deve ser de:
                         borderRadius: BorderRadius.circular(20.0),
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      //baixar pdf
+                      Pdf_servico pdf_servico = Pdf_servico();
+                      Future<String> caminho = pdf_servico.generateAndSavePdf(
+                        texto: textoDaHistoria,
+                      );
+                      pdf_servico.baixarPDF(await caminho);
+                    },
                     child: Stack(
                       alignment: Alignment.center,
                       children: [

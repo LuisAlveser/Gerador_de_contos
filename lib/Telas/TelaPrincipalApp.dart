@@ -556,6 +556,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                               idquestionario:
                                                   dochistoria["id_questionario"],
                                             );
+                                            setState(() {});
                                           },
                                         ),
                                       ),

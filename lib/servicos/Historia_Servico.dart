@@ -109,7 +109,7 @@ class HistoriaService {
             .doc(idHistoria)
             .delete();
 
-        print("História com ID '$idHistoria' excluída com sucesso.");
+        
         getHistoriasPorQuestionarios();
       } on FirebaseException catch (e) {
         SnackBar(

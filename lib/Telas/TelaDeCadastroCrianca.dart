@@ -463,7 +463,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                               : _currentPageIndex == 6
                               ? "Cadastrar"
                               : "Proximo",
-
+                          
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,

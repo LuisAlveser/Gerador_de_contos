@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 
 import 'package:tcc/Model/HistoriaModelo.dart';
@@ -28,7 +29,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       AutenticacaoResponsavel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKeyAtualizacaoResponsavel = GlobalKey<FormState>();
-  final _formKeyHistoriaPadrao = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -201,7 +202,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                           preferencias_controller =
                                               TextEditingController();
                                           bool historia_padrao = false;
-
+                                          final _formKeyHistoriaPadrao =
+                                              GlobalKey<FormState>();
                                           return StatefulBuilder(
                                             builder: (
                                               BuildContext context,
@@ -298,6 +300,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                         visible:
                                                             historia_padrao,
                                                         child: Form(
+                                                          key:
+                                                              _formKeyHistoriaPadrao,
                                                           child: Column(
                                                             children: [
                                                               Text(
@@ -354,20 +358,25 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
 
                                                                 child: ElevatedButton(
                                                                   onPressed: () {
-                                                                    Navigator.push(
-                                                                      context,
-                                                                      MaterialPageRoute(
-                                                                        builder:
-                                                                            (
-                                                                              context,
-                                                                            ) => Teladahistoria(
-                                                                              doc:
-                                                                                  doc,
-                                                                              historiapadraoTexto:
-                                                                                  preferencias_controller.text,
-                                                                            ),
-                                                                      ),
-                                                                    );
+                                                                    //valida o formulario
+                                                                    if (_formKeyHistoriaPadrao
+                                                                        .currentState!
+                                                                        .validate()) {
+                                                                      Navigator.push(
+                                                                        context,
+                                                                        MaterialPageRoute(
+                                                                          builder:
+                                                                              (
+                                                                                context,
+                                                                              ) => Teladahistoria(
+                                                                                doc:
+                                                                                    doc,
+                                                                                historiapadraoTexto:
+                                                                                    preferencias_controller.text,
+                                                                              ),
+                                                                        ),
+                                                                      );
+                                                                    }
                                                                   },
                                                                   style: ElevatedButton.styleFrom(
                                                                     padding:
@@ -928,7 +937,12 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         child: BottomNavigationBar(
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon: IconButton(onPressed: () {}, icon: Icon(Icons.exit_to_app)),
+              icon: IconButton(
+                onPressed: () {
+                  SystemNavigator.pop();
+                },
+                icon: Icon(Icons.exit_to_app),
+              ),
               label: 'Sair',
             ),
             BottomNavigationBarItem(

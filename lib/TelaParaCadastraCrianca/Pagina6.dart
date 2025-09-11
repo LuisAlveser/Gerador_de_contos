@@ -269,6 +269,7 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                   },
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
@@ -281,178 +282,153 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Pai/ Mãe",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: Parentesco[0],
-                          groupValue: selecionadoParentesco,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoParentesco = value.toString();
-                              _pagina6Data.selecionadoParentesco =
-                                  selecionadoParentesco;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Pai/ Mãe",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
+                      leading: Radio(
+                        value: Parentesco[0],
+                        groupValue: selecionadoParentesco,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoParentesco = value.toString();
+                            _pagina6Data.selecionadoParentesco =
+                                selecionadoParentesco;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
                     ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Avô/ Avó",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
+
+                    ListTile(
+                      title: Text(
+                        "Avô/ Avó",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
-                        leading: Radio(
-                          value: Parentesco[1],
-                          groupValue: selecionadoParentesco,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoParentesco = value.toString();
-                              _pagina6Data.selecionadoParentesco =
-                                  selecionadoParentesco;
-                              _sendDataToParent();
-                            });
-                          },
+                      ),
+                      leading: Radio(
+                        value: Parentesco[1],
+                        groupValue: selecionadoParentesco,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoParentesco = value.toString();
+                            _pagina6Data.selecionadoParentesco =
+                                selecionadoParentesco;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Irmão/ Irmã",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
+                      ),
+                      leading: Radio(
+                        value: Parentesco[2],
+                        groupValue: selecionadoParentesco,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoParentesco = value.toString();
+                            _pagina6Data.selecionadoParentesco =
+                                selecionadoParentesco;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Tio/ Tia",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: Parentesco[3],
+                        groupValue: selecionadoParentesco,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoParentesco = value.toString();
+                            _pagina6Data.selecionadoParentesco =
+                                selecionadoParentesco;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Outro",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: Parentesco[4],
+                        groupValue: selecionadoParentesco,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoParentesco = value.toString();
+                            _pagina6Data.selecionadoParentesco =
+                                selecionadoParentesco;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Prefiro não responder",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: Parentesco[5],
+                        groupValue: selecionadoParentesco,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoParentesco = value.toString();
+                            _pagina6Data.selecionadoParentesco =
+                                selecionadoParentesco;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Irmão/ Irmã",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: Parentesco[2],
-                          groupValue: selecionadoParentesco,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoParentesco = value.toString();
-                              _pagina6Data.selecionadoParentesco =
-                                  selecionadoParentesco;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Tio/ Tia",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: Parentesco[3],
-                          groupValue: selecionadoParentesco,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoParentesco = value.toString();
-                              _pagina6Data.selecionadoParentesco =
-                                  selecionadoParentesco;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Outro",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: Parentesco[4],
-                          groupValue: selecionadoParentesco,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoParentesco = value.toString();
-                              _pagina6Data.selecionadoParentesco =
-                                  selecionadoParentesco;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Prefiro não responder",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: Parentesco[5],
-                          groupValue: selecionadoParentesco,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoParentesco = value.toString();
-                              _pagina6Data.selecionadoParentesco =
-                                  selecionadoParentesco;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               Divider(color: Colors.white, thickness: 2.0),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
@@ -466,115 +442,101 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Sim",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ProcessoDeALFAlfdetizacao[0],
-                          groupValue: selecionadoProcessoAlf,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoProcessoAlf = value.toString();
-                              _pagina6Data.selecionadoProcessoAlf =
-                                  selecionadoProcessoAlf;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Sim",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Não",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ProcessoDeALFAlfdetizacao[1],
-                          groupValue: selecionadoProcessoAlf,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoProcessoAlf = value.toString();
-                              _pagina6Data.selecionadoProcessoAlf =
-                                  selecionadoProcessoAlf;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ProcessoDeALFAlfdetizacao[0],
+                        groupValue: selecionadoProcessoAlf,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoProcessoAlf = value.toString();
+                            _pagina6Data.selecionadoProcessoAlf =
+                                selecionadoProcessoAlf;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Não sei informar",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ProcessoDeALFAlfdetizacao[2],
-                          groupValue: selecionadoProcessoAlf,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoProcessoAlf = value.toString();
-                              _pagina6Data.selecionadoProcessoAlf =
-                                  selecionadoProcessoAlf;
-                              _sendDataToParent();
-                            });
-                          },
+
+                    ListTile(
+                      title: Text(
+                        "Não",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
+                      leading: Radio(
+                        value: ProcessoDeALFAlfdetizacao[1],
+                        groupValue: selecionadoProcessoAlf,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoProcessoAlf = value.toString();
+                            _pagina6Data.selecionadoProcessoAlf =
+                                selecionadoProcessoAlf;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
                     ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Prefiro não responder",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
+                    ListTile(
+                      title: Text(
+                        "Não sei informar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
-                        leading: Radio(
-                          value: ProcessoDeALFAlfdetizacao[3],
-                          groupValue: selecionadoProcessoAlf,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoProcessoAlf = value.toString();
-                              _pagina6Data.selecionadoProcessoAlf =
-                                  selecionadoProcessoAlf;
-                              _sendDataToParent();
-                            });
-                          },
+                      ),
+                      leading: Radio(
+                        value: ProcessoDeALFAlfdetizacao[2],
+                        groupValue: selecionadoProcessoAlf,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoProcessoAlf = value.toString();
+                            _pagina6Data.selecionadoProcessoAlf =
+                                selecionadoProcessoAlf;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Prefiro não responder",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
+                      ),
+                      leading: Radio(
+                        value: ProcessoDeALFAlfdetizacao[3],
+                        groupValue: selecionadoProcessoAlf,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoProcessoAlf = value.toString();
+                            _pagina6Data.selecionadoProcessoAlf =
+                                selecionadoProcessoAlf;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
                   ],

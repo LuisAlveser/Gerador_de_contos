@@ -26,6 +26,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
       new AutenticacaoResponsavel();
   Loginresponsavel _loginresponsavel = new Loginresponsavel();
 
+  bool recuperacaoSenha = false;
   bool temConta = true;
 
   bool _carregando = false;
@@ -214,14 +215,14 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                                       );
                                     }
                                   } else {
-                                  userLogado = await _loginresponsavel
+                                    userLogado = await _loginresponsavel
                                         .loginResponsavel(
                                           email: email_controller.text,
                                           senha: senha_controller.text,
                                           context: context,
                                         );
                                     print(userLogado);
-                                    if (userLogado!= null) {
+                                    if (userLogado != null) {
                                       Navigator.pushReplacement(
                                         context,
                                         MaterialPageRoute(
@@ -312,16 +313,46 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                       ),
                       Padding(padding: EdgeInsets.all(5)),
                       TextButton(
-                        onPressed: () {
-                          //recuperação de senha
+                        onPressed: () async {
+                          setState(() {
+                            recuperacaoSenha = true;
+                          });
+
+                          if (email_controller.text.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                  "Digite o email para a alteração de senha",
+                                ),
+                                backgroundColor: Colors.red,
+                              ),
+                            );
+                          }
+                          try {
+                            AutenticacaoResponsavel autenticacaoResponsavel =
+                                AutenticacaoResponsavel();
+
+                            await autenticacaoResponsavel.recuperarsenha(
+                              context,
+                              email_controller.text,
+                            );
+                          } catch (e) {
+                            print("Erro ao recuperar senha: $e");
+                          } finally {
+                            setState(() {
+                              recuperacaoSenha = false;
+                            });
+                          }
                         },
                         child: Text(
-                          (temConta)
+                          recuperacaoSenha
+                              ? "Enviando Email"
+                              : (temConta)
                               ? ""
                               : "Esqueceu sua senha ? Clique aqui !",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 10,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

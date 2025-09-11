@@ -205,57 +205,54 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
 
                 Padding(
                   padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Sim",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiOculos[0],
-                            groupValue: selecionadoOculos,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoOculos = value.toString();
-                                _pagina1Data.selecionadoOculos =
-                                    selecionadoOculos;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Sim",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: PossuiOculos[0],
+                          groupValue: selecionadoOculos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoOculos = value.toString();
+                              _pagina1Data.selecionadoOculos =
+                                  selecionadoOculos;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Não",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+                      ListTile(
+                        title: Text(
+                          "Não",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: PossuiOculos[1],
-                            groupValue: selecionadoOculos,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoOculos = value.toString();
-                                _pagina1Data.selecionadoOculos =
-                                    selecionadoOculos;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
+                        ),
+                        leading: Radio(
+                          value: PossuiOculos[1],
+                          groupValue: selecionadoOculos,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoOculos = value.toString();
+                              _pagina1Data.selecionadoOculos =
+                                  selecionadoOculos;
+                              _sendDataToParent();
+                            });
+                          },
                         ),
                       ),
                     ],
@@ -276,148 +273,125 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
 
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Sim, com laudo médico",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiTEA[0],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                                _pagina1Data.selecionadaTea = selecionadaTea;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Sim, com laudo médico",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: PossuiTEA[0],
+                          groupValue: selecionadaTea,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadaTea = value.toString();
+                              _pagina1Data.selecionadaTea = selecionadaTea;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Sim, com hipótese diagnóstica por profissionais",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+
+                      ListTile(
+                        title: Text(
+                          "Sim, com hipótese diagnóstica por profissionais",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: PossuiTEA[1],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                                _pagina1Data.selecionadaTea = selecionadaTea;
-                                _sendDataToParent();
-                              });
-                            },
+                        ),
+                        leading: Radio(
+                          value: PossuiTEA[1],
+                          groupValue: selecionadaTea,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadaTea = value.toString();
+                              _pagina1Data.selecionadaTea = selecionadaTea;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Está em andamento",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
+                        ),
+                        leading: Radio(
+                          value: PossuiTEA[2],
+                          groupValue: selecionadaTea,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadaTea = value.toString();
+                              _pagina1Data.selecionadaTea = selecionadaTea;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Não",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: PossuiTEA[3],
+                          groupValue: selecionadaTea,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadaTea = value.toString();
+                              _pagina1Data.selecionadaTea = selecionadaTea;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Prefiro não responder",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: PossuiTEA[4],
+                          groupValue: selecionadaTea,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadaTea = value.toString();
+                              _pagina1Data.selecionadaTea = selecionadaTea;
+                              _sendDataToParent();
+                            });
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Está em andamento",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiTEA[2],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                                _pagina1Data.selecionadaTea = selecionadaTea;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Não",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiTEA[3],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                                _pagina1Data.selecionadaTea = selecionadaTea;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Prefiro não responder",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: PossuiTEA[4],
-                            groupValue: selecionadaTea,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadaTea = value.toString();
-                                _pagina1Data.selecionadaTea = selecionadaTea;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Divider(color: Colors.white, thickness: 2.0),
                 const SizedBox(height: 10),
 
@@ -433,178 +407,147 @@ class Pagina1FormCriancaState extends State<Pagina1FormCrianca> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Nível 1:  Pouco apoio",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: NivelSuporte[0],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel =
-                                    selecionadoNivel;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Nível 1:  Pouco apoio",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: NivelSuporte[0],
+                          groupValue: selecionadoNivel,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoNivel = value.toString();
+                              _pagina1Data.selecionadoNivel = selecionadoNivel;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Nível 2: Apoio moderado",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+
+                      ListTile(
+                        title: Text(
+                          "Nível 2: Apoio moderado",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: NivelSuporte[1],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel =
-                                    selecionadoNivel;
-                                _sendDataToParent();
-                              });
-                            },
+                        ),
+                        leading: Radio(
+                          value: NivelSuporte[1],
+                          groupValue: selecionadoNivel,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoNivel = value.toString();
+                              _pagina1Data.selecionadoNivel = selecionadoNivel;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Nível 3: Apoio substancial",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
+                        ),
+                        leading: Radio(
+                          value: NivelSuporte[2],
+                          groupValue: selecionadoNivel,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoNivel = value.toString();
+                              _pagina1Data.selecionadoNivel = selecionadoNivel;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Não sei informar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: NivelSuporte[3],
+                          groupValue: selecionadoNivel,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoNivel = value.toString();
+                              _pagina1Data.selecionadoNivel = selecionadoNivel;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Ainda não foi diagnosticado(a)",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: NivelSuporte[4],
+                          groupValue: selecionadoNivel,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoNivel = value.toString();
+                              _pagina1Data.selecionadoNivel = selecionadoNivel;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Prefiro não responder",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: NivelSuporte[5],
+                          groupValue: selecionadoNivel,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoNivel = value.toString();
+                              _pagina1Data.selecionadoNivel = selecionadoNivel;
+                              _sendDataToParent();
+                            });
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Nível 3: Apoio substancial",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: NivelSuporte[2],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel =
-                                    selecionadoNivel;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Não sei informar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: NivelSuporte[3],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel =
-                                    selecionadoNivel;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Ainda não foi diagnosticado(a)",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: NivelSuporte[4],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel =
-                                    selecionadoNivel;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Prefiro não responder",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: NivelSuporte[5],
-                            groupValue: selecionadoNivel,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoNivel = value.toString();
-                                _pagina1Data.selecionadoNivel =
-                                    selecionadoNivel;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Divider(color: Colors.white, thickness: 2.0),
               ],
             ),

@@ -375,7 +375,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                               acessoriosPreferidos: pagina6.acessoriofavoritos,
                               animaisPreferidos: pagina6.animaisfavoritos,
                               deveTerNaHistoria:
-                                  pagina6.historiacoisasNaofavoritas,
+                                  pagina6.historiacoisasfavoritas,
                               naoDeveTernaHistoria:
                                   pagina6.historiacoisasNaofavoritas,
                               parentesco: pagina6.selecionadoParentesco,

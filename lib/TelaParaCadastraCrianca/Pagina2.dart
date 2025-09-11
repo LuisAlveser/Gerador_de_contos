@@ -122,95 +122,84 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Masculino",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: Genero[0],
-                            groupValue: selecionadoGenero,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoGenero = value.toString();
-                                _pagina2Data.selecionadoGenero =
-                                    selecionadoGenero;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Masculino",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: Genero[0],
+                          groupValue: selecionadoGenero,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoGenero = value.toString();
+                              _pagina2Data.selecionadoGenero =
+                                  selecionadoGenero;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Feminino",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+
+                      ListTile(
+                        title: Text(
+                          "Feminino",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: Genero[1],
-                            groupValue: selecionadoGenero,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoGenero = value.toString();
-                                _pagina2Data.selecionadoGenero =
-                                    selecionadoGenero;
-                                _sendDataToParent();
-                              });
-                            },
+                        ),
+                        leading: Radio(
+                          value: Genero[1],
+                          groupValue: selecionadoGenero,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoGenero = value.toString();
+                              _pagina2Data.selecionadoGenero =
+                                  selecionadoGenero;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Prefiro não responder",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
+                        ),
+                        leading: Radio(
+                          value: Genero[2],
+                          groupValue: selecionadoGenero,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoGenero = value.toString();
+                              _pagina2Data.selecionadoGenero =
+                                  selecionadoGenero;
+                              _sendDataToParent();
+                            });
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Prefiro não responder",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: Genero[2],
-                            groupValue: selecionadoGenero,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoGenero = value.toString();
-                                _pagina2Data.selecionadoGenero =
-                                    selecionadoGenero;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Divider(color: Colors.white, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
@@ -224,120 +213,103 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Verbal",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: Verbal[0],
-                            groupValue: selecionadoVerbo,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoVerbo = value.toString();
-                                _pagina2Data.selecionadoVerbo =
-                                    selecionadoVerbo;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Verbal",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: Verbal[0],
+                          groupValue: selecionadoVerbo,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoVerbo = value.toString();
+                              _pagina2Data.selecionadoVerbo = selecionadoVerbo;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Não verbal",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+
+                      ListTile(
+                        title: Text(
+                          "Não verbal",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: Verbal[1],
-                            groupValue: selecionadoVerbo,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoVerbo = value.toString();
-                                _pagina2Data.selecionadoVerbo =
-                                    selecionadoVerbo;
-                                _sendDataToParent();
-                              });
-                            },
+                        ),
+                        leading: Radio(
+                          value: Verbal[1],
+                          groupValue: selecionadoVerbo,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoVerbo = value.toString();
+                              _pagina2Data.selecionadoVerbo = selecionadoVerbo;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Prefiro não responder",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
+                        ),
+                        leading: Radio(
+                          value: Verbal[2],
+                          groupValue: selecionadoVerbo,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoVerbo = value.toString();
+                              _pagina2Data.selecionadoVerbo = selecionadoVerbo;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Não sei informar",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: Verbal[3],
+                          groupValue: selecionadoVerbo,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoVerbo = value.toString();
+                              _pagina2Data.selecionadoVerbo = selecionadoVerbo;
+                              _sendDataToParent();
+                            });
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Prefiro não responder",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: Verbal[2],
-                            groupValue: selecionadoVerbo,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoVerbo = value.toString();
-                                _pagina2Data.selecionadoVerbo =
-                                    selecionadoVerbo;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Não sei informar",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: Verbal[3],
-                            groupValue: selecionadoVerbo,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoVerbo = value.toString();
-                                _pagina2Data.selecionadoVerbo =
-                                    selecionadoVerbo;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Divider(color: Colors.white, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
@@ -351,95 +323,84 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Assistir vídeos",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EletronicosAtividade[0],
-                            groupValue: selecionadoEletronico,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEletronico = value.toString();
-                                _pagina2Data.selecionadoEletronico =
-                                    selecionadoEletronico;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Assistir vídeos",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: EletronicosAtividade[0],
+                          groupValue: selecionadoEletronico,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEletronico = value.toString();
+                              _pagina2Data.selecionadoEletronico =
+                                  selecionadoEletronico;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Usar joguinhos",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+
+                      ListTile(
+                        title: Text(
+                          "Usar joguinhos",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: EletronicosAtividade[1],
-                            groupValue: selecionadoEletronico,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEletronico = value.toString();
-                                _pagina2Data.selecionadoEletronico =
-                                    selecionadoEletronico;
-                                _sendDataToParent();
-                              });
-                            },
+                        ),
+                        leading: Radio(
+                          value: EletronicosAtividade[1],
+                          groupValue: selecionadoEletronico,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEletronico = value.toString();
+                              _pagina2Data.selecionadoEletronico =
+                                  selecionadoEletronico;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Escutar músicas",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
+                        ),
+                        leading: Radio(
+                          value: EletronicosAtividade[2],
+                          groupValue: selecionadoEletronico,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEletronico = value.toString();
+                              _pagina2Data.selecionadoEletronico =
+                                  selecionadoEletronico;
+                              _sendDataToParent();
+                            });
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Escutar músicas",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EletronicosAtividade[2],
-                            groupValue: selecionadoEletronico,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEletronico = value.toString();
-                                _pagina2Data.selecionadoEletronico =
-                                    selecionadoEletronico;
-                                _sendDataToParent();
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Divider(color: Colors.white, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
@@ -453,237 +414,192 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Pré-escola",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[0],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                                _sendDataToParent();
-                              });
-                            },
+                      ListTile(
+                        title: Text(
+                          "Pré-escola",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
                         ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[0],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                              _sendDataToParent();
+                            });
+                          },
+                        ),
                       ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "1º ano do Ensino Fundamental",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
+
+                      ListTile(
+                        title: Text(
+                          "1º ano do Ensino Fundamental",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[1],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[1],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "2º ano do Ensino Fundamental",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
                           ),
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[2],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "3º ano do Ensino Fundamental",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[3],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "4º ano do Ensino Fundamental",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[4],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "5º ao 9º ano do Ensino Fundamental",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[5],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Não está no Ensino Fundamental",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[6],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          "Prefiro não responder",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 13,
+                          ),
+                        ),
+                        leading: Radio(
+                          value: EtapaEducacaoBasica[7],
+                          groupValue: selecionadoEtapaEducacaoBasica,
+                          activeColor: Colors.white,
+                          onChanged: (value) {
+                            setState(() {
+                              selecionadoEtapaEducacaoBasica = value.toString();
+                              _pagina2Data.selecionadoEtapaEducacaoBasica =
+                                  selecionadoEtapaEducacaoBasica;
+                            });
+                          },
                         ),
                       ),
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "2º ano do Ensino Fundamental",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[2],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "3º ano do Ensino Fundamental",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[3],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "4º ano do Ensino Fundamental",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[4],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "5º ao 9º ano do Ensino \nFundamental",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[5],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Não está no Ensino Fundamental",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[6],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListTile(
-                          title: Text(
-                            "Prefiro não responder",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                              fontSize: 13,
-                            ),
-                          ),
-                          leading: Radio(
-                            value: EtapaEducacaoBasica[7],
-                            groupValue: selecionadoEtapaEducacaoBasica,
-                            activeColor: Colors.white,
-                            onChanged: (value) {
-                              setState(() {
-                                selecionadoEtapaEducacaoBasica =
-                                    value.toString();
-                                _pagina2Data.selecionadoEtapaEducacaoBasica =
-                                    selecionadoEtapaEducacaoBasica;
-                              });
-                            },
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+
                 Divider(color: Colors.white, thickness: 2.0),
               ],
             ),

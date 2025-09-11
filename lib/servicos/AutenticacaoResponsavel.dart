@@ -106,7 +106,6 @@ class AutenticacaoResponsavel {
       mostrarResponsavel();
 
       return true;
-      
     } on FirebaseException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -123,6 +122,35 @@ class AutenticacaoResponsavel {
         ),
       );
       return false;
+    }
+  }
+
+  Future<void> recuperarsenha(BuildContext context, String email) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text(
+            "E-mail enviado com sucesso, verifique sua caixa de spam!",
+          ),
+          backgroundColor: Colors.green,
+        ),
+      );
+    } on FirebaseAuthException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro: ${e.message}"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Ocorreu um erro inesperado: $e"),
+          backgroundColor: Colors.red,
+        ),
+      );
     }
   }
 }

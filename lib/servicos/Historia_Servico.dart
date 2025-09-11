@@ -1,7 +1,12 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tcc/Model/HistoriaModeloreal.dart';
+import 'package:http/http.dart' as http;
+import 'package:firebase_storage/firebase_storage.dart';
 
 class HistoriaService {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -109,7 +114,6 @@ class HistoriaService {
             .doc(idHistoria)
             .delete();
 
-        
         getHistoriasPorQuestionarios();
       } on FirebaseException catch (e) {
         SnackBar(
@@ -125,5 +129,58 @@ class HistoriaService {
     }
   }
 
-  
+  Future<File> baixarImagemDaUrl(String url) async {
+    try {
+      final response = await http.get(Uri.parse(url));
+
+      final tempDir = await getTemporaryDirectory();
+
+      final fileName = '${DateTime.now().millisecondsSinceEpoch}.jpg';
+      final file = File('${tempDir.path}/$fileName');
+
+      await file.writeAsBytes(response.bodyBytes);
+
+      print('Imagem baixada e salva em: ${file.path}');
+      return file;
+    } catch (e) {
+      print('Erro ao baixar a imagem: $e');
+      throw Exception('Falha ao baixar a imagem da URL.');
+    }
+  }
+
+  Future<String> uploadImagemParaStorage(File imagem, String idHistoria) async {
+    final storageRef = FirebaseStorage.instance
+        .ref()
+        .child('imagens_historias')
+        .child('$idHistoria.jpg');
+
+    final uploadTask = storageRef.putFile(imagem);
+
+    final snapshot = await uploadTask.whenComplete(() {});
+    final urlDownload = await snapshot.ref.getDownloadURL();
+
+    return urlDownload;
+  }
+
+  Future<void> salvarHistoriaComImagemDaUrl(
+  String imageUrl,
+  String idHistoria,
+) async {
+  try {
+    
+    final imagemFile = await baixarImagemDaUrl(imageUrl);
+
+    
+    final urlImagem = await uploadImagemParaStorage(imagemFile, idHistoria);
+
+    
+    await FirebaseFirestore.instance.collection("historias").doc(idHistoria).update({
+      "imagemUrl": urlImagem,
+    });
+
+    print(" História atualizada com a imagem!");
+  } catch (e) {
+    print(' Erro no fluxo de salvamento: $e');
+  }
+}
 }

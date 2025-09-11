@@ -132,438 +132,355 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Arroz",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[0],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Arroz",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Feijão",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[1],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[0],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Batata Frita",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[2],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+
+                    ListTile(
+                      title: Text(
+                        "Feijão",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Carnes e aves",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[3],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[1],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Macarrão",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[4],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Batata Frita",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Frutas",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[5],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[2],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Legumes",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[6],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Carnes e aves",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Verduras",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[7],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[3],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Sorvete",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[8],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Macarrão",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Bolachas",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[9],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[4],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Salgadinhos",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[10],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+
+                    ListTile(
+                      title: Text(
+                        "Frutas",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Pipoca",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[11],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[5],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Iogurte",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[12],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Legumes",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Lanches (pizza, hamburger e etc)",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: ComidasPreferidas[13],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
+                      leading: Radio(
+                        value: ComidasPreferidas[6],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Outro alimento",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
+                    ListTile(
+                      title: Text(
+                        "Verduras",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
-                        leading: Radio(
-                          value: ComidasPreferidas[14],
-                          groupValue: selecionadaComidaFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaComidaFavorita = value.toString();
-                              _pagina5Data.selecionadaComidaFavorita =
-                                  selecionadaComidaFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[7],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Sorvete",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[8],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Bolachas",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[9],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Salgadinhos",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[10],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Pipoca",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[11],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Iogurte",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[12],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Lanches (pizza, hamburger e etc)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[13],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Outro alimento",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: ComidasPreferidas[14],
+                        groupValue: selecionadaComidaFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaComidaFavorita = value.toString();
+                            _pagina5Data.selecionadaComidaFavorita =
+                                selecionadaComidaFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
                   ],
@@ -583,269 +500,222 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Girar",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[0],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Girar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[0],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
                     ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Balançar",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
+
+                    ListTile(
+                      title: Text(
+                        "Balançar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[1],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[1],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Lutar",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[2],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Correr",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[3],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Brincar de faz-de-conta",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[4],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Que alguém faça cócegas",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[5],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Que alguém leia",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[6],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Que alguém cante",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[7],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Que alguém conte história",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: AtividadesFavoritas[8],
+                        groupValue: selecionadaAtividadeFavorita,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadaAtividadeFavorita = value.toString();
+                            _pagina5Data.selecionadaAtividadeFavorita =
+                                selecionadaAtividadeFavorita;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Lutar",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[2],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Correr",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[3],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Brincar de faz-de-conta",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[4],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Que alguém faça cócegas",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[5],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Que alguém leia",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[6],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Que alguém cante",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[7],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Que alguém conte história",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: AtividadesFavoritas[8],
-                          groupValue: selecionadaAtividadeFavorita,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadaAtividadeFavorita = value.toString();
-                              _pagina5Data.selecionadaAtividadeFavorita =
-                                  selecionadaAtividadeFavorita;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               Divider(color: Colors.white, thickness: 2.0),
               Padding(
                 padding: const EdgeInsets.all(2.0),
@@ -859,327 +729,268 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
               ),
               Padding(
                 padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Balançar o corpo (para frente ou para trás)",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[0],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
+                    ListTile(
+                      title: Text(
+                        "Balançar o corpo (para frente ou para trás)",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
                       ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[0],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
                     ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Balançar as mãos",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
+
+                    ListTile(
+                      title: Text(
+                        "Balançar as mãos",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[1],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[1],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Andar nas pontas dos pés",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
                         ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[2],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Bater os pés no chão ou em algum objeto próximo",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[3],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Cruzar e descruzar as pernas muitas vezes",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[4],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Pular com frequência",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[5],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Correr com frequência",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[6],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Movimentar os dedos na frente dos olhos",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[7],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Fazer sons repetitivos",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[8],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Girar objetos ou girar em volta do próprio corpo",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[9],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
+                      ),
+                    ),
+                    ListTile(
+                      title: Text(
+                        "Prefiro não responder",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 13,
+                        ),
+                      ),
+                      leading: Radio(
+                        value: MovimentosFavoritos[10],
+                        groupValue: selecionadoMovimentoFavoritos,
+                        activeColor: Colors.white,
+                        onChanged: (value) {
+                          setState(() {
+                            selecionadoMovimentoFavoritos = value.toString();
+                            _pagina5Data.selecionadoMovimentoFavoritos =
+                                selecionadoMovimentoFavoritos;
+                            _sendDataToParent();
+                          });
+                        },
                       ),
                     ),
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Andar nas pontas dos pés",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[2],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Bater os pés no chão ou em algum objeto próximo",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[3],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Cruzar e descruzar as pernas muitas vezes",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[4],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Pular com frequência",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[5],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Correr com frequência",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[6],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Movimentar os dedos na frente dos olhos",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[7],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Fazer sons repetitivos",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[8],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Girar objetos ou girar em volta do próprio corpo",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[9],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        title: Text(
-                          "Prefiro não responder",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 13,
-                          ),
-                        ),
-                        leading: Radio(
-                          value: MovimentosFavoritos[10],
-                          groupValue: selecionadoMovimentoFavoritos,
-                          activeColor: Colors.white,
-                          onChanged: (value) {
-                            setState(() {
-                              selecionadoMovimentoFavoritos = value.toString();
-                              _pagina5Data.selecionadoMovimentoFavoritos =
-                                  selecionadoMovimentoFavoritos;
-                              _sendDataToParent();
-                            });
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+
               Divider(color: Colors.white, thickness: 2.0),
             ],
           ),

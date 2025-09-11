@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'dart:io';
+
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:tcc/Model/HistoriaModeloreal.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
@@ -32,14 +31,16 @@ class _TeladahistoriaState extends State<Teladahistoria> {
   String textoDaHistoria = "";
   bool carregandoHistoria = false;
   bool salvandohistoria = false;
-  bool carregandoImagem = true;
+  bool carregandoImagem = false;
   String? imagemUrl;
+  String? imagemUrl2;
+  String? imagemUrl3;
+  String? imagemUrl4;
   Future<void> gerarhistoria() async {
     setState(() {
       carregandoHistoria = true;
-
-      textoDaHistoria = "";
       carregandoImagem = true;
+      textoDaHistoria = "";
     });
 
     try {
@@ -47,7 +48,21 @@ class _TeladahistoriaState extends State<Teladahistoria> {
 
       gemini.info(model: 'gemini-2.5-flash').then((info) => print(info));
 
-      String prompt = '''
+      String prompt =
+          (widget.historiapadraoTexto != null &&
+                  widget.historiapadraoTexto!.isNotEmpty)
+              ? '''
+Crie uma história para uma criança de nome ${widget.doc?["nome"]}, com idade de ${widget.doc?["idade"]} e autismo de nível ${widget.doc?["nivel_TEA"]}. 
+Essa criança possui comunicação ${widget.doc?["comunicacao"]}, está no ano escolar ${widget.doc?["ano_escolar"]}, e tem como hiperfoco ${widget.doc?["hiperfoco"]}.
+A história deve dar ênfase nesssas preferências : ${widget.historiapadraoTexto}.
+A história não deve conter: ${widget.doc?["nao_deve_ter_na_historia"]}.
+Personagens secundários: ${widget.doc?["conjuge_nomes"]} e ${widget.doc?["amigos_nomes"]}.
+A duração da história deve ser de:
+- 1 a 2 páginas se nível TEA for 3,
+- 3 a 4 páginas para nível 2,
+- 5 páginas para nível 1.
+'''
+              : '''
 Crie uma história para uma criança de nome ${widget.doc?["nome"]}, com idade de ${widget.doc?["idade"]} e autismo de nível ${widget.doc?["nivel_TEA"]}. 
 Essa criança possui comunicação ${widget.doc?["comunicacao"]}, está no ano escolar ${widget.doc?["ano_escolar"]}, e tem como hiperfoco ${widget.doc?["hiperfoco"]}.
 A história deve conter: ${widget.doc?["deve_ter_na_historia"]}.
@@ -61,8 +76,10 @@ A duração da história deve ser de:
 
       final value = await Gemini.instance.prompt(
         parts: [Part.text(prompt)],
-        generationConfig: GenerationConfig(maxOutputTokens: 100),
+
+        generationConfig: GenerationConfig(maxOutputTokens: 500),
       );
+
       if (value?.output != null) {
         setState(() {
           textoDaHistoria = value!.output!;
@@ -85,6 +102,22 @@ A duração da história deve ser de:
   }
 
   gerarImagens() async {
+    setState(() {
+      carregandoImagem = true;
+    });
+    final gemini = Gemini.instance;
+    final promptParaImagem =
+        "Com base na seguinte história: '${textoDaHistoria.toString()}', gere um resumo detalhado contendo o começo,meio e fim da história.Esse resumo deve ter no máximo 500 caracteres. ";
+
+    final DescricaoImagem = await gemini.prompt(
+      parts: [Part.text(promptParaImagem)],
+    );
+
+    final descricaoImagem = DescricaoImagem?.output;
+    print(descricaoImagem);
+    if (descricaoImagem == null || descricaoImagem.isEmpty) {
+      print('Não foi possível gerar a descrição para a imagem.');
+    }
     final apiKey = dotenv.env["chave_OpenAI_imagem"];
 
     final uri = Uri.parse("https://api.openai.com/v1/images/generations");
@@ -93,24 +126,10 @@ A duração da história deve ser de:
       "Authorization": "Bearer ${apiKey}",
     };
 
-    int numero_imagens;
-    switch (widget.doc?["nivel_TEA"]) {
-      case "Nível 1":
-        numero_imagens = 4;
-        break;
-      case "Nível 2":
-        numero_imagens = 3;
-        break;
-      case "Nível 3":
-        numero_imagens = 1;
-        break;
-      default:
-        numero_imagens = 2;
-    }
     final body = jsonEncode({
       "model": "dall-e-3",
       "prompt":
-          "Crie uma imagem do naruto  para uma criança de ${widget.doc?["idade"]} anos  de idade e que tem ${widget.doc?["nivel_TEA"]} de autismo.", //colocar prompt
+          "Crie uma imagem em formato de desenho animado, com cores vibrantes e uma atmosfera alegre, com base nesse resumo${descricaoImagem.toString()} .A imagem deve dar ênfase nos personagens e acontecimentos da história e não deve ter direitos autorais.",
       "size": "1024x1024",
       "n": 1,
     });
@@ -122,7 +141,6 @@ A duração da história deve ser de:
         final responseData = jsonDecode(response.body);
 
         setState(() {
-          carregandoImagem = false;
           imagemUrl = responseData["data"][0]["url"];
         });
       } else {
@@ -133,11 +151,15 @@ A duração da história deve ser de:
     } catch (e) {
       print("Erro: $e");
     }
+    setState(() {
+      carregandoImagem = false;
+    });
   }
 
   @override
   void initState() {
     super.initState();
+
     final apiKey = dotenv.env["chave_google_texto"];
 
     if (apiKey != null && apiKey.isNotEmpty) {
@@ -152,14 +174,18 @@ A duração da história deve ser de:
     }
     if (widget.historiadoc != null) {
       textoDaHistoria = widget.historiadoc?["texto"];
+
+      imagemUrl = widget.historiadoc?["urlimagem"];
+      print(imagemUrl);
     }
-    if (widget.doc != null) {
+    if (widget.doc != null && widget.historiapadraoTexto == null) {
       gerarhistoria();
     }
 
     if (widget.historiapadraoTexto != null) {
-      gerarhistoria();
-      //  gerarImagens();
+      gerarhistoria().then((_) {
+        gerarImagens();
+      });
     }
   }
 
@@ -184,11 +210,36 @@ A duração da história deve ser de:
         padding: const EdgeInsets.all(20.0),
         child:
             carregandoHistoria
-                ? Center(
-                  child: const CircularProgressIndicator(color: Colors.white),
-                )
+                ? Center(child: CircularProgressIndicator(color: Colors.white))
                 : Column(
                   children: [
+                    widget.historiapadraoTexto != null || imagemUrl != null
+                        ? carregandoImagem
+                            ? Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                            : Image.network(
+                              imagemUrl!,
+                              fit: BoxFit.cover,
+                              loadingBuilder: (
+                                context,
+                                child,
+                                loadingProgress,
+                              ) {
+                                if (carregandoImagem == false) {
+                                  return child;
+                                }
+                                return Center(
+                                  child: CircularProgressIndicator(
+                                    color: Colors.white,
+                                  ),
+                                );
+                              },
+                            )
+                        : Padding(padding: EdgeInsets.only(top: 20)),
+                    Padding(padding: EdgeInsets.only(top: 20)),
                     Text(
                       textoDaHistoria,
                       textAlign: TextAlign.center,
@@ -198,23 +249,6 @@ A duração da história deve ser de:
                       ), //texto da história
                     ),
                     Padding(padding: EdgeInsets.only(top: 20)),
-                    if (imagemUrl != null)
-                      Image.network(
-                        imagemUrl!,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (context, child, loadingProgress) {
-                          if (carregandoImagem == false) {
-                            return child;
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.white,
-                            ),
-                          );
-                        },
-                      )
-                    else
-                      Container(),
                   ],
                 ),
       ),
@@ -251,21 +285,34 @@ A duração da história deve ser de:
                                       setState(() {
                                         salvandohistoria = true;
                                       });
-                                      HistoriaModeloReal historiamodel =
-                                          HistoriaModeloReal(
-                                            idhistoria: "",
-                                            idquestionario: widget.doc!.id,
-                                            texto: textoDaHistoria,
-                                            data: DateTime.now(),
-                                          );
                                       HistoriaService historiaService =
                                           HistoriaService();
+                                      final file = await historiaService
+                                          .baixarImagemDaUrl(imagemUrl!);
+                                      HistoriaModeloReal
+                                      historiamodel = HistoriaModeloReal(
+                                        idhistoria: "",
+                                        idquestionario: widget.doc!.id,
+                                        texto: textoDaHistoria,
+                                        data: DateTime.now(),
+                                        urlimagem:
+                                            widget.historiapadraoTexto != null
+                                                ? await historiaService
+                                                    .uploadImagemParaStorage(
+                                                      file,
+                                                      widget.doc!.id,
+                                                    )
+                                                : null,
+                                      );
+
                                       bool sucesso;
+
                                       sucesso = await historiaService
                                           .cadastrarHistoria(
                                             historiamodel: historiamodel,
                                             context: context,
                                           );
+
                                       if (sucesso) {
                                         setState(() {
                                           salvandohistoria = false;
@@ -303,7 +350,7 @@ A duração da história deve ser de:
                                   ),
                                 ),
                                 Text(
-                                  "Salvar História",
+                                  salvandohistoria ? "..." : "Salvar História",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -333,6 +380,7 @@ A duração da história deve ser de:
                       Pdf_servico pdf_servico = Pdf_servico();
                       Future<String> caminho = pdf_servico.generateAndSavePdf(
                         texto: textoDaHistoria,
+                        url_imagem: imagemUrl,
                       );
                       pdf_servico.baixarPDF(await caminho);
                     },

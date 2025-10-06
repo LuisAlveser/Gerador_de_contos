@@ -100,7 +100,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(167, 10, 134, 235),
+      color: const Color.fromARGB(167, 234, 235, 236),
 
       child: Form(
         key: widget.formKey,
@@ -116,7 +116,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                     "Qual o gênero dele/ dela?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -131,14 +131,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Masculino",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Genero[0],
                           groupValue: selecionadoGenero,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoGenero = value.toString();
@@ -155,14 +155,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Feminino",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Genero[1],
                           groupValue: selecionadoGenero,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoGenero = value.toString();
@@ -178,14 +178,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Prefiro não responder",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Genero[2],
                           groupValue: selecionadoGenero,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoGenero = value.toString();
@@ -200,14 +200,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Ele/ ela é",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -222,14 +222,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Verbal",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Verbal[0],
                           groupValue: selecionadoVerbo,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoVerbo = value.toString();
@@ -245,14 +245,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Não verbal",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Verbal[1],
                           groupValue: selecionadoVerbo,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoVerbo = value.toString();
@@ -267,14 +267,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Prefiro não responder",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Verbal[2],
                           groupValue: selecionadoVerbo,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoVerbo = value.toString();
@@ -289,14 +289,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Não sei informar",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: Verbal[3],
                           groupValue: selecionadoVerbo,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoVerbo = value.toString();
@@ -310,14 +310,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Como são as preferências dele/ dela por eletrônicos?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -332,14 +332,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Assistir vídeos",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EletronicosAtividade[0],
                           groupValue: selecionadoEletronico,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEletronico = value.toString();
@@ -356,14 +356,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Usar joguinhos",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EletronicosAtividade[1],
                           groupValue: selecionadoEletronico,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEletronico = value.toString();
@@ -379,14 +379,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Escutar músicas",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EletronicosAtividade[2],
                           groupValue: selecionadoEletronico,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEletronico = value.toString();
@@ -401,14 +401,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Em qual etapa da Educação Básica ele/ela está:",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -423,14 +423,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Pré-escola",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[0],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -447,7 +447,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "1º ano do Ensino Fundamental",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
@@ -469,14 +469,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "2º ano do Ensino Fundamental",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[2],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -491,14 +491,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "3º ano do Ensino Fundamental",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[3],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -513,14 +513,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "4º ano do Ensino Fundamental",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[4],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -535,14 +535,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "5º ao 9º ano do Ensino Fundamental",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[5],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -557,14 +557,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Não está no Ensino Fundamental",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[6],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -579,14 +579,14 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                           "Prefiro não responder",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: EtapaEducacaoBasica[7],
                           groupValue: selecionadoEtapaEducacaoBasica,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoEtapaEducacaoBasica = value.toString();
@@ -600,7 +600,7 @@ class _Pagina2FormCriancaState extends State<Pagina2FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
               ],
             ),
           ),

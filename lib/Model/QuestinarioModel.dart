@@ -3,7 +3,7 @@ class QuestionarioModel {
   String idresponsavel;
   String nome;
   String apelido;
-  String  idade;
+  String idade;
   String usaOculos;
   String diagnosticoTEA;
   String nivelTEA;
@@ -35,7 +35,6 @@ class QuestionarioModel {
   String animalEstimacaoNome;
   String hiperfoco;
 
-  
   QuestionarioModel({
     required this.idquestionario,
     required this.idresponsavel,
@@ -76,50 +75,49 @@ class QuestionarioModel {
 
   factory QuestionarioModel.fromMap(Map<String, dynamic> map, String id) {
     return QuestionarioModel(
-      idquestionario:map ['idquestionario'] ,
-       idresponsavel: map['idresponsavel'],
-      nome:  map ['nome'] ,
-      apelido: map['apelido'] ,
-      idade: map['idade']  ,
-      usaOculos: map['usa_oculos'] ,
-      diagnosticoTEA:map ['diagnostico_TEA'] ,
-      nivelTEA: map['nivel_TEA'] ,
-      genero: map['genero'] ,
-      comunicacao:map ['comunicacao'] ,
-      tecnologiaQueGosta:map ['tecnologia_que_gosta'],
-      anoEscolar: map['ano_escolar'] ,
-      acompanhamentoProfissinal:map ['acompanhamento_profissinal'],
-      relacaocomLivros:map ['relacao_com_livros'] ,
-      tecnologiasUsadasComFrequencia:
-         map ['tecnologias_usados_com_frequencia'] ,
-      caracteristicaBrinquedo:map ['caracteristica_brinquedo'],
-      corFavorita:map ['cor_favorita'] ,
-      veiculosPreferidos:map['veiculos_preferidos'] ,
-      alimentosNome:map ['alimentos_nome'] ,
-      atividadePreferida:map ['atividade_preferida'] ,
+      idquestionario: map['idquestionario'],
+      idresponsavel: map['idresponsavel'],
+      nome: map['nome'],
+      apelido: map['apelido'],
+      idade: map['idade'],
+      usaOculos: map['usa_oculos'],
+      diagnosticoTEA: map['diagnostico_TEA'],
+      nivelTEA: map['nivel_TEA'],
+      genero: map['genero'],
+      comunicacao: map['comunicacao'],
+      tecnologiaQueGosta: map['tecnologia_que_gosta'],
+      anoEscolar: map['ano_escolar'],
+      acompanhamentoProfissinal: map['acompanhamento_profissinal'],
+      relacaocomLivros: map['relacao_com_livros'],
+      tecnologiasUsadasComFrequencia: map['tecnologias_usados_com_frequencia'],
+      caracteristicaBrinquedo: map['caracteristica_brinquedo'],
+      corFavorita: map['cor_favorita'],
+      veiculosPreferidos: map['veiculos_preferidos'],
+      alimentosNome: map['alimentos_nome'],
+      atividadePreferida: map['atividade_preferida'],
       movimentoRealizadoComFrequencia:
-         map ['movimento_realizado_com_frequencia'] ,
-      brinquedoNome:map ['brinquedo_nome'] ,
-      coisasPreferidas:map ['coisas_preferidas'] ,
+          map['movimento_realizado_com_frequencia'],
+      brinquedoNome: map['brinquedo_nome'],
+      coisasPreferidas: map['coisas_preferidas'],
       acessoriosPreferidos: map['acessorios_preferidos'],
-      animaisPreferidos:map ['animais_preferidos'],
-      deveTerNaHistoria: map['deve_ter_na_historia'] ,
-      naoDeveTernaHistoria: map['nao_deve_ter_na_historia'] ,
-      parentesco:map ['parentesco'] ,
-      processoDeAlfabetizacao:map ['processo_de_alfabetizacao'] ,
-      conjugeNomes:map ['conjuge_nomes'] ,
-      amigosNomes:map ['amigos_nomes'] ,
-      atividadeFavorita:map ['atividade_favorita'] ,
-      atividadeNaoGosta:map ['atividade_nao_gosta'] ,
-      animalEstimacaoNome:map ['animal_estimacao_nome'],
-      hiperfoco: map['hiperfoco'] 
+      animaisPreferidos: map['animais_preferidos'],
+      deveTerNaHistoria: map['deve_ter_na_historia'],
+      naoDeveTernaHistoria: map['nao_deve_ter_na_historia'],
+      parentesco: map['parentesco'],
+      processoDeAlfabetizacao: map['processo_de_alfabetizacao'],
+      conjugeNomes: map['conjuge_nomes'],
+      amigosNomes: map['amigos_nomes'],
+      atividadeFavorita: map['atividade_favorita'],
+      atividadeNaoGosta: map['atividade_nao_gosta'],
+      animalEstimacaoNome: map['animal_estimacao_nome'],
+      hiperfoco: map['hiperfoco'],
     );
   }
 
-   Map<String, dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
       'idquestionario': idquestionario,
-      'idresponsavel':idresponsavel,
+      'idresponsavel': idresponsavel,
       'nome': nome,
       'apelido': apelido,
       'idade': idade,

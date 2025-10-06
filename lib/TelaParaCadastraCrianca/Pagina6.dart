@@ -120,7 +120,7 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(167, 10, 134, 235),
+      color: const Color.fromARGB(167, 234, 235, 236),
       child: SingleChildScrollView(
         child: Form(
           key: widget.formKey,
@@ -276,7 +276,7 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                   "Parentesco com a criança",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -291,14 +291,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Pai/ Mãe",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: Parentesco[0],
                         groupValue: selecionadoParentesco,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoParentesco = value.toString();
@@ -315,14 +315,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Avô/ Avó",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: Parentesco[1],
                         groupValue: selecionadoParentesco,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoParentesco = value.toString();
@@ -338,14 +338,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Irmão/ Irmã",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: Parentesco[2],
                         groupValue: selecionadoParentesco,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoParentesco = value.toString();
@@ -361,14 +361,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Tio/ Tia",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: Parentesco[3],
                         groupValue: selecionadoParentesco,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoParentesco = value.toString();
@@ -384,14 +384,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Outro",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: Parentesco[4],
                         groupValue: selecionadoParentesco,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoParentesco = value.toString();
@@ -407,14 +407,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Prefiro não responder",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: Parentesco[5],
                         groupValue: selecionadoParentesco,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoParentesco = value.toString();
@@ -429,14 +429,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                 ),
               ),
 
-              Divider(color: Colors.white, thickness: 2.0),
+              Divider(color: Colors.black, thickness: 2.0),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Text(
                   "Ele/ ela está em processo de alfabetização?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -451,14 +451,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Sim",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ProcessoDeALFAlfdetizacao[0],
                         groupValue: selecionadoProcessoAlf,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoProcessoAlf = value.toString();
@@ -475,14 +475,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Não",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ProcessoDeALFAlfdetizacao[1],
                         groupValue: selecionadoProcessoAlf,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoProcessoAlf = value.toString();
@@ -498,7 +498,7 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Não sei informar",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
@@ -521,14 +521,14 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                         "Prefiro não responder",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ProcessoDeALFAlfdetizacao[3],
                         groupValue: selecionadoProcessoAlf,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoProcessoAlf = value.toString();
@@ -543,7 +543,7 @@ class _Pagina6FormCriancaState extends State<Pagina6FormCrianca> {
                 ),
               ),
 
-              Divider(color: Colors.white, thickness: 2.0),
+              Divider(color: Colors.black, thickness: 2.0),
             ],
           ),
         ),

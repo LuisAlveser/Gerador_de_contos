@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating/flutter_rating.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
-
-import 'package:tcc/Model/HistoriaModelo.dart';
 
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
 import 'package:tcc/Telas/TelaDaHistoria.dart';
@@ -34,12 +35,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
-      backgroundColor: const Color.fromARGB(167, 10, 134, 235),
+      backgroundColor: const Color.fromARGB(167, 239, 241, 243),
       appBar: AppBar(
         title: Text(
           "Crianças Cadastradas",
           style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
+        backgroundColor: Color.fromARGB(167, 10, 134, 235),
         centerTitle: true,
         automaticallyImplyLeading: false,
         leading: Builder(
@@ -175,6 +177,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                               Text("Gênero: ${doc["genero"]}"),
                             ],
                           ),
+                          SizedBox(height: 6),
+                          Row(
+                            children: [
+                              Icon(Icons.diversity_1, size: 20),
+                              SizedBox(width: 6),
+                              Text("Nível de Autismo: ${doc["nivel_TEA"]}"),
+                            ],
+                          ),
                           SizedBox(height: 12),
                           Align(
                             alignment: Alignment.centerRight,
@@ -222,7 +232,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                   style: TextStyle(
                                                     fontSize: 20,
                                                     fontWeight: FontWeight.bold,
-                                                    color: Colors.white,
+                                                    color: Colors.black,
                                                   ),
                                                 ),
 
@@ -254,12 +264,12 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: Colors.white,
+                                                            color: Colors.black,
                                                           ),
                                                         ),
                                                       ),
                                                       Divider(
-                                                        color: Colors.white,
+                                                        color: Colors.black,
                                                         thickness: 2.0,
                                                       ),
                                                       Padding(
@@ -281,12 +291,12 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             fontSize: 15,
                                                             fontWeight:
                                                                 FontWeight.bold,
-                                                            color: Colors.white,
+                                                            color: Colors.black,
                                                           ),
                                                         ),
                                                       ),
                                                       Divider(
-                                                        color: Colors.white,
+                                                        color: Colors.black,
                                                         thickness: 2.0,
                                                       ),
                                                       Padding(
@@ -313,7 +323,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                                           .bold,
                                                                   color:
                                                                       Colors
-                                                                          .white,
+                                                                          .black,
                                                                 ),
                                                               ),
                                                               Padding(
@@ -466,13 +476,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       ),
       //crianças cadastradas
       drawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 25, 72, 137),
+        backgroundColor: Color.fromARGB(167, 10, 134, 235),
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
             Container(
               padding: EdgeInsets.only(top: 50),
-              color: Color.fromARGB(255, 25, 72, 137),
+              color: Color.fromARGB(167, 10, 134, 235),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -481,19 +491,17 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ],
               ),
             ),
 
-            Divider(color: Colors.white, thickness: 2),
+            Divider(color: Colors.black, thickness: 2),
 
             FutureBuilder<List<QueryDocumentSnapshot>>(
-              future:
-                  _historiaService
-                      .getHistoriasPorQuestionarios(), //passar os questionarios ids
+              future: _historiaService.getHistoriasPorQuestionarios(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(
@@ -514,7 +522,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     final dochistoria = docs[index];
                     final timestamp = dochistoria["data"];
                     final DateTime data = timestamp.toDate();
-
+                    double _NotaLocal = (dochistoria["nota"] as num).toDouble();
                     return Card(
                       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                       elevation: 4,
@@ -558,14 +566,38 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                         action: SnackBarAction(
                                           label: "Remover",
                                           textColor: Colors.white,
-                                          onPressed: () {
-                                            _historiaService.excluirHistoriaPorId(
-                                              idHistoria:
-                                                  dochistoria["id_historia"],
-                                              idquestionario:
-                                                  dochistoria["id_questionario"],
-                                            );
-                                            setState(() {});
+                                          onPressed: () async {
+                                            if (dochistoria["urlimagem"] !=
+                                                null) {
+                                              _historiaService
+                                                  .excluirImagemDoStorage(
+                                                    dochistoria["urlimagem"],
+                                                  )
+                                                  .then((_) {
+                                                    _historiaService
+                                                        .excluirImagemDoStorage(
+                                                          dochistoria["urlimagem2"],
+                                                        )
+                                                        .then((_) {
+                                                          _historiaService
+                                                              .excluirHistoriaPorId(
+                                                                idHistoria:
+                                                                    dochistoria["id_historia"],
+                                                                idquestionario:
+                                                                    dochistoria["id_questionario"],
+                                                              );
+                                                          setState(() {});
+                                                        });
+                                                  });
+                                            } else {
+                                              _historiaService.excluirHistoriaPorId(
+                                                idHistoria:
+                                                    dochistoria["id_historia"],
+                                                idquestionario:
+                                                    dochistoria["id_questionario"],
+                                              );
+                                              setState(() {});
+                                            }
                                           },
                                         ),
                                       ),
@@ -575,6 +607,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                 ),
                               ],
                             ),
+
                             SizedBox(height: 10),
                             Row(
                               children: [
@@ -638,6 +671,52 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                 ),
                               ],
                             ),
+                            Text(
+                              "Avalie nossa História:",
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 10.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Padding(padding: EdgeInsets.only(top: 2)),
+                            StatefulBuilder(
+                              builder:
+                                  (
+                                    BuildContext context,
+                                 
+                                    StateSetter setStateInterno,
+                                  ) => StarRating(
+                                    rating: _NotaLocal,
+                                    filledIcon: Icons.favorite,
+                                    halfFilledIcon: Icons.favorite_border,
+                                    emptyIcon: Icons.favorite_outline,
+                                    color: Colors.blue,
+                                    borderColor: Colors.grey,
+                                    onRatingChanged: (newRating) {
+                                    
+                                      setStateInterno(() {
+                                       
+
+                                       
+                                        _NotaLocal = newRating;
+
+                                        print(newRating);
+                                      });
+
+                                      _historiaService.atualizarNota(
+                                        idhistoria: dochistoria["id_historia"],
+                                        idquestionario:
+                                            dochistoria["id_questionario"],
+                                        nota: newRating,
+                                        context: context,
+                                      );
+                                      setState(() {});
+
+                                     
+                                    },
+                                  ),
+                            ),
                           ],
                         ),
                       ),
@@ -650,14 +729,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
         ),
       ),
       endDrawer: Drawer(
-        backgroundColor: Color.fromARGB(255, 25, 72, 137),
+        backgroundColor: Color.fromARGB(167, 10, 134, 235),
         child: ListView(
           children: [
             FutureBuilder(
               future: _autenticacaoResponsavel.mostrarResponsavel(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator(color: Colors.white);
+                  return CircularProgressIndicator(color: Colors.black);
                 }
 
                 if (snapshot.hasError) {
@@ -677,7 +756,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                           SizedBox(width: 10),
                           Icon(
                             Icons.supervised_user_circle,
-                            color: Colors.white,
+                            color: Colors.black,
                           ),
                           SizedBox(width: 10),
                           Text(
@@ -685,21 +764,21 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Colors.white,
+                              color: Colors.black,
                             ),
                           ),
                         ],
                       ),
-                      Divider(thickness: 2, color: Colors.white),
+                      Divider(thickness: 2, color: Colors.black),
                       SizedBox(height: 20),
                       Row(
                         children: [
                           SizedBox(width: 10),
-                          Icon(Icons.email, color: Colors.white),
+                          Icon(Icons.email, color: Colors.black),
                           SizedBox(width: 10),
                           Text(
                             '${data["email"]}',
-                            style: TextStyle(fontSize: 15, color: Colors.white),
+                            style: TextStyle(fontSize: 15, color: Colors.black),
                           ),
                         ],
                       ),
@@ -707,11 +786,11 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                       Row(
                         children: [
                           SizedBox(width: 10),
-                          Icon(Icons.phone, color: Colors.white),
+                          Icon(Icons.phone, color: Colors.black),
                           SizedBox(width: 10),
                           Text(
                             '${data["telefone"]}',
-                            style: TextStyle(fontSize: 15, color: Colors.white),
+                            style: TextStyle(fontSize: 15, color: Colors.black),
                           ),
                         ],
                       ),
@@ -746,7 +825,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   title: Text(
                                     "Informações do Responsável",
                                     style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.black,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20,
                                     ),
@@ -935,6 +1014,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
           topRight: Radius.circular(15.0),
         ),
         child: BottomNavigationBar(
+          backgroundColor: Color.fromARGB(167, 10, 134, 235),
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
               icon: IconButton(

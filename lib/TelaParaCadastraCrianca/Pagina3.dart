@@ -101,7 +101,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(167, 10, 134, 235),
+      color: const Color.fromARGB(167, 234, 235, 236),
       child: Form(
         key: widget.formKey,
         child: SingleChildScrollView(
@@ -115,7 +115,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                     "Ele/Ela tem acompanhamento de algum profissional?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -130,14 +130,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Educador especial",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[0],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
 
                           onChanged: (value) {
                             setState(() {
@@ -155,14 +155,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Fonoaudiólogo(a)",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[1],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -178,14 +178,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Nutricionista",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[2],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
 
                           onChanged: (value) {
                             setState(() {
@@ -202,14 +202,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Psicólogo(a)",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[3],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -225,14 +225,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Psicopedagogo",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[4],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -248,14 +248,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Terapeuta ocupacional",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[5],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -271,14 +271,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Profissional da escola",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[6],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -295,14 +295,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Sem acompanhamento.",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[7],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -318,14 +318,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Prefiro não responder",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: AcompanhamentoProfissional[8],
                           groupValue: selecionadoAcompanhamento,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoAcompanhamento = value.toString();
@@ -340,14 +340,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Qual a relação dele/dela com livros de histórias:",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -362,14 +362,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Gosta de folhar",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[0],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -386,14 +386,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Gosta de riscar",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[1],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -409,14 +409,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Gosta de ler histórias",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[2],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -432,14 +432,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Gosta que leiam para ele/ela as histórias",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[3],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -455,14 +455,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Gosta de ver as imagens / fotos",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[4],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -478,14 +478,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Não demostra interesse por livros",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[5],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -501,14 +501,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Não sei informar",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[6],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -524,14 +524,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Prefiro não responder",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComLivros[7],
                           groupValue: selecionadoRelacaoLivros,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoLivros = value.toString();
@@ -546,14 +546,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
                 Padding(
                   padding: const EdgeInsets.all(2.0),
                   child: Text(
                     "Tecnologias, com que freqüência ele/ ela utiliza?",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                      color: Colors.black,
                     ),
                   ),
                 ),
@@ -568,14 +568,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Celular",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComTecnologia[0],
                           groupValue: selecionadoRelacaoComTecnologia,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoComTecnologia =
@@ -593,14 +593,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Televisão",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComTecnologia[1],
                           groupValue: selecionadoRelacaoComTecnologia,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoComTecnologia =
@@ -617,14 +617,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Tablet",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComTecnologia[2],
                           groupValue: selecionadoRelacaoComTecnologia,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoComTecnologia =
@@ -641,14 +641,14 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                           "Computador",
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 13,
                           ),
                         ),
                         leading: Radio(
                           value: RelacaoComTecnologia[3],
                           groupValue: selecionadoRelacaoComTecnologia,
-                          activeColor: Colors.white,
+                          activeColor: Colors.black,
                           onChanged: (value) {
                             setState(() {
                               selecionadoRelacaoComTecnologia =
@@ -664,7 +664,7 @@ class _Pagina3FormCriancaState extends State<Pagina3FormCrianca> {
                   ),
                 ),
 
-                Divider(color: Colors.white, thickness: 2.0),
+                Divider(color: Colors.black, thickness: 2.0),
               ],
             ),
           ),

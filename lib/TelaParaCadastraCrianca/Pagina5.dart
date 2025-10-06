@@ -113,7 +113,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(167, 10, 134, 235),
+      color: const Color.fromARGB(167, 234, 235, 236),
       child: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Form(
@@ -126,7 +126,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                   "Com relação a alimentos, como são as preferências dele/ dela?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -141,14 +141,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Arroz",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[0],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -165,14 +165,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Feijão",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[1],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -188,14 +188,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Batata Frita",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[2],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -211,14 +211,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Carnes e aves",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[3],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -234,14 +234,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Macarrão",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[4],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -258,14 +258,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Frutas",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[5],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -281,14 +281,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Legumes",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[6],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -304,14 +304,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Verduras",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[7],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -327,14 +327,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Sorvete",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[8],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -350,14 +350,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Bolachas",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[9],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -373,14 +373,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Salgadinhos",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[10],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -396,14 +396,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Pipoca",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[11],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -419,14 +419,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Iogurte",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[12],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -442,14 +442,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Lanches (pizza, hamburger e etc)",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[13],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -465,14 +465,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Outro alimento",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: ComidasPreferidas[14],
                         groupValue: selecionadaComidaFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaComidaFavorita = value.toString();
@@ -487,14 +487,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                 ),
               ),
 
-              Divider(color: Colors.white, thickness: 2.0),
+              Divider(color: Colors.black, thickness: 2.0),
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Text(
                   "Com relação as seguintes atividades, quais as preferências dele/ dela?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -509,14 +509,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Girar",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[0],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -533,14 +533,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Balançar",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[1],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -556,14 +556,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Lutar",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[2],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -579,14 +579,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Correr",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[3],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -602,14 +602,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Brincar de faz-de-conta",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[4],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -625,14 +625,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Que alguém faça cócegas",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[5],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -648,14 +648,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Que alguém leia",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[6],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -671,14 +671,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Que alguém cante",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[7],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -694,14 +694,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Que alguém conte história",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: AtividadesFavoritas[8],
                         groupValue: selecionadaAtividadeFavorita,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadaAtividadeFavorita = value.toString();
@@ -716,14 +716,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                 ),
               ),
 
-              Divider(color: Colors.white, thickness: 2.0),
+              Divider(color: Colors.black, thickness: 2.0),
               Padding(
                 padding: const EdgeInsets.all(2.0),
                 child: Text(
                   "Quais  movimentos repetitivos ele/ela realiza com frequência?",
                   style: TextStyle(
                     fontWeight: FontWeight.bold,
-                    color: Colors.white,
+                    color: Colors.black,
                   ),
                 ),
               ),
@@ -738,14 +738,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Balançar o corpo (para frente ou para trás)",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[0],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -762,14 +762,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Balançar as mãos",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[1],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -785,14 +785,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Andar nas pontas dos pés",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[2],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -808,14 +808,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Bater os pés no chão ou em algum objeto próximo",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[3],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -831,14 +831,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Cruzar e descruzar as pernas muitas vezes",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[4],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -854,14 +854,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Pular com frequência",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[5],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -877,14 +877,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Correr com frequência",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[6],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -900,14 +900,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Movimentar os dedos na frente dos olhos",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[7],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -923,14 +923,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Fazer sons repetitivos",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[8],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -946,14 +946,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Girar objetos ou girar em volta do próprio corpo",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[9],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -969,14 +969,14 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                         "Prefiro não responder",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontSize: 13,
                         ),
                       ),
                       leading: Radio(
                         value: MovimentosFavoritos[10],
                         groupValue: selecionadoMovimentoFavoritos,
-                        activeColor: Colors.white,
+                        activeColor: Colors.black,
                         onChanged: (value) {
                           setState(() {
                             selecionadoMovimentoFavoritos = value.toString();
@@ -991,7 +991,7 @@ class _Pagina5FormCriancaState extends State<Pagina5FormCrianca> {
                 ),
               ),
 
-              Divider(color: Colors.white, thickness: 2.0),
+              Divider(color: Colors.black, thickness: 2.0),
             ],
           ),
         ),

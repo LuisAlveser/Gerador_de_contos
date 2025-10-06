@@ -148,11 +148,12 @@ class HistoriaService {
     }
   }
 
-  Future<String> uploadImagemParaStorage(File imagem, String idHistoria) async {
+  Future<String> uploadImagemParaStorage(File imagem) async {
+    final nomeArquivo = imagem.uri.pathSegments.last;
     final storageRef = FirebaseStorage.instance
         .ref()
         .child('imagens_historias')
-        .child('$idHistoria.jpg');
+        .child(nomeArquivo);
 
     final uploadTask = storageRef.putFile(imagem);
 
@@ -162,25 +163,60 @@ class HistoriaService {
     return urlDownload;
   }
 
-  Future<void> salvarHistoriaComImagemDaUrl(
-  String imageUrl,
-  String idHistoria,
-) async {
+  Future<void> excluirImagemDoStorage(String url) async {
+    try {
+      String fileName = url.split("imagens_historias%2F").last;
+      fileName = fileName.split("?").first;
+
+      final storageRef = FirebaseStorage.instance
+          .ref()
+          .child('imagens_historias')
+          .child(fileName);
+
+      await storageRef.delete();
+    } on FirebaseException catch (e) {
+      if (e.code == 'object-not-found') {
+        print('Erro: A imagem não foi encontrada no caminho especificado.');
+      } else {
+        print('Erro ao excluir a imagem: $e');
+      }
+    } catch (e) {
+      print('Erro inesperado: $e');
+    }
+  }
+
+  Future<void> atualizarNota({
+  required String idhistoria,
+  required String idquestionario,
+  required double nota,
+  required BuildContext context,
+}) async {
+  User? currentUser = _auth.currentUser;
+
+  if (currentUser == null) {
+    print("Usuário não autenticado. Não é possível atualizar a nota.");
+    return;
+  }
+
   try {
-    
-    final imagemFile = await baixarImagemDaUrl(imageUrl);
-
-    
-    final urlImagem = await uploadImagemParaStorage(imagemFile, idHistoria);
-
-    
-    await FirebaseFirestore.instance.collection("historias").doc(idHistoria).update({
-      "imagemUrl": urlImagem,
+   
+    await _firestore
+        .collection('responsaveis')
+        .doc(currentUser.uid)
+        .collection('questionario')
+        .doc(idquestionario)
+        .collection('historias')
+        .doc(idhistoria)
+        .update({
+      "nota": nota,
     });
+    
+    print("Nota da história $idhistoria atualizada para $nota com sucesso!");
 
-    print(" História atualizada com a imagem!");
+  } on FirebaseException catch (e) {
+    print("Erro do Firebase ao atualizar nota: ${e.code} - ${e.message}");
   } catch (e) {
-    print(' Erro no fluxo de salvamento: $e');
+    print("Erro inesperado ao atualizar nota: $e");
   }
 }
 }

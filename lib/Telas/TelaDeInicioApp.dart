@@ -33,7 +33,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(167, 10, 134, 235),
+      backgroundColor: Color.fromARGB(167, 10, 134, 235),
       body: Stack(
         children: [
           Padding(
@@ -53,7 +53,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                         (temConta) ? "Iniciar Jornada" : "Bem-vindo de Volta!",
                         style: TextStyle(
                           fontSize: 40,
-                          color: Colors.white,
+                          color: Colors.black,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -305,7 +305,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                               ? "Já tem uma conta ? Entre aqui ! "
                               : "Não tem conta? Cadastre-se aqui !",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
@@ -351,7 +351,7 @@ class _TelaDeInicioState extends State<TelaDeInicio> {
                               ? ""
                               : "Esqueceu sua senha ? Clique aqui !",
                           style: TextStyle(
-                            color: Colors.white,
+                            color: Colors.black,
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),

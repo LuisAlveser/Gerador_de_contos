@@ -214,9 +214,10 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(167, 10, 134, 235),
+      backgroundColor: const Color.fromARGB(167, 236, 238, 240),
       appBar: AppBar(
         centerTitle: true,
+
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
         ),
@@ -226,7 +227,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
 
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(167, 10, 134, 235),
       ),
 
       body: SafeArea(
@@ -248,7 +249,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
           topRight: Radius.circular(15.0),
         ),
         child: Container(
-          color: Colors.white,
+          color: Color.fromARGB(167, 10, 134, 235),
           padding: const EdgeInsets.only(
             left: 10.0,
             right: 10.0,
@@ -463,7 +464,7 @@ class _TelaDeFormularioCriancaState extends State<TelaDeFormularioCrianca> {
                               : _currentPageIndex == 6
                               ? "Cadastrar"
                               : "Proximo",
-                          
+
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,

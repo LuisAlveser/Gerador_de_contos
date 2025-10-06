@@ -1,6 +1,7 @@
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:tcc/Telas/TelaDeInicioApp.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -8,7 +9,10 @@ import 'package:flutter_downloader/flutter_downloader.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await dotenv.load(fileName: ".env");
+  Gemini.init(apiKey: dotenv.env['chave_google_texto']!);
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseAppCheck.instance.activate(
     // You can also use a `ReCaptchaEnterpriseProvider` provider instance as an

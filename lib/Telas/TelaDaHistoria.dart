@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_ai/firebase_ai.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:tcc/Model/HistoriaModeloreal.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
 import 'package:tcc/servicos/Historia_Servico.dart';
@@ -32,21 +32,22 @@ class _TeladahistoriaState extends State<Teladahistoria> {
   bool carregandoHistoria = false;
   bool salvandohistoria = false;
   bool carregandoImagem = false;
-  String? imagemUrl;
-  String? imagemUrl2;
-  String? imagemUrl3;
-  String? imagemUrl4;
+  bool baixandoPDF = true;
+  List<String?> urls = List.filled(2, null);
+
   Future<void> gerarhistoria() async {
     setState(() {
       carregandoHistoria = true;
       carregandoImagem = true;
       textoDaHistoria = "";
+      baixandoPDF = false;
+      salvandohistoria = false;
     });
 
     try {
-      final gemini = Gemini.instance;
-
-      gemini.info(model: 'gemini-2.5-flash').then((info) => print(info));
+      final model = FirebaseAI.googleAI().generativeModel(
+        model: 'gemini-2.5-flash',
+      );
 
       String prompt =
           (widget.historiapadraoTexto != null &&
@@ -61,6 +62,7 @@ A duração da história deve ser de:
 - 1 a 2 páginas se nível TEA for 3,
 - 3 a 4 páginas para nível 2,
 - 5 páginas para nível 1.
+**IMPORTANTE: Não use aspas curvas (“ ” ‘ ’) ou reticências (…); use apenas aspas retas (") e apóstrofos retos (').**
 '''
               : '''
 Crie uma história para uma criança de nome ${widget.doc?["nome"]}, com idade de ${widget.doc?["idade"]} e autismo de nível ${widget.doc?["nivel_TEA"]}. 
@@ -72,17 +74,16 @@ A duração da história deve ser de:
 - 1 a 2 páginas se nível TEA for 3,
 - 3 a 4 páginas para nível 2,
 - 5 páginas para nível 1.
+**IMPORTANTE: Não use aspas curvas (“ ” ‘ ’) ou reticências (…); use apenas aspas retas (") e apóstrofos retos (').**
 ''';
 
-      final value = await Gemini.instance.prompt(
-        parts: [Part.text(prompt)],
+      final contents = [Content.text(prompt)];
 
-        generationConfig: GenerationConfig(maxOutputTokens: 500),
-      );
+      final response = await model.generateContent(contents);
 
-      if (value?.output != null) {
+      if (response.text != null) {
         setState(() {
-          textoDaHistoria = value!.output!;
+          textoDaHistoria = response.text!;
           carregandoHistoria = false;
         });
       } else {
@@ -101,23 +102,11 @@ A duração da história deve ser de:
     }
   }
 
-  gerarImagens() async {
+  gerarImagens(int i, String descricaoImagem) async {
     setState(() {
       carregandoImagem = true;
     });
-    final gemini = Gemini.instance;
-    final promptParaImagem =
-        "Com base na seguinte história: '${textoDaHistoria.toString()}', gere um resumo detalhado contendo o começo,meio e fim da história.Esse resumo deve ter no máximo 500 caracteres. ";
 
-    final DescricaoImagem = await gemini.prompt(
-      parts: [Part.text(promptParaImagem)],
-    );
-
-    final descricaoImagem = DescricaoImagem?.output;
-    print(descricaoImagem);
-    if (descricaoImagem == null || descricaoImagem.isEmpty) {
-      print('Não foi possível gerar a descrição para a imagem.');
-    }
     final apiKey = dotenv.env["chave_OpenAI_imagem"];
 
     final uri = Uri.parse("https://api.openai.com/v1/images/generations");
@@ -129,9 +118,9 @@ A duração da história deve ser de:
     final body = jsonEncode({
       "model": "dall-e-3",
       "prompt":
-          "Crie uma imagem em formato de desenho animado, com cores vibrantes e uma atmosfera alegre, com base nesse resumo${descricaoImagem.toString()} .A imagem deve dar ênfase nos personagens e acontecimentos da história e não deve ter direitos autorais.",
-      "size": "1024x1024",
+          "Crie uma imagem em formato de desenho animado, com cores vibrantes e uma atmosfera alegre, com base nesse resumo${descricaoImagem.toString()} .A imagem  não deve ter direitos autorais.",
       "n": 1,
+      "size": "1024x1024",
     });
 
     try {
@@ -141,7 +130,8 @@ A duração da história deve ser de:
         final responseData = jsonDecode(response.body);
 
         setState(() {
-          imagemUrl = responseData["data"][0]["url"];
+          urls[i] = responseData["data"][0]["url"];
+          print(urls[i]);
         });
       } else {
         print(
@@ -159,11 +149,11 @@ A duração da história deve ser de:
   @override
   void initState() {
     super.initState();
-
+    baixandoPDF = false;
+    salvandohistoria = false;
     final apiKey = dotenv.env["chave_google_texto"];
 
     if (apiKey != null && apiKey.isNotEmpty) {
-      Gemini.init(apiKey: apiKey);
       print(" Gemini inicializado com sucesso!");
     } else {
       print(
@@ -173,18 +163,35 @@ A duração da história deve ser de:
       textoDaHistoria = 'Erro: Chave de API do Gemini não configurada.';
     }
     if (widget.historiadoc != null) {
+      urls[0] = widget.historiadoc?["urlimagem"]; //carrega as imagens salvas
+      urls[1] = widget.historiadoc?["urlimagem2"];
       textoDaHistoria = widget.historiadoc?["texto"];
-
-      imagemUrl = widget.historiadoc?["urlimagem"];
-      print(imagemUrl);
     }
     if (widget.doc != null && widget.historiapadraoTexto == null) {
       gerarhistoria();
     }
 
     if (widget.historiapadraoTexto != null) {
-      gerarhistoria().then((_) {
-        gerarImagens();
+      gerarhistoria().then((_) async {
+        final model = FirebaseAI.googleAI().generativeModel(
+          model: 'gemini-2.5-flash',
+        );
+
+        final promptParaImagem =
+            "Com base na seguinte história: '${textoDaHistoria.toString()}', gere um resumo detalhado contendo o começo,meio e fim da história.Esse resumo deve ter no máximo 1000 caracteres. ";
+
+        final contents = [Content.text(promptParaImagem)];
+
+        final response = await model.generateContent(contents);
+
+        final descricaoImagem = response?.text;
+        print(descricaoImagem);
+        if (descricaoImagem == null || descricaoImagem.isEmpty) {
+          print('Não foi possível gerar a descrição para a imagem.');
+        }
+        for (int i = 0; i < urls.length; i++) {
+          await gerarImagens(i, descricaoImagem.toString());
+        }
       });
     }
   }
@@ -192,7 +199,7 @@ A duração da história deve ser de:
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(167, 10, 134, 235),
+      backgroundColor: const Color.fromARGB(167, 234, 235, 236),
       appBar: AppBar(
         centerTitle: true,
         shape: const RoundedRectangleBorder(
@@ -204,7 +211,7 @@ A duração da história deve ser de:
               : "História  para ${widget.doc?["nome"]}",
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromARGB(167, 10, 134, 235),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
@@ -213,7 +220,7 @@ A duração da história deve ser de:
                 ? Center(child: CircularProgressIndicator(color: Colors.white))
                 : Column(
                   children: [
-                    widget.historiapadraoTexto != null || imagemUrl != null
+                    widget.historiapadraoTexto != null || urls[0] != null
                         ? carregandoImagem
                             ? Center(
                               child: CircularProgressIndicator(
@@ -221,7 +228,7 @@ A duração da história deve ser de:
                               ),
                             )
                             : Image.network(
-                              imagemUrl!,
+                              urls[0]!,
                               fit: BoxFit.cover,
                               loadingBuilder: (
                                 context,
@@ -245,10 +252,26 @@ A duração da história deve ser de:
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 16,
-                        color: Colors.white,
+                        color: Colors.black,
                       ), //texto da história
                     ),
                     Padding(padding: EdgeInsets.only(top: 20)),
+                    widget.historiapadraoTexto != null || urls[1] != null
+                        ? Image.network(
+                          urls[1]!,
+                          fit: BoxFit.cover,
+                          loadingBuilder: (context, child, loadingProgress) {
+                            if (carregandoImagem == false) {
+                              return child;
+                            }
+                            return Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            );
+                          },
+                        )
+                        : const SizedBox.shrink(),
                   ],
                 ),
       ),
@@ -259,7 +282,7 @@ A duração da história deve ser de:
           topRight: Radius.circular(15.0),
         ),
         child: Container(
-          color: Colors.white,
+          color: Color.fromARGB(167, 10, 134, 235),
           padding: const EdgeInsets.only(
             left: 10.0,
             right: 10.0,
@@ -278,59 +301,99 @@ A duração da história deve ser de:
                       widget.historiadoc != null
                           ? null
                           : ElevatedButton(
-                            onPressed:
-                                salvandohistoria
-                                    ? null
-                                    : () async {
-                                      setState(() {
-                                        salvandohistoria = true;
-                                      });
-                                      HistoriaService historiaService =
-                                          HistoriaService();
-                                      final file = await historiaService
-                                          .baixarImagemDaUrl(imagemUrl!);
-                                      HistoriaModeloReal
-                                      historiamodel = HistoriaModeloReal(
-                                        idhistoria: "",
-                                        idquestionario: widget.doc!.id,
-                                        texto: textoDaHistoria,
-                                        data: DateTime.now(),
-                                        urlimagem:
-                                            widget.historiapadraoTexto != null
-                                                ? await historiaService
-                                                    .uploadImagemParaStorage(
-                                                      file,
-                                                      widget.doc!.id,
-                                                    )
-                                                : null,
-                                      );
+                            onPressed: () async {
+                              setState(() {
+                                salvandohistoria = true;
+                              });
+                              if (widget.historiapadraoTexto != null) {
+                                //Historia com imagem
+                                HistoriaService historiaService =
+                                    HistoriaService();
+                                final file = await historiaService
+                                    .baixarImagemDaUrl(urls[0]!);
+                                final file2 = await historiaService
+                                    .baixarImagemDaUrl(urls[1]!);
+                                HistoriaModeloReal historiamodel =
+                                    HistoriaModeloReal(
+                                      idhistoria: "",
+                                      idquestionario: widget.doc!.id,
+                                      texto: textoDaHistoria,
+                                      data: DateTime.now(),
+                                      urlimagem: await historiaService
+                                          .uploadImagemParaStorage(file),
 
-                                      bool sucesso;
+                                      urlimagem2: await historiaService
+                                          .uploadImagemParaStorage(file2),
+                                      nota: 0,
+                                    );
 
-                                      sucesso = await historiaService
-                                          .cadastrarHistoria(
-                                            historiamodel: historiamodel,
-                                            context: context,
-                                          );
+                                bool sucesso;
 
-                                      if (sucesso) {
-                                        setState(() {
-                                          salvandohistoria = false;
-                                        });
-                                        if (widget.doc != null) {
-                                          Navigator.pushAndRemoveUntil(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder:
-                                                  (context) =>
-                                                      const TelaPrincipal(),
-                                            ),
-                                            (Route<dynamic> route) => false,
-                                          );
-                                          setState(() {});
-                                        }
-                                      }
-                                    },
+                                sucesso = await historiaService
+                                    .cadastrarHistoria(
+                                      historiamodel: historiamodel,
+                                      context: context,
+                                    );
+
+                                if (sucesso) {
+                                  setState(() {
+                                    salvandohistoria = false;
+                                  });
+                                  if (widget.doc != null) {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => const TelaPrincipal(),
+                                      ),
+                                      (Route<dynamic> route) => false,
+                                    );
+                                    setState(() {});
+                                  }
+                                }
+                              } else {
+                                //Historia sem imagem
+                                HistoriaService historiaService =
+                                    HistoriaService();
+
+                                HistoriaModeloReal historiamodel =
+                                    HistoriaModeloReal(
+                                      idhistoria: "",
+                                      idquestionario: widget.doc!.id,
+                                      texto: textoDaHistoria,
+                                      data: DateTime.now(),
+                                      urlimagem: null,
+                                      urlimagem2: null,
+
+                                      nota: 0.0,
+                                    );
+
+                                bool sucesso;
+
+                                sucesso = await historiaService
+                                    .cadastrarHistoria(
+                                      historiamodel: historiamodel,
+                                      context: context,
+                                    );
+
+                                if (sucesso) {
+                                  setState(() {
+                                    salvandohistoria = false;
+                                  });
+                                  if (widget.doc != null) {
+                                    Navigator.pushAndRemoveUntil(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => const TelaPrincipal(),
+                                      ),
+                                      (Route<dynamic> route) => false,
+                                    );
+                                    setState(() {});
+                                  }
+                                }
+                              }
+                            },
                             style: ElevatedButton.styleFrom(
                               padding: EdgeInsets.zero,
                               shape: RoundedRectangleBorder(
@@ -350,7 +413,7 @@ A duração da história deve ser de:
                                   ),
                                 ),
                                 Text(
-                                  salvandohistoria ? "..." : "Salvar História",
+                                  salvandohistoria ? "Salvar História" : "...",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,
@@ -376,13 +439,27 @@ A duração da história deve ser de:
                       ),
                     ),
                     onPressed: () async {
+                      setState(() {
+                        baixandoPDF = true;
+                      });
+
                       //baixar pdf
-                      Pdf_servico pdf_servico = Pdf_servico();
-                      Future<String> caminho = pdf_servico.generateAndSavePdf(
-                        texto: textoDaHistoria,
-                        url_imagem: imagemUrl,
-                      );
-                      pdf_servico.baixarPDF(await caminho);
+                      if (widget.historiapadraoTexto != null) {
+                        List<String> urlsImagensValidas =
+                            urls
+                                .whereType<String>()
+                                .where((url) => url.isNotEmpty)
+                                .toList();
+
+                        Pdf_servico pdf_servico = Pdf_servico();
+                        pdf_servico.generateAndSavePdf(
+                          texto: textoDaHistoria,
+                          urlsImagens: urlsImagensValidas,
+                        );
+                      } else {
+                        Pdf_servico pdf_servico = Pdf_servico();
+                        pdf_servico.generateAndSavePdf(texto: textoDaHistoria);
+                      }
                     },
                     child: Stack(
                       alignment: Alignment.center,
@@ -396,8 +473,8 @@ A duração da história deve ser de:
                             width: double.infinity,
                           ),
                         ),
-                        const Text(
-                          "Baixar História",
+                        Text(
+                          baixandoPDF ? "Baixar História" : "...",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,

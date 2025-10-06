@@ -90,7 +90,7 @@ class _Pagina7FormCriancaState extends State<Pagina7FormCrianca> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(167, 10, 134, 235),
+      color: const Color.fromARGB(167, 234, 235, 236),
       child: SingleChildScrollView(
         child: Form(
           key: widget.formKey,

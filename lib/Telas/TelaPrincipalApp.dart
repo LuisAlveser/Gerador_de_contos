@@ -30,7 +30,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
       AutenticacaoResponsavel();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final _formKeyAtualizacaoResponsavel = GlobalKey<FormState>();
-
+  int criancaCadastradas = 0;
+  int historiasSalvas = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,6 +86,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 itemCount: snapshot.data!.docs.length,
                 itemBuilder: (context, index) {
                   DocumentSnapshot doc = snapshot.data!.docs[index];
+
+                  criancaCadastradas = snapshot.data!.docs.length;
 
                   return Card(
                     margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -205,6 +208,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   height: 50,
                                   child: ElevatedButton(
                                     onPressed: () {
+                                      print(criancaCadastradas);
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -513,7 +517,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                 }
 
                 final docs = snapshot.data!;
-
+                historiasSalvas = docs.length;
                 return ListView.builder(
                   itemCount: docs.length,
                   shrinkWrap: true,
@@ -542,7 +546,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     Icon(Icons.menu_book, color: Colors.blue),
                                     SizedBox(width: 8),
                                     Text(
-                                      "Título: ${dochistoria["texto"].toString().substring(2, 25)}..",
+                                      "Título: ${dochistoria["texto"].toString().substring(0, 20)}..",
                                       style: TextStyle(
                                         fontSize: 10,
                                         fontWeight: FontWeight.bold,
@@ -629,6 +633,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     height: 20.0,
                                     child: ElevatedButton(
                                       onPressed: () {
+                                        print(historiasSalvas);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
@@ -684,7 +689,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                               builder:
                                   (
                                     BuildContext context,
-                                 
+
                                     StateSetter setStateInterno,
                                   ) => StarRating(
                                     rating: _NotaLocal,
@@ -694,11 +699,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     color: Colors.blue,
                                     borderColor: Colors.grey,
                                     onRatingChanged: (newRating) {
-                                    
                                       setStateInterno(() {
-                                       
-
-                                       
                                         _NotaLocal = newRating;
 
                                         print(newRating);
@@ -712,8 +713,6 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                         context: context,
                                       );
                                       setState(() {});
-
-                                     
                                     },
                                   ),
                             ),
@@ -996,7 +995,18 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     label: "Sim",
                     textColor: Colors.white,
                     onPressed: () {
-                      //excluir reponsável
+                      if (criancaCadastradas == 0 && historiasSalvas == 0) {
+                        //o responsavel pode excluir a conta
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                              "Para excluir sua conta, você precisa excluir as histórias salvas e os perfis  das crianças ",
+                            ),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     },
                   ),
                 );
@@ -1037,12 +1047,21 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             BottomNavigationBarItem(
               icon: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => TelaDeFormularioCrianca(),
-                    ),
-                  );
+                  if (criancaCadastradas <= 3) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => TelaDeFormularioCrianca(),
+                      ),
+                    );
+                  } else {
+                    SnackBar(
+                      content: Text(
+                        "Você excedeu o número de crianças cadastradas, exclua alguma para poder adicionar uma nova",
+                      ),
+                      backgroundColor: Colors.red,
+                    );
+                  }
                 },
                 icon: Icon(Icons.person_add_alt_outlined),
               ),

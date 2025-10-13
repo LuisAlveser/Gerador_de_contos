@@ -19,16 +19,19 @@ class Pdf_servico {
     final roboto = pw.Font.ttf(await rootBundle.load('assets/Roboto.ttf'));
 
     List<Uint8List> imagensBytes = [];
+
     if (urlsImagens != null && urlsImagens.isNotEmpty) {
+      print('URLs de imagens: ${urlsImagens.length}');
       for (var url in urlsImagens) {
         final response = await http.get(Uri.parse(url));
         if (response.statusCode == 200) {
           imagensBytes.add(response.bodyBytes);
         }
       }
+      print(imagensBytes.length);
     }
 
-    if (urlsImagens == null || urlsImagens.isEmpty) {
+    if (imagensBytes.isEmpty) {
       // sem imagens
       pdf.addPage(
         pw.MultiPage(
@@ -49,27 +52,50 @@ class Pdf_servico {
         pw.MultiPage(
           pageFormat: PdfPageFormat.a4,
           build: (pw.Context context) {
-            return [
-              if (imagensBytes.isNotEmpty)
-                pw.Image(
-                  pw.MemoryImage(imagensBytes[0]),
-                  fit: pw.BoxFit.contain,
-                  width: PdfPageFormat.a4.availableWidth,
-                  height: 300,
+            final List<pw.Widget> widgets = [];
+            widgets.add(
+              pw.Padding(
+                padding: const pw.EdgeInsets.only(bottom: 15),
+                child: pw.Center(
+                  child: pw.Image(
+                    pw.MemoryImage(imagensBytes[0]),
+                    fit: pw.BoxFit.contain,
+                    width: PdfPageFormat.a4.availableWidth,
+                    height: 300,
+                  ),
                 ),
+              ),
+            );
 
-              pw.Text(texto, style: pw.TextStyle(font: roboto, fontSize: 16)),
-              if (imagensBytes.length > 1) ...[
-                pw.Image(
-                  pw.MemoryImage(imagensBytes[1]),
-                  fit: pw.BoxFit.contain,
-                  height: 200,
+            widgets.add(
+              pw.Paragraph(
+                text: texto,
+                style: pw.TextStyle(font: roboto, fontSize: 16),
+                padding: const pw.EdgeInsets.only(bottom: 15),
+              ),
+            );
+
+            for (int i = 1; i < imagensBytes.length; i++) {
+              widgets.add(
+                pw.Padding(
+                  padding: const pw.EdgeInsets.symmetric(vertical: 5),
+
+                  child: pw.Center(
+                    child: pw.Image(
+                      pw.MemoryImage(imagensBytes[i]),
+                      fit: pw.BoxFit.contain,
+                      height: 300,
+                      width: PdfPageFormat.a4.availableWidth,
+                    ),
+                  ),
                 ),
-              ],
-            ];
+              );
+            }
+
+            return widgets;
           },
         ),
-      ); //
+      );
     }
 
     final fileName = 'documento_${DateTime.now().millisecondsSinceEpoch}.pdf';

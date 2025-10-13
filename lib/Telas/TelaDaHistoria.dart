@@ -32,7 +32,7 @@ class _TeladahistoriaState extends State<Teladahistoria> {
   bool carregandoHistoria = false;
   bool salvandohistoria = false;
   bool carregandoImagem = false;
-  bool baixandoPDF = true;
+  bool baixandoPDF = false;
   List<String?> urls = List.filled(2, null);
 
   Future<void> gerarhistoria() async {
@@ -220,7 +220,7 @@ A duração da história deve ser de:
                 ? Center(child: CircularProgressIndicator(color: Colors.white))
                 : Column(
                   children: [
-                    widget.historiapadraoTexto != null || urls[0] != null
+                    urls[0] != null
                         ? carregandoImagem
                             ? Center(
                               child: CircularProgressIndicator(
@@ -256,7 +256,7 @@ A duração da história deve ser de:
                       ), //texto da história
                     ),
                     Padding(padding: EdgeInsets.only(top: 20)),
-                    widget.historiapadraoTexto != null || urls[1] != null
+                    urls[1] != null
                         ? Image.network(
                           urls[1]!,
                           fit: BoxFit.cover,
@@ -306,7 +306,6 @@ A duração da história deve ser de:
                                 salvandohistoria = true;
                               });
                               if (widget.historiapadraoTexto != null) {
-                                //Historia com imagem
                                 HistoriaService historiaService =
                                     HistoriaService();
                                 final file = await historiaService
@@ -444,22 +443,18 @@ A duração da história deve ser de:
                       });
 
                       //baixar pdf
-                      if (widget.historiapadraoTexto != null) {
-                        List<String> urlsImagensValidas =
-                            urls
-                                .whereType<String>()
-                                .where((url) => url.isNotEmpty)
-                                .toList();
 
-                        Pdf_servico pdf_servico = Pdf_servico();
-                        pdf_servico.generateAndSavePdf(
-                          texto: textoDaHistoria,
-                          urlsImagens: urlsImagensValidas,
-                        );
-                      } else {
-                        Pdf_servico pdf_servico = Pdf_servico();
-                        pdf_servico.generateAndSavePdf(texto: textoDaHistoria);
-                      }
+                      List<String> urlsImagensValidas =
+                          urls
+                              .whereType<String>()
+                              .where((url) => url.isNotEmpty)
+                              .toList();
+                      print(urlsImagensValidas.length);
+                      Pdf_servico pdf_servico = Pdf_servico();
+                      pdf_servico.generateAndSavePdf(
+                        texto: textoDaHistoria,
+                        urlsImagens: urlsImagensValidas,
+                      );
                     },
                     child: Stack(
                       alignment: Alignment.center,
@@ -474,7 +469,7 @@ A duração da história deve ser de:
                           ),
                         ),
                         Text(
-                          baixandoPDF ? "Baixar História" : "...",
+                          baixandoPDF ? "..." : "Baixar História",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.white,

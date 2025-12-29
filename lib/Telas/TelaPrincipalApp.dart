@@ -9,8 +9,8 @@ import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 
 import 'package:tcc/Telas/TelaDeCadastroCrianca.dart';
 import 'package:tcc/Telas/TelaDaHistoria.dart';
-import 'package:tcc/servicos/AdicionarQuestionario.dart';
-import 'package:tcc/servicos/AutenticacaoResponsavel.dart';
+import 'package:tcc/servicos/Questionario.dart';
+import 'package:tcc/servicos/Responsavel.dart';
 import 'package:tcc/servicos/Historia_Servico.dart';
 
 class TelaPrincipal extends StatefulWidget {
@@ -150,6 +150,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                 .removerquestionario(
                                                   idquestionario:
                                                       doc["idquestionario"],
+                                                  context: context,
                                                 );
                                           },
                                         ),
@@ -209,6 +210,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                   child: ElevatedButton(
                                     onPressed: () {
                                       print(criancaCadastradas);
+                                      print(doc["nome"]);
                                       showDialog(
                                         context: context,
                                         builder: (BuildContext context) {
@@ -253,11 +255,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                             context,
                                                             MaterialPageRoute(
                                                               builder:
-                                                                  (context) =>
-                                                                      Teladahistoria(
-                                                                        doc:
-                                                                            doc,
-                                                                      ),
+                                                                  (
+                                                                    context,
+                                                                  ) => Teladahistoria(
+                                                                    doc: doc,
+                                                                    historiasSalvas:
+                                                                        historiasSalvas,
+                                                                  ),
                                                             ),
                                                           );
                                                         },
@@ -387,6 +391,8 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                                                                     doc,
                                                                                 historiapadraoTexto:
                                                                                     preferencias_controller.text,
+                                                                                historiasSalvas:
+                                                                                    historiasSalvas,
                                                                               ),
                                                                         ),
                                                                       );
@@ -633,13 +639,14 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                                     height: 20.0,
                                     child: ElevatedButton(
                                       onPressed: () {
-                                        print(historiasSalvas);
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder:
                                                 (context) => Teladahistoria(
                                                   historiadoc: dochistoria,
+                                                  historiasSalvas:
+                                                      historiasSalvas,
                                                 ),
                                           ),
                                         );
@@ -997,6 +1004,13 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
                     onPressed: () {
                       if (criancaCadastradas == 0 && historiasSalvas == 0) {
                         //o responsavel pode excluir a conta
+                        final User? user = FirebaseAuth.instance.currentUser;
+                        AutenticacaoResponsavel autenticacaoResponsavel =
+                            AutenticacaoResponsavel();
+                        autenticacaoResponsavel.excluirresponsavel(
+                          context: context,
+                          currentUser: user!.uid,
+                        );
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
@@ -1047,7 +1061,7 @@ class _TelaPrincipalState extends State<TelaPrincipal> {
             BottomNavigationBarItem(
               icon: IconButton(
                 onPressed: () {
-                  if (criancaCadastradas <= 3) {
+                  if (criancaCadastradas <= 30) {
                     Navigator.push(
                       context,
                       MaterialPageRoute(

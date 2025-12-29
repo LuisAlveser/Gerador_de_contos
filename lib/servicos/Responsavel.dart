@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tcc/Model/ResponsavelModelo.dart';
+import 'package:tcc/Telas/TelaDeInicioApp.dart';
 
 class AutenticacaoResponsavel {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -148,6 +149,45 @@ class AutenticacaoResponsavel {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Ocorreu um erro inesperado: $e"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
+  Future<void> excluirresponsavel({
+    required BuildContext context,
+    required String currentUser,
+  }) async {
+    try {
+      User? user = _auth.currentUser;
+     
+       _firestore.collection('responsaveis').doc(currentUser).delete().then((_) {
+        user!.delete();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Responsável excluido  com sucesso!"),
+            backgroundColor: Colors.green,
+          ),
+        );
+        if (context.mounted) {
+          Navigator.of(context).pushAndRemoveUntil(
+            MaterialPageRoute(builder: (context) => const TelaDeInicio()),
+            (Route<dynamic> route) => false,
+          );
+        }
+      });
+    } on FirebaseException catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro ao excluir responsável: ${e.message}"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Erro inesperado: $e"),
           backgroundColor: Colors.red,
         ),
       );

@@ -45,7 +45,6 @@ class QuestionarioService {
           .doc(docId)
           .set(questionario.toMap());
 
-     
       return true;
     } on FirebaseException catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -76,14 +75,37 @@ class QuestionarioService {
         .snapshots();
   }
 
-  Future<void> removerquestionario({required String idquestionario}) {
+  Future<void> removerquestionario({
+    required String idquestionario,
+    required BuildContext context,
+  }) async {
     User? currentUser = _auth.currentUser;
-    return _firestore
-        .collection('responsaveis')
-        .doc(currentUser?.uid)
-        .collection('questionario')
-        .doc(idquestionario)
-        .delete();
+    final historiasporquestionario =
+        await _firestore
+            .collection('responsaveis')
+            .doc(currentUser?.uid)
+            .collection('questionario')
+            .doc(idquestionario)
+            .collection('historias')
+            .get();
+    print(historiasporquestionario.docs.length);
+    if (historiasporquestionario.docs.length > 0) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            "Atenção: Não é possível excluir. Este questionário ainda tem ${historiasporquestionario.docs.length} histórias salvas. Remova-as primeiro.",
+          ),
+          backgroundColor: Colors.red,
+        ),
+      );
+    } else {
+      return _firestore
+          .collection('responsaveis')
+          .doc(currentUser?.uid)
+          .collection('questionario')
+          .doc(idquestionario)
+          .delete();
+    }
   }
 
   Future<bool> atualizarQuestionario({
@@ -104,7 +126,6 @@ class QuestionarioService {
         return false;
       }
 
-      
       _firestore
           .collection('responsaveis')
           .doc(currentUser.uid)

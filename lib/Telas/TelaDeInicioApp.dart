@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:tcc/Decoracao/DecoracaoAutenticacao.dart';
 import 'package:tcc/Model/ResponsavelModelo.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
-import 'package:tcc/servicos/AutenticacaoResponsavel.dart';
+import 'package:tcc/servicos/Responsavel.dart';
 import 'package:tcc/servicos/LoginResponsavel.dart';
 
 class TelaDeInicio extends StatefulWidget {

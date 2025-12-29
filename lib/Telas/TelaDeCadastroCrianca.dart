@@ -10,7 +10,7 @@ import 'package:tcc/TelaParaCadastraCrianca/Pagina5.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina6.dart';
 import 'package:tcc/TelaParaCadastraCrianca/Pagina7.dart';
 import 'package:tcc/Telas/TelaPrincipalApp.dart';
-import 'package:tcc/servicos/AdicionarQuestionario.dart';
+import 'package:tcc/servicos/Questionario.dart';
 
 class TelaDeFormularioCrianca extends StatefulWidget {
   final DocumentSnapshot? doc;

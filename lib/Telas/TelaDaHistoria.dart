@@ -15,12 +15,14 @@ class Teladahistoria extends StatefulWidget {
   final DocumentSnapshot? doc;
   final String? historiapadraoTexto;
   final DocumentSnapshot? historiadoc;
+  final int historiasSalvas;
 
   const Teladahistoria({
     super.key,
     this.doc,
     this.historiapadraoTexto,
     this.historiadoc,
+    required this.historiasSalvas,
   });
 
   @override
@@ -59,10 +61,10 @@ A história deve dar ênfase nesssas preferências : ${widget.historiapadraoText
 A história não deve conter: ${widget.doc?["nao_deve_ter_na_historia"]}.
 Personagens secundários: ${widget.doc?["conjuge_nomes"]} e ${widget.doc?["amigos_nomes"]}.
 A duração da história deve ser de:
-- 1 a 2 páginas se nível TEA for 3,
+- 1 a 2 páginas se nível TEA for 3  ou se for  não sei informar ou ainda não foi diagnosticado ou prefiro não responder,
 - 3 a 4 páginas para nível 2,
 - 5 páginas para nível 1.
-**IMPORTANTE: Não use aspas curvas (“ ” ‘ ’) ou reticências (…); use apenas aspas retas (") e apóstrofos retos (').**
+**IMPORTANTE: Não use aspas curvas (“ ” ‘ ’) ou reticências (…); use apenas aspas retas (") e apóstrofos retos (') e ao final do texto coloque essa frase História Gerada por ContoTEIA.**
 '''
               : '''
 Crie uma história para uma criança de nome ${widget.doc?["nome"]}, com idade de ${widget.doc?["idade"]} e autismo de nível ${widget.doc?["nivel_TEA"]}. 
@@ -71,10 +73,10 @@ A história deve conter: ${widget.doc?["deve_ter_na_historia"]}.
 A história não deve conter: ${widget.doc?["nao_deve_ter_na_historia"]}.
 Personagens secundários: ${widget.doc?["conjuge_nomes"]} e ${widget.doc?["amigos_nomes"]}.
 A duração da história deve ser de:
-- 1 a 2 páginas se nível TEA for 3,
+- 1 a 2 páginas se nível TEA for 3 ou se for não sei informar ou ainda não foi diagnosticado ou prefiro não responder,
 - 3 a 4 páginas para nível 2,
 - 5 páginas para nível 1.
-**IMPORTANTE: Não use aspas curvas (“ ” ‘ ’) ou reticências (…); use apenas aspas retas (") e apóstrofos retos (').**
+**IMPORTANTE: Não use aspas curvas (“ ” ‘ ’) ou reticências (…); use apenas aspas retas (") e apóstrofos retos (') e ao final do texto coloque essa frase História Gerada por ContoTEIA.**
 ''';
 
       final contents = [Content.text(prompt)];
@@ -151,17 +153,7 @@ A duração da história deve ser de:
     super.initState();
     baixandoPDF = false;
     salvandohistoria = false;
-    final apiKey = dotenv.env["chave_google_texto"];
 
-    if (apiKey != null && apiKey.isNotEmpty) {
-      print(" Gemini inicializado com sucesso!");
-    } else {
-      print(
-        " Erro: chave_google_texto não encontrada no arquivo .env ou está vazia.",
-      );
-
-      textoDaHistoria = 'Erro: Chave de API do Gemini não configurada.';
-    }
     if (widget.historiadoc != null) {
       urls[0] = widget.historiadoc?["urlimagem"]; //carrega as imagens salvas
       urls[1] = widget.historiadoc?["urlimagem2"];
@@ -306,89 +298,113 @@ A duração da história deve ser de:
                                 salvandohistoria = true;
                               });
                               if (widget.historiapadraoTexto != null) {
-                                HistoriaService historiaService =
-                                    HistoriaService();
-                                final file = await historiaService
-                                    .baixarImagemDaUrl(urls[0]!);
-                                final file2 = await historiaService
-                                    .baixarImagemDaUrl(urls[1]!);
-                                HistoriaModeloReal historiamodel =
-                                    HistoriaModeloReal(
-                                      idhistoria: "",
-                                      idquestionario: widget.doc!.id,
-                                      texto: textoDaHistoria,
-                                      data: DateTime.now(),
-                                      urlimagem: await historiaService
-                                          .uploadImagemParaStorage(file),
-
-                                      urlimagem2: await historiaService
-                                          .uploadImagemParaStorage(file2),
-                                      nota: 0,
-                                    );
-
-                                bool sucesso;
-
-                                sucesso = await historiaService
-                                    .cadastrarHistoria(
-                                      historiamodel: historiamodel,
-                                      context: context,
-                                    );
-
-                                if (sucesso) {
-                                  setState(() {
-                                    salvandohistoria = false;
-                                  });
-                                  if (widget.doc != null) {
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => const TelaPrincipal(),
+                                if (widget.historiasSalvas == 3) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Você excedeu o número de histórias salvas, exclua alguma para poder salvar uma nova",
                                       ),
-                                      (Route<dynamic> route) => false,
-                                    );
-                                    setState(() {});
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                } else {
+                                  HistoriaService historiaService =
+                                      HistoriaService();
+                                  final file = await historiaService
+                                      .baixarImagemDaUrl(urls[0]!);
+                                  final file2 = await historiaService
+                                      .baixarImagemDaUrl(urls[1]!);
+                                  HistoriaModeloReal historiamodel =
+                                      HistoriaModeloReal(
+                                        idhistoria: "",
+                                        idquestionario: widget.doc!.id,
+                                        texto: textoDaHistoria,
+                                        data: DateTime.now(),
+                                        urlimagem: await historiaService
+                                            .uploadImagemParaStorage(file),
+
+                                        urlimagem2: await historiaService
+                                            .uploadImagemParaStorage(file2),
+                                        nota: 0,
+                                      );
+
+                                  bool sucesso;
+
+                                  sucesso = await historiaService
+                                      .cadastrarHistoria(
+                                        historiamodel: historiamodel,
+                                        context: context,
+                                      );
+
+                                  if (sucesso) {
+                                    setState(() {
+                                      salvandohistoria = false;
+                                    });
+                                    if (widget.doc != null) {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) =>
+                                                  const TelaPrincipal(),
+                                        ),
+                                        (Route<dynamic> route) => false,
+                                      );
+                                      setState(() {});
+                                    }
                                   }
                                 }
                               } else {
-                                //Historia sem imagem
-                                HistoriaService historiaService =
-                                    HistoriaService();
-
-                                HistoriaModeloReal historiamodel =
-                                    HistoriaModeloReal(
-                                      idhistoria: "",
-                                      idquestionario: widget.doc!.id,
-                                      texto: textoDaHistoria,
-                                      data: DateTime.now(),
-                                      urlimagem: null,
-                                      urlimagem2: null,
-
-                                      nota: 0.0,
-                                    );
-
-                                bool sucesso;
-
-                                sucesso = await historiaService
-                                    .cadastrarHistoria(
-                                      historiamodel: historiamodel,
-                                      context: context,
-                                    );
-
-                                if (sucesso) {
-                                  setState(() {
-                                    salvandohistoria = false;
-                                  });
-                                  if (widget.doc != null) {
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder:
-                                            (context) => const TelaPrincipal(),
+                                if (widget.historiasSalvas == 30) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      content: Text(
+                                        "Você excedeu o número de histórias salvas, exclua alguma para poder salvar uma nova",
                                       ),
-                                      (Route<dynamic> route) => false,
-                                    );
-                                    setState(() {});
+                                      backgroundColor: Colors.red,
+                                    ),
+                                  );
+                                } else {
+                                  //Historia sem imagem
+                                  HistoriaService historiaService =
+                                      HistoriaService();
+
+                                  HistoriaModeloReal historiamodel =
+                                      HistoriaModeloReal(
+                                        idhistoria: "",
+                                        idquestionario: widget.doc!.id,
+                                        texto: textoDaHistoria,
+                                        data: DateTime.now(),
+                                        urlimagem: null,
+                                        urlimagem2: null,
+
+                                        nota: 0.0,
+                                      );
+
+                                  bool sucesso;
+
+                                  sucesso = await historiaService
+                                      .cadastrarHistoria(
+                                        historiamodel: historiamodel,
+                                        context: context,
+                                      );
+
+                                  if (sucesso) {
+                                    setState(() {
+                                      salvandohistoria = false;
+                                    });
+                                    if (widget.doc != null) {
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder:
+                                              (context) =>
+                                                  const TelaPrincipal(),
+                                        ),
+                                        (Route<dynamic> route) => false,
+                                      );
+                                      setState(() {});
+                                    }
                                   }
                                 }
                               }
@@ -412,7 +428,7 @@ A duração da história deve ser de:
                                   ),
                                 ),
                                 Text(
-                                  salvandohistoria ? "Salvar História" : "...",
+                                  salvandohistoria ? "..." : "Salvar História",
                                   textAlign: TextAlign.center,
                                   style: TextStyle(
                                     color: Colors.white,

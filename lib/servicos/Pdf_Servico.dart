@@ -40,7 +40,7 @@ class Pdf_servico {
             return [
               pw.Paragraph(
                 text: texto,
-                style: pw.TextStyle(font: roboto, fontSize: 16),
+                style: pw.TextStyle(font: pw.Font.times(), fontSize: 16),
               ),
             ];
           },
@@ -70,7 +70,7 @@ class Pdf_servico {
             widgets.add(
               pw.Paragraph(
                 text: texto,
-                style: pw.TextStyle(font: roboto, fontSize: 16),
+                style: pw.TextStyle(font: pw.Font.times(), fontSize: 16),
                 padding: const pw.EdgeInsets.only(bottom: 15),
               ),
             );
